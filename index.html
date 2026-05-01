@@ -510,10 +510,9 @@
 
     <!-- Pregunta al usuario -->
     <div class="kit-question-block rv d4">
-      <p class="kit-q-text">¿Te gustaría armarle un <span>kit especial</span> a ella?</p>
+      <p class="kit-q-text">¿Te gustaría armarle un <span>kit especial</span>?</p>
       <div class="kit-choice">
         <button class="btn-si" id="btn-si-kit">Sí, quiero armarlo</button>
-        <button class="btn-no-kit" id="btn-no-kit">No, gracias</button>
       </div>
     </div>
   </div>
@@ -1056,9 +1055,6 @@
     btnSi.style.display = 'none';
     btnNo.style.display = 'none';
     setTimeout(() => kitForm.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-  });
-  btnNo.addEventListener('click', () => {
-    document.getElementById('colecciones').scrollIntoView({ behavior: 'smooth' });
   });
 </script>
 </body>
