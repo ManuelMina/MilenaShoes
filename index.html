@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Milena's Shoes — Pisa fuerte. Luce diferente.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:     #060606;
+      --bg-2:   #0f0f0f;
+      --bg-3:   #1a1a1a;
+      --bg-4:   #222;
+      --gold:   #C9A84C;
+      --gold-l: #E8C97A;
+      --pink:   #FF4F7B;
+      --green:  #25D366;
+      --text:   #F0EDE8;
+      --muted:  #7a7a7a;
+      --border: rgba(201,168,76,0.15);
+      --max-w:  1200px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) var(--bg-2);
+    }
+    html::-webkit-scrollbar { width: 4px; }
+    html::-webkit-scrollbar-track { background: var(--bg-2); }
+    html::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 22px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(6,6,6,0.95);
+      backdrop-filter: blur(24px);
+      padding: 14px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 5px; color: var(--gold); }
+    .nav-logo span { color: var(--text); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--muted); transition: color 0.3s; position: relative;
+    }
+    .nav-links a::after { content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px; background:var(--gold); transition:width 0.3s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta { color: var(--bg) !important; background: var(--gold); padding: 8px 20px !important; font-weight: 700 !important; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--gold-l) !important; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); transition: all 0.3s; }
+    .mobile-nav {
+      display: none; position: fixed; inset: 0;
+      background: rgba(6,6,6,0.98); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; letter-spacing: 6px; color: var(--text); transition: color 0.2s; }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-close { position: absolute; top: 24px; right: 48px; font-size: 2rem; color: var(--muted); cursor: pointer; background: none; border: none; }
+
+    /* ── HERO ── */
+    #inicio {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); }
+    .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, var(--gold), transparent 70%); top: -200px; right: -150px; opacity: 0.08; animation: f1 9s ease-in-out infinite; }
+    .orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, var(--pink), transparent 70%); bottom: -150px; left: -100px; opacity: 0.06; animation: f2 11s ease-in-out infinite; }
+    .orb-3 { width: 350px; height: 350px; background: radial-gradient(circle, var(--gold-l), transparent 70%); top: 45%; left: 42%; opacity: 0.04; animation: f3 14s ease-in-out infinite; }
+    @keyframes f1 { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(50px) scale(1.06)} }
+    @keyframes f2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-40px) scale(1.08)} }
+    @keyframes f3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(30px,-20px) scale(1.12)} }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,168,76,0.032) 1px,transparent 1px), linear-gradient(90deg,rgba(201,168,76,0.032) 1px,transparent 1px);
+      background-size: 90px 90px;
+    }
+    .hero-content { position: relative; z-index: 2; text-align: center; padding: 100px 24px 80px; }
+    .hero-eye { display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 7px; text-transform: uppercase; color: var(--gold); margin-bottom: 28px; opacity: 0; transform: translateY(16px); animation: fu 0.8s ease forwards 0.3s; }
+    .hero-h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5.5rem, 19vw, 17rem); line-height: 0.86; letter-spacing: 10px; opacity: 0; transform: translateY(30px); animation: fu 1s ease forwards 0.55s; }
+    .hero-h1 .acc { color: var(--gold); }
+    .hero-rule { width: 0; height: 1px; background: linear-gradient(90deg,transparent,var(--gold),transparent); margin: 28px auto; animation: re 1s ease forwards 1.1s; }
+    @keyframes re { to { width: 200px; } }
+    .hero-slogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1rem,3vw,1.55rem); color: var(--muted); letter-spacing: 2px; opacity: 0; transform: translateY(16px); animation: fu 0.8s ease forwards 1s; }
+    .hero-price { font-size: 0.8rem; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-top: 10px; opacity: 0; animation: fu 0.8s ease forwards 1.15s; }
+    .hero-price strong { color: var(--gold-l); font-weight: 600; }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; margin-top: 38px; flex-wrap: wrap; opacity: 0; transform: translateY(16px); animation: fu 0.8s ease forwards 1.3s; }
+    .btn-gold { background: var(--gold); color: var(--bg); padding: 15px 38px; font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; transition: all 0.3s; clip-path: polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%); }
+    .btn-gold:hover { background: var(--gold-l); transform: translateY(-3px); box-shadow: 0 14px 40px rgba(201,168,76,0.28); }
+    .btn-outline { border: 1px solid rgba(201,168,76,0.35); color: var(--text); padding: 15px 38px; font-size: 0.75rem; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; transition: all 0.3s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
+    .btn-wa { display: inline-flex; align-items: center; gap: 10px; background: var(--green); color: #fff; padding: 15px 38px; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; }
+    .btn-wa:hover { background: #1ebe5a; transform: translateY(-3px); box-shadow: 0 14px 40px rgba(37,211,102,0.28); }
+    .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0; animation: fu 0.8s ease forwards 1.7s; }
+    .scroll-lbl { font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase; color: #444; }
+    .scroll-ln { width: 1px; height: 44px; position: relative; overflow: hidden; background: rgba(201,168,76,0.15); }
+    .scroll-ln::after { content:''; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: var(--gold); animation: sd 1.6s ease-in-out infinite; }
+    @keyframes sd { 0%{top:-100%} 100%{top:100%} }
+    @keyframes fu { to { opacity: 1; transform: translateY(0); } }
+
+    /* ── COMMON SECTION ── */
+    section { padding: 120px 48px; }
+    .max { max-width: var(--max-w); margin: 0 auto; }
+    .s-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .s-h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.9rem,4.5vw,3.2rem); line-height: 1.15; margin-bottom: 24px; }
+    .s-h2 em { color: var(--gold); font-style: italic; }
+    .s-center { text-align: center; margin-bottom: 64px; }
+    .s-center .s-h2 { margin-bottom: 0; }
+    .s-body { font-size: 0.97rem; font-weight: 300; line-height: 1.9; color: #888; margin-bottom: 16px; }
+
+    /* ── ABOUT ── */
+    #sobre-nosotros { background: var(--bg-2); position: relative; overflow: hidden; }
+    #sobre-nosotros::before { content:'MS'; position:absolute; font-family:'Bebas Neue',sans-serif; font-size:28vw; color:rgba(201,168,76,0.02); right:-2vw; top:50%; transform:translateY(-50%); pointer-events:none; letter-spacing:10px; }
+    .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: center; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+    .stat-cell { background: var(--bg-2); padding: 36px 28px; text-align: center; transition: background 0.3s; }
+    .stat-cell:hover { background: var(--bg-3); }
+    .stat-n { font-family: 'Bebas Neue', sans-serif; font-size: 3.4rem; letter-spacing: 2px; color: var(--gold); line-height: 1; }
+    .stat-d { font-size: 0.68rem; font-weight: 600; letter-spacing: 3.5px; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+    /* ── COLLECTIONS ── */
+    #colecciones { background: var(--bg); }
+    .cols-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .col-card { position: relative; overflow: hidden; aspect-ratio: 4/5; cursor: pointer; }
+    .col-bg { position: absolute; inset: 0; transition: transform 0.7s ease; }
+    .col-card:hover .col-bg { transform: scale(1.06); }
+    .bg-mujer { background: linear-gradient(155deg, #1e0918 0%, #7a2657 40%, #d4608c 75%, #f4a0c0 100%); }
+    .bg-hombre { background: linear-gradient(155deg, #080f1e 0%, #173062 40%, #2e68b5 75%, #6090d4 100%); }
+    .col-shade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.1) 55%, transparent 100%); }
+    .col-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-60%); font-size: 6rem; opacity: 0.18; transition: opacity 0.4s; }
+    .col-card:hover .col-icon { opacity: 0.3; }
+    .col-badge { position: absolute; top: 18px; right: 18px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); color: var(--gold); font-size: 0.58rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 10px; }
+    .col-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 28px; z-index: 2; transform: translateY(6px); transition: transform 0.4s ease; }
+    .col-card:hover .col-info { transform: translateY(0); }
+    .col-t { font-size: 0.65rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .col-n { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    .col-sz { font-size: 0.78rem; color: #888; font-weight: 300; margin-bottom: 18px; }
+    .col-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); opacity: 0; transform: translateY(8px); transition: all 0.4s ease; }
+    .col-card:hover .col-link { opacity: 1; transform: translateY(0); }
+
+    /* ── KIT BUILDER ── */
+    #kits { background: var(--bg-2); position: relative; overflow: hidden; }
+    #kits::before { content:'KIT'; position:absolute; font-family:'Bebas Neue',sans-serif; font-size:40vw; color:rgba(201,168,76,0.018); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; letter-spacing:10px; white-space:nowrap; }
+
+    .kit-wrap { display: grid; grid-template-columns: 1fr 380px; gap: 56px; align-items: start; }
+    .kit-steps { display: flex; flex-direction: column; gap: 32px; }
+
+    .kit-step { background: var(--bg-3); border: 1px solid var(--border); padding: 28px 32px; transition: border-color 0.3s; }
+    .kit-step.active { border-color: rgba(201,168,76,0.4); }
+    .step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; color: var(--gold); letter-spacing: 1px; flex-shrink: 0; }
+    .step-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text); }
+
+    .gender-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .gender-card { border: 2px solid var(--bg-4); padding: 20px; cursor: pointer; text-align: center; transition: all 0.3s; background: var(--bg-4); }
+    .gender-card:hover { border-color: rgba(201,168,76,0.4); }
+    .gender-card.selected { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+    .gender-card input { display: none; }
+    .gender-icon { font-size: 2rem; margin-bottom: 8px; }
+    .gender-label { font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text); }
+    .gender-sub { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+
+    .size-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .size-btn { width: 52px; height: 52px; border: 2px solid var(--bg-4); background: var(--bg-4); color: var(--muted); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.25s; display: flex; align-items: center; justify-content: center; }
+    .size-btn:hover { border-color: rgba(201,168,76,0.4); color: var(--text); }
+    .size-btn.selected { border-color: var(--gold); background: rgba(201,168,76,0.1); color: var(--gold); }
+    #size-hint { font-size: 0.72rem; color: var(--muted); margin-top: 12px; }
+
+    .sweet-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .sweet-card { border: 2px solid var(--bg-4); padding: 18px 12px; cursor: pointer; text-align: center; transition: all 0.3s; background: var(--bg-4); }
+    .sweet-card:hover { border-color: rgba(201,168,76,0.4); }
+    .sweet-card.selected { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+    .sweet-card input { display: none; }
+    .sweet-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .sweet-name { font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text); }
+
+    .msg-area { width: 100%; background: var(--bg-4); border: 2px solid var(--bg-4); color: var(--text); padding: 16px; font-family: 'Inter', sans-serif; font-size: 0.9rem; resize: vertical; min-height: 110px; transition: border-color 0.3s; line-height: 1.6; }
+    .msg-area:focus { outline: none; border-color: rgba(201,168,76,0.4); }
+    .msg-area::placeholder { color: #444; }
+    .char-count { font-size: 0.68rem; color: #555; text-align: right; margin-top: 6px; }
+
+    /* Kit Preview Panel */
+    .kit-preview {
+      position: sticky; top: 100px;
+      background: var(--bg-3); border: 1px solid var(--border);
+      padding: 32px 28px;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .preview-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 4px; color: var(--gold); margin-bottom: 20px; text-align: center; }
+    .kit-visual {
+      background: linear-gradient(135deg, #1a0a15, #4a1835, #8a3060);
+      border: 1px dashed rgba(201,168,76,0.2);
+      padding: 28px 20px; margin-bottom: 24px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .kit-visual::before { content:'🎁'; position:absolute; font-size:8rem; opacity:0.08; top:50%; left:50%; transform:translate(-50%,-50%); }
+    .kit-visual-items { position: relative; z-index: 1; display: flex; justify-content: center; gap: 12px; font-size: 2rem; }
+    .kit-visual-label { font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 12px; font-weight: 600; }
+
+    .preview-items { list-style: none; display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border); }
+    .preview-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .preview-item .pi-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .preview-item .pi-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 2px; }
+    .preview-item .pi-val { font-size: 0.82rem; color: #aaa; font-weight: 300; }
+    .preview-item .pi-val.filled { color: var(--text); font-weight: 400; }
+
+    .preview-total { background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+    .preview-total .pt-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+    .preview-total .pt-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; color: var(--gold); }
+
+    .btn-send-wa { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 18px; background: var(--green); color: #fff; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.3s; margin-top: 20px; }
+    .btn-send-wa:hover { background: #1ebe5a; box-shadow: 0 8px 32px rgba(37,211,102,0.3); transform: translateY(-2px); }
+    .btn-send-wa:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; box-shadow: none; }
+    .wa-note { font-size: 0.68rem; color: #555; text-align: center; margin-top: 10px; }
+
+    /* ── GALLERY ── */
+    #galeria { background: var(--bg); }
+    .gal-note { text-align: center; font-size: 0.82rem; color: var(--muted); margin-bottom: 44px; }
+    .gal-note a { color: var(--gold); font-weight: 600; border-bottom: 1px solid rgba(201,168,76,0.25); transition: border-color 0.3s; }
+    .gal-note a:hover { border-color: var(--gold); }
+    .gal-grid { display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: 280px 280px; gap: 4px; }
+    .gal-item { position: relative; overflow: hidden; cursor: pointer; }
+    .gal-item:nth-child(1) { grid-row: span 2; }
+    .gal-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; transition: transform 0.6s ease; }
+    .gal-item:hover .gal-ph { transform: scale(1.05); }
+    .ph-1{background:linear-gradient(145deg,#1a0510,#6b2050,#c060a0)} .ph-2{background:linear-gradient(145deg,#050a1a,#152558,#2d5ab0)} .ph-3{background:linear-gradient(145deg,#050f05,#154515,#308030)} .ph-4{background:linear-gradient(145deg,#1a1000,#6b4400,#c08800)} .ph-5{background:linear-gradient(145deg,#1a0500,#6b1c00,#c04c30)} .ph-6{background:linear-gradient(145deg,#041010,#104444,#208080)}
+    .gal-ph-i { font-size: 2.8rem; opacity: 0.28; }
+    .gal-ph-l { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.28); font-weight: 600; }
+    .gal-hover { position: absolute; inset: 0; background: rgba(201,168,76,0.07); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; z-index: 2; }
+    .gal-item:hover .gal-hover { opacity: 1; }
+    .gal-plus { font-size: 2.4rem; color: rgba(255,255,255,0.4); font-weight: 200; transform: scale(0.7); transition: transform 0.3s; }
+    .gal-item:hover .gal-plus { transform: scale(1); }
+    .gal-tag { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); border: 1px solid rgba(201,168,76,0.2); color: rgba(201,168,76,0.55); font-size: 0.55rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 8px; font-weight: 600; }
+
+    /* ── TESTIMONIOS ── */
+    #testimonios { background: var(--bg-2); position: relative; overflow: hidden; }
+    .testi-header-note { text-align: center; font-size: 0.8rem; color: #555; margin-top: -48px; margin-bottom: 64px; font-style: italic; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .testi-card {
+      background: var(--bg-3); border: 1px solid transparent;
+      padding: 36px 28px; transition: all 0.35s;
+      position: relative;
+    }
+    .testi-card:hover { border-color: var(--border); background: var(--bg-4); transform: translateY(-4px); }
+    .testi-card::before { content:'"'; position:absolute; top:16px; left:24px; font-family:'Playfair Display',serif; font-size:5rem; color:rgba(201,168,76,0.08); line-height:1; }
+    .testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 16px; }
+    .testi-text { font-size: 0.9rem; font-weight: 300; line-height: 1.85; color: #aaa; margin-bottom: 20px; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--pink)); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--bg); flex-shrink: 0; }
+    .testi-name { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+    .testi-detail { font-size: 0.68rem; color: var(--muted); letter-spacing: 1px; }
+    .testi-placeholder { opacity: 0.45; }
+
+    /* ── CONTACTO ── */
+    #contacto { background: var(--bg); position: relative; overflow: hidden; }
+    .contact-wm { position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 18vw; color: rgba(201,168,76,0.02); white-space: nowrap; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; letter-spacing: 12px; }
+    .contact-wrap { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .info-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-bottom: 48px; }
+    .ic { background: var(--bg-2); border: 1px solid transparent; padding: 30px 20px; text-align: center; transition: all 0.3s; }
+    .ic:hover { border-color: var(--border); background: var(--bg-3); }
+    .ic-icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .ic-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .ic-val { font-size: 0.88rem; color: var(--text); font-weight: 300; line-height: 1.5; }
+    .contact-ctas { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cta-block { border: 1px solid var(--border); padding: 40px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; position: relative; overflow: hidden; transition: border-color 0.3s; }
+    .cta-block:hover { border-color: rgba(201,168,76,0.35); }
+    .cta-block::before { content:''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
+    .cta-wa::before { background: linear-gradient(90deg, transparent, var(--green), transparent); }
+    .cta-ig::before { background: linear-gradient(90deg, transparent, #fd1d1d, transparent); }
+    .cta-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); }
+    .cta-handle { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; }
+    .cta-handle .at { color: var(--gold); }
+    .cta-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+    .btn-ig { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; }
+    .btn-ig:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(200,50,50,0.28); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--bg-2); border-top: 1px solid var(--border); padding: 36px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .f-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 5px; color: var(--gold); }
+    .f-slogan { font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.92rem; color: var(--muted); }
+    .f-copy { font-size: 0.68rem; color: #444; letter-spacing: 1px; }
+
+    /* ── SCROLL ANIM ── */
+    .rv    { opacity:0; transform:translateY(44px); transition:opacity 0.85s ease,transform 0.85s ease; }
+    .rv-l  { opacity:0; transform:translateX(-44px); transition:opacity 0.85s ease,transform 0.85s ease; }
+    .rv-r  { opacity:0; transform:translateX(44px); transition:opacity 0.85s ease,transform 0.85s ease; }
+    .vis   { opacity:1 !important; transform:none !important; }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s} .d5{transition-delay:.5s}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .kit-wrap { grid-template-columns: 1fr; }
+      .kit-preview { position: static; }
+      .testi-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media(max-width:960px){
+      nav { padding:16px 24px; }
+      nav.scrolled { padding:12px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .about-wrap { grid-template-columns: 1fr; gap:56px; }
+      .cols-grid { grid-template-columns: 1fr; }
+      .col-card { aspect-ratio: 16/9; }
+      .info-cards { grid-template-columns: 1fr; }
+      .contact-ctas { grid-template-columns: 1fr; }
+    }
+    @media(max-width:700px){
+      section { padding: 90px 24px; }
+      footer { flex-direction: column; text-align: center; padding: 28px 24px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .gal-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
+      .gal-item:nth-child(1) { grid-row: span 1; }
+      .gal-grid .gal-item { height: 200px; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .sweet-cards { grid-template-columns: 1fr; }
+      .gender-cards { grid-template-columns: 1fr; }
+    }
+    @media(max-width:480px){
+      .gal-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav id="nav">
+  <div class="nav-logo">Milena's<span>Shoes</span></div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#colecciones">Colecciones</a></li>
+    <li><a href="#kits">Kits</a></li>
+    <li><a href="#testimonios">Reseñas</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+  <button class="hamburger" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#inicio">Inicio</a>
+  <a href="#colecciones">Colecciones</a>
+  <a href="#kits">Kits</a>
+  <a href="#testimonios">Reseñas</a>
+  <a href="#contacto">Contacto</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="inicio" style="padding:0">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <span class="hero-eye">Cali, Colombia &nbsp;·&nbsp; Tienda Online</span>
+    <h1 class="hero-h1">MILENA'S<br><span class="acc">SHOES</span></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-slogan">Pisa fuerte. Luce diferente.</p>
+    <p class="hero-price">Kit de regalo desde <strong>$185.000 COP</strong> &nbsp;·&nbsp; Zapatos desde <strong>$100.000 COP</strong></p>
+    <div class="hero-ctas">
+      <a href="#kits" class="btn-gold">Arma tu Kit</a>
+      <a href="#colecciones" class="btn-outline">Ver Colecciones</a>
+      <a href="https://wa.me/573227155957" target="_blank" rel="noopener" class="btn-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="scroll-lbl">Scroll</span>
+    <div class="scroll-ln"></div>
+  </div>
+</section>
+
+<!-- ═══════════ SOBRE NOSOTROS ═══════════ -->
+<section id="sobre-nosotros">
+  <div class="max about-wrap">
+    <div>
+      <p class="s-tag rv">Nuestra historia</p>
+      <h2 class="s-h2 rv d1">Moda que se <em>siente</em><br>en cada paso</h2>
+      <p class="s-body rv d2">En Milena's Shoes creemos que el calzado correcto transforma cómo te sientes. Desde Cali, Colombia, llevamos a tu puerta los mejores diseños en calzado deportivo para hombre y mujer.</p>
+      <p class="s-body rv d3">Y si buscas el regalo perfecto, nuestros kits lo tienen todo: zapatos, dulce, flores y una tarjeta con tu mensaje. Todo empacado con amor.</p>
+    </div>
+    <div class="stats-grid rv-r">
+      <div class="stat-cell">
+        <div class="stat-n" id="stat-pares">0</div>
+        <div class="stat-d">Pares vendidos</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n counter" data-target="100">0</div>
+        <div class="stat-d">% Online</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n" style="font-size:1.7rem;padding-top:6px">Cali</div>
+        <div class="stat-d">Colombia</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n" style="font-size:1.5rem;padding-top:6px">$185K</div>
+        <div class="stat-d">Kit completo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ COLECCIONES ═══════════ -->
+<section id="colecciones">
+  <div class="s-center">
+    <p class="s-tag rv">Calzado deportivo</p>
+    <h2 class="s-h2 rv d1">Para <em>ella</em> y para <em>él</em></h2>
+  </div>
+  <div class="max cols-grid">
+    <div class="col-card rv d1">
+      <div class="col-bg bg-mujer"></div>
+      <div class="col-shade"></div>
+      <div class="col-icon">👟</div>
+      <div class="col-badge">Foto aquí</div>
+      <div class="col-info">
+        <p class="col-t">Colección</p>
+        <h3 class="col-n">Mujer</h3>
+        <p class="col-sz">Tallas 35 – 40 &nbsp;·&nbsp; Deportivo</p>
+        <a href="https://wa.me/573227155957" target="_blank" rel="noopener" class="col-link">Consultar tallas <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+    <div class="col-card rv d2">
+      <div class="col-bg bg-hombre"></div>
+      <div class="col-shade"></div>
+      <div class="col-icon">👟</div>
+      <div class="col-badge">Foto aquí</div>
+      <div class="col-info">
+        <p class="col-t">Colección</p>
+        <h3 class="col-n">Hombre</h3>
+        <p class="col-sz">Tallas 38 – 44 &nbsp;·&nbsp; Deportivo</p>
+        <a href="https://wa.me/573227155957" target="_blank" rel="noopener" class="col-link">Consultar tallas <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ KIT BUILDER ═══════════ -->
+<section id="kits">
+  <div class="s-center">
+    <p class="s-tag rv">🌸 Edición especial · Día de las Madres</p>
+    <h2 class="s-h2 rv d1">¿Y si este año<br>el regalo la <em>sorprende</em> de verdad?</h2>
+    <p class="s-body rv d2" style="max-width:600px;margin:16px auto 0">Preparamos este kit especial para que puedas regalarle algo único: sus zapatos favoritos, un dulce, una rosa y tu mensaje con corazón — todo empacado con amor, listo para entregar.</p>
+    <p class="s-body rv d3" style="max-width:500px;margin:8px auto 0;font-size:0.82rem"><strong style="color:var(--gold)">Kit completo por $185.000 COP</strong> &nbsp;·&nbsp; Edición piloto por tiempo limitado</p>
+  </div>
+  <div class="max kit-wrap">
+
+    <!-- STEPS -->
+    <div class="kit-steps">
+
+      <!-- Paso 1 -->
+      <div class="kit-step active rv d1">
+        <div class="step-header">
+          <div class="step-num">1</div>
+          <span class="step-title">¿Para quién es el regalo?</span>
+        </div>
+        <div class="gender-cards">
+          <label class="gender-card" id="lbl-mujer">
+            <input type="radio" name="genero" value="Mujer" id="g-mujer">
+            <div class="gender-icon">👩</div>
+            <div class="gender-label">Mujer</div>
+            <div class="gender-sub">Tallas 35 – 40</div>
+          </label>
+          <label class="gender-card" id="lbl-hombre">
+            <input type="radio" name="genero" value="Hombre" id="g-hombre">
+            <div class="gender-icon">👨</div>
+            <div class="gender-label">Hombre</div>
+            <div class="gender-sub">Tallas 38 – 44</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="kit-step rv d2">
+        <div class="step-header">
+          <div class="step-num">2</div>
+          <span class="step-title">¿Qué talla necesitas?</span>
+        </div>
+        <div class="size-grid" id="size-grid"></div>
+        <p id="size-hint">Selecciona primero el género para ver las tallas disponibles.</p>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="kit-step rv d3">
+        <div class="step-header">
+          <div class="step-num">3</div>
+          <span class="step-title">¿Qué dulce va en el kit?</span>
+        </div>
+        <div class="sweet-cards">
+          <label class="sweet-card" id="sw-choco">
+            <input type="radio" name="dulce" value="Chocolatina">
+            <div class="sweet-icon">🍫</div>
+            <div class="sweet-name">Chocolatina</div>
+          </label>
+          <label class="sweet-card" id="sw-gomi">
+            <input type="radio" name="dulce" value="Gomitas">
+            <div class="sweet-icon">🍬</div>
+            <div class="sweet-name">Gomitas</div>
+          </label>
+          <label class="sweet-card" id="sw-mani">
+            <input type="radio" name="dulce" value="Maní confitado">
+            <div class="sweet-icon">🥜</div>
+            <div class="sweet-name">Maní confitado</div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Paso 4 -->
+      <div class="kit-step rv d4">
+        <div class="step-header">
+          <div class="step-num">4</div>
+          <span class="step-title">Escribe tu mensaje personalizado</span>
+        </div>
+        <textarea id="mensaje" class="msg-area" maxlength="200" placeholder="Ej: Feliz cumpleaños mi amor, que este regalo te llene de alegría..."></textarea>
+        <div class="char-count"><span id="char-n">0</span> / 200 caracteres</div>
+      </div>
+
+    </div><!-- /kit-steps -->
+
+    <!-- PREVIEW -->
+    <div class="kit-preview rv-r">
+      <div class="preview-title">Tu Kit</div>
+      <div class="kit-visual">
+        <div class="kit-visual-items" id="kit-emoji">🎁</div>
+        <div class="kit-visual-label">Vista previa de tu kit</div>
+      </div>
+      <ul class="preview-items">
+        <li class="preview-item">
+          <span class="pi-icon">👟</span>
+          <div>
+            <div class="pi-label">Zapatos</div>
+            <div class="pi-val" id="prev-zapatos">Selecciona género y talla</div>
+          </div>
+        </li>
+        <li class="preview-item">
+          <span class="pi-icon">🍬</span>
+          <div>
+            <div class="pi-label">Dulce</div>
+            <div class="pi-val" id="prev-dulce">Selecciona un dulce</div>
+          </div>
+        </li>
+        <li class="preview-item">
+          <span class="pi-icon">🌹</span>
+          <div>
+            <div class="pi-label">Ramo de rosa</div>
+            <div class="pi-val filled">Incluido en el kit</div>
+          </div>
+        </li>
+        <li class="preview-item">
+          <span class="pi-icon">🎀</span>
+          <div>
+            <div class="pi-label">Empaque de regalo</div>
+            <div class="pi-val filled">Incluido en el kit</div>
+          </div>
+        </li>
+        <li class="preview-item">
+          <span class="pi-icon">💌</span>
+          <div>
+            <div class="pi-label">Mensaje personalizado</div>
+            <div class="pi-val" id="prev-mensaje">Escribe tu mensaje</div>
+          </div>
+        </li>
+      </ul>
+      <div class="preview-total">
+        <span class="pt-label">Total kit</span>
+        <span class="pt-price">$185.000</span>
+      </div>
+      <div style="margin-top:16px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);">
+        <p style="font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Metodos de pago</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Efectivo</span>
+          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Nequi</span>
+          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Daviplata</span>
+          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Transferencia</span>
+          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Tarjeta credito/debito*</span>
+        </div>
+        <p style="font-size:0.62rem;color:#555;margin-top:8px">* Pago con tarjeta via link — aplica comision del medio de pago.</p>
+      </div>
+      <button class="btn-send-wa" id="btn-wa" disabled>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Enviar pedido por WhatsApp
+      </button>
+      <p class="wa-note">Completa todos los pasos para habilitar el botón</p>
+    </div>
+
+  </div><!-- /kit-wrap -->
+</section>
+
+<!-- ═══════════ GALERÍA ═══════════ -->
+<section id="galeria">
+  <div class="s-center">
+    <p class="s-tag rv">Inspiración</p>
+    <h2 class="s-h2 rv d1">Nuestra <em>galería</em></h2>
+  </div>
+  <p class="gal-note rv d2">📸 Síguenos en <a href="https://www.instagram.com/milenashoes26" target="_blank" rel="noopener">@milenashoes26</a> para ver todos nuestros kits y productos · Reemplaza estas fotos con las tuyas</p>
+  <div class="max gal-grid">
+    <div class="gal-item rv d1"><div class="gal-ph ph-1"><div class="gal-ph-i">👠</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
+    <div class="gal-item rv d2"><div class="gal-ph ph-2"><div class="gal-ph-i">👟</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
+    <div class="gal-item rv d3"><div class="gal-ph ph-3"><div class="gal-ph-i">🎁</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
+    <div class="gal-item rv d2"><div class="gal-ph ph-4"><div class="gal-ph-i">🌹</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
+    <div class="gal-item rv d3"><div class="gal-ph ph-5"><div class="gal-ph-i">🎀</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
+    <div class="gal-item rv d4"><div class="gal-ph ph-6"><div class="gal-ph-i">👡</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
+  </div>
+</section>
+
+<!-- ═══════════ TESTIMONIOS ═══════════ -->
+<section id="testimonios">
+  <div class="s-center">
+    <p class="s-tag rv">+50 pares vendidos</p>
+    <h2 class="s-h2 rv d1">Lo que dicen<br>nuestros <em>clientes</em></h2>
+  </div>
+  <p class="testi-header-note rv">— Aquí van las reseñas reales de tus clientes cuando nos las envíes —</p>
+  <div class="max testi-grid">
+
+    <div class="testi-card testi-placeholder rv d1">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"[Mensaje real de tu cliente aquí. Pégame los testimonios que te enviaron y los agrego."]"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">?</div>
+        <div>
+          <div class="testi-name">[Nombre del cliente]</div>
+          <div class="testi-detail">Cali, Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card testi-placeholder rv d2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"[Mensaje real de tu cliente aquí. Pégame los testimonios que te enviaron y los agrego."]"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">?</div>
+        <div>
+          <div class="testi-name">[Nombre del cliente]</div>
+          <div class="testi-detail">Cali, Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card testi-placeholder rv d3">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"[Mensaje real de tu cliente aquí. Pégame los testimonios que te enviaron y los agrego."]"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">?</div>
+        <div>
+          <div class="testi-name">[Nombre del cliente]</div>
+          <div class="testi-detail">Cali, Colombia</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════ CONTACTO ═══════════ -->
+<section id="contacto">
+  <div class="contact-wm">MILENA</div>
+  <div class="contact-wrap">
+    <div class="s-center">
+      <p class="s-tag rv">¿Lista para tu próximo par?</p>
+      <h2 class="s-h2 rv d1">Encuéntranos <em>aquí</em></h2>
+    </div>
+    <div class="info-cards">
+      <div class="ic rv d1">
+        <div class="ic-icon">📍</div>
+        <div class="ic-label">Ubicación</div>
+        <div class="ic-val">Cali, Colombia</div>
+      </div>
+      <div class="ic rv d2">
+        <div class="ic-icon">🛒</div>
+        <div class="ic-label">Modalidad</div>
+        <div class="ic-val">Tienda 100% Online</div>
+      </div>
+      <div class="ic rv d3">
+        <div class="ic-icon">💰</div>
+        <div class="ic-label">Precios</div>
+        <div class="ic-val">Zapatos $100K–$160K<br>Kit completo $185K</div>
+      </div>
+    </div>
+    <div class="contact-ctas">
+      <div class="cta-block cta-wa rv d1">
+        <p class="cta-label">Escríbenos por</p>
+        <p class="cta-handle">WhatsApp</p>
+        <p class="cta-desc">Haz tu pedido, consulta tallas disponibles o arma tu kit directamente por WhatsApp. ¡Respondemos rápido!</p>
+        <a href="https://wa.me/573227155957" target="_blank" rel="noopener" class="btn-wa" style="margin-top:6px">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+      <div class="cta-block cta-ig rv d2">
+        <p class="cta-label">Síguenos en</p>
+        <p class="cta-handle"><span class="at">@</span>milenashoes26</p>
+        <p class="cta-desc">Todos nuestros productos, kits y novedades están en Instagram. ¡Mira los modelos disponibles!</p>
+        <a href="https://www.instagram.com/milenashoes26" target="_blank" rel="noopener" class="btn-ig" style="margin-top:6px">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Ver en Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="f-brand">Milena's Shoes</div>
+  <div class="f-slogan">"Pisa fuerte. Luce diferente."</div>
+  <div class="f-copy">© 2026 Milena's Shoes · Cali, Colombia</div>
+</footer>
+
+<script>
+  // ── Nav scroll ──
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+  // ── Mobile nav ──
+  const ham        = document.getElementById('ham');
+  const mobileNav  = document.getElementById('mobileNav');
+  const mobileClose= document.getElementById('mobileClose');
+  ham.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+  // ── Scroll reveal ──
+  const revObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => revObs.observe(el));
+
+  // ── Counter ──
+  function runCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const step = target / (1400 / 16);
+    let v = 0;
+    const t = setInterval(() => {
+      v += step;
+      if (v >= target) { v = target; clearInterval(t); }
+      el.textContent = Math.floor(v);
+    }, 16);
+  }
+  const cntObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cntObs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => cntObs.observe(el));
+
+  // +50 pares counter
+  const paresStat = document.getElementById('stat-pares');
+  if (paresStat) {
+    const paresObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          let v = 0;
+          const t = setInterval(() => {
+            v += 2;
+            if (v >= 50) { paresStat.textContent = '+50'; clearInterval(t); return; }
+            paresStat.textContent = v;
+          }, 28);
+          paresObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    paresObs.observe(paresStat);
+  }
+
+  // ── Hero parallax ──
+  const hc = document.querySelector('.hero-content');
+  const hs = document.querySelector('.hero-scroll');
+  window.addEventListener('scroll', () => {
+    const s = window.scrollY, vh = window.innerHeight;
+    if (s < vh && hc) { hc.style.transform = `translateY(${s * 0.22}px)`; hc.style.opacity = String(Math.max(0, 1 - s / (vh * 0.65))); }
+    if (s < 240 && hs) hs.style.opacity = String(Math.max(0, 1 - s / 180));
+  }, { passive: true });
+
+  // ── Active nav ──
+  const secs = document.querySelectorAll('section[id]');
+  const navAs = document.querySelectorAll('.nav-links a');
+  const acObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) navAs.forEach(a => {
+        a.style.color = '';
+        if (a.getAttribute('href') === '#' + e.target.id) a.style.color = 'var(--gold)';
+      });
+    });
+  }, { threshold: 0.4 });
+  secs.forEach(s => acObs.observe(s));
+
+  // ────────────────────────────
+  // KIT BUILDER LOGIC
+  // ────────────────────────────
+  const WA_NUMBER = '573227155957';
+
+  let kitState = { genero: '', talla: '', dulce: '', mensaje: '' };
+
+  // Tallas por género
+  const tallas = {
+    Mujer:  [35,36,37,38,39,40],
+    Hombre: [38,39,40,41,42,43,44]
+  };
+
+  function updatePreview() {
+    // Zapatos
+    const pZ = document.getElementById('prev-zapatos');
+    if (kitState.genero && kitState.talla) {
+      pZ.textContent = `${kitState.genero} · Talla ${kitState.talla}`;
+      pZ.className = 'pi-val filled';
+    } else {
+      pZ.textContent = 'Selecciona género y talla';
+      pZ.className = 'pi-val';
+    }
+    // Dulce
+    const pD = document.getElementById('prev-dulce');
+    if (kitState.dulce) {
+      pD.textContent = kitState.dulce;
+      pD.className = 'pi-val filled';
+    } else {
+      pD.textContent = 'Selecciona un dulce';
+      pD.className = 'pi-val';
+    }
+    // Mensaje
+    const pM = document.getElementById('prev-mensaje');
+    if (kitState.mensaje.trim()) {
+      const short = kitState.mensaje.trim().length > 45 ? kitState.mensaje.trim().slice(0, 42) + '...' : kitState.mensaje.trim();
+      pM.textContent = '"' + short + '"';
+      pM.className = 'pi-val filled';
+    } else {
+      pM.textContent = 'Escribe tu mensaje';
+      pM.className = 'pi-val';
+    }
+    // Kit visual emoji
+    const emojiEl = document.getElementById('kit-emoji');
+    const icons = [];
+    if (kitState.genero) icons.push(kitState.genero === 'Mujer' ? '👟' : '👟');
+    icons.push('🌹');
+    if (kitState.dulce === 'Chocolatina') icons.push('🍫');
+    else if (kitState.dulce === 'Gomitas') icons.push('🍬');
+    else if (kitState.dulce === 'Maní confitado') icons.push('🥜');
+    else icons.push('🍬');
+    icons.push('🎀');
+    emojiEl.textContent = icons.join(' ');
+    // Botón WhatsApp
+    const btn = document.getElementById('btn-wa');
+    const complete = kitState.genero && kitState.talla && kitState.dulce;
+    btn.disabled = !complete;
+    btn.nextElementSibling.style.display = complete ? 'none' : 'block';
+  }
+
+  // Género
+  document.querySelectorAll('input[name="genero"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      kitState.genero = radio.value;
+      kitState.talla = '';
+      // Visual
+      document.getElementById('lbl-mujer').classList.toggle('selected', kitState.genero === 'Mujer');
+      document.getElementById('lbl-hombre').classList.toggle('selected', kitState.genero === 'Hombre');
+      // Render tallas
+      const grid = document.getElementById('size-grid');
+      const hint = document.getElementById('size-hint');
+      hint.style.display = 'none';
+      grid.innerHTML = '';
+      tallas[kitState.genero].forEach(t => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'size-btn';
+        btn.textContent = t;
+        btn.addEventListener('click', () => {
+          kitState.talla = String(t);
+          grid.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          updatePreview();
+        });
+        grid.appendChild(btn);
+      });
+      updatePreview();
+    });
+  });
+
+  // Dulce
+  document.querySelectorAll('input[name="dulce"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      kitState.dulce = radio.value;
+      document.getElementById('sw-choco').classList.toggle('selected', kitState.dulce === 'Chocolatina');
+      document.getElementById('sw-gomi').classList.toggle('selected', kitState.dulce === 'Gomitas');
+      document.getElementById('sw-mani').classList.toggle('selected', kitState.dulce === 'Maní confitado');
+      updatePreview();
+    });
+  });
+
+  // Mensaje
+  const msgArea = document.getElementById('mensaje');
+  const charN   = document.getElementById('char-n');
+  msgArea.addEventListener('input', () => {
+    kitState.mensaje = msgArea.value;
+    charN.textContent = msgArea.value.length;
+    updatePreview();
+  });
+
+  // Botón WhatsApp
+  document.getElementById('btn-wa').addEventListener('click', () => {
+    if (!kitState.genero || !kitState.talla || !kitState.dulce) return;
+    const msg = [
+      "Hola Milena's Shoes, quiero hacer un pedido:",
+      '',
+      'Zapatos: ' + kitState.genero + ' - Talla ' + kitState.talla,
+      'Dulce: ' + kitState.dulce,
+      'Empaque: Incluido (rosa + lazo + bolsa)',
+      kitState.mensaje.trim() ? 'Mensaje personalizado: "' + kitState.mensaje.trim() + '"' : 'Sin mensaje personalizado',
+      '',
+      'Total: $185.000 COP',
+      '',
+      'Esta disponible? Gracias!'
+    ].join('\n');
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
+  });
+
+  updatePreview();
+</script>
+</body>
+</html>
