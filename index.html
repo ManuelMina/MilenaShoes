@@ -413,6 +413,34 @@
       .gal-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
     }
+
+    /* ── CATÁLOGO ── */
+    #catalogo { background: var(--bg-3); }
+    .cat-tabs { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+    .cat-tab { background: none; border: none; border-bottom: 2px solid transparent; color: var(--muted); font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 12px 28px; cursor: pointer; transition: all 0.25s; white-space: nowrap; flex-shrink: 0; }
+    .cat-tab:hover { color: var(--text); }
+    .cat-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .cat-filters { display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; align-items: center; }
+    .cat-sel { background: var(--bg-4); border: 1px solid var(--border); color: var(--text); padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; appearance: none; -webkit-appearance: none; padding-right: 32px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C9A84C'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+    .cat-sel:focus { outline: none; border-color: rgba(201,168,76,0.4); }
+    .cat-count { font-size: 0.68rem; color: var(--muted); letter-spacing: 2px; margin-left: auto; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 48px; }
+    .prod-card { background: var(--bg-4); border: 1px solid var(--border); cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; }
+    .prod-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+    .prod-img-wrap { aspect-ratio: 1/1; overflow: hidden; background: #111; }
+    .prod-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .prod-card:hover .prod-img { transform: scale(1.08); }
+    .prod-info { padding: 14px 14px 0; display: flex; flex-direction: column; gap: 3px; flex: 1; }
+    .prod-id { font-size: 0.58rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+    .prod-marca { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text); margin-top: 2px; }
+    .prod-ref { font-size: 0.76rem; color: var(--muted); font-weight: 300; }
+    .prod-talla { font-size: 0.62rem; color: #666; letter-spacing: 1px; margin-top: 2px; }
+    .prod-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--gold); letter-spacing: 2px; margin-top: 8px; }
+    .prod-wa-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--green); color: #fff; border: none; padding: 11px; font-size: 0.66rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: background 0.25s; margin-top: 14px; width: 100%; font-family: 'Inter', sans-serif; }
+    .prod-wa-btn:hover { background: #1ebe5a; }
+    .cat-empty { text-align: center; color: var(--muted); font-size: 0.9rem; padding: 64px; display: none; }
+    @media(max-width:700px){ .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .cat-filters { flex-direction: column; align-items: stretch; } .cat-count { margin-left: 0; } }
+    @media(max-width:380px){ .cat-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -423,6 +451,7 @@
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#colecciones">Colecciones</a></li>
+    <li><a href="#catalogo">Catálogo</a></li>
     <li><a href="#kits">Kits</a></li>
     <li><a href="#testimonios">Reseñas</a></li>
     <li><a href="#contacto" class="nav-cta">Contacto</a></li>
@@ -434,6 +463,7 @@
   <button class="mobile-close" id="mobileClose">✕</button>
   <a href="#inicio">Inicio</a>
   <a href="#colecciones">Colecciones</a>
+  <a href="#catalogo">Catálogo</a>
   <a href="#kits">Kits</a>
   <a href="#testimonios">Reseñas</a>
   <a href="#contacto">Contacto</a>
@@ -529,6 +559,37 @@
         <a href="https://wa.me/573227155957" target="_blank" rel="noopener" class="col-link">Consultar tallas <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ CATÁLOGO ═══════════ -->
+<section id="catalogo">
+  <div class="s-center">
+    <p class="s-tag rv">59 modelos disponibles</p>
+    <h2 class="s-h2 rv d1">Nuestro <em>catálogo</em></h2>
+    <p class="s-body rv d2" style="max-width:520px;margin:0 auto">Haz click en cualquier zapato para preguntar por WhatsApp. Filtra por género, marca o precio.</p>
+  </div>
+  <div class="max">
+    <div class="cat-tabs rv d2">
+      <button class="cat-tab active" data-gen="all">Todos</button>
+      <button class="cat-tab" data-gen="M">Mujer</button>
+      <button class="cat-tab" data-gen="H">Hombre</button>
+    </div>
+    <div class="cat-filters rv d3">
+      <select id="cat-marca" class="cat-sel">
+        <option value="">Todas las marcas</option>
+      </select>
+      <select id="cat-precio" class="cat-sel">
+        <option value="">Todos los precios</option>
+        <option value="0-134999">Hasta $135.000</option>
+        <option value="135000-149999">$135.000 – $149.000</option>
+        <option value="150000-159999">$150.000 – $159.000</option>
+        <option value="160000-999999">$160.000 en adelante</option>
+      </select>
+      <span class="cat-count" id="cat-count">59 resultados</span>
+    </div>
+    <div class="cat-grid" id="cat-grid"></div>
+    <p class="cat-empty" id="cat-empty">No hay productos que coincidan con los filtros seleccionados.</p>
   </div>
 </section>
 
@@ -1077,6 +1138,177 @@
 
   updatePreview();
 
+  // ── CATÁLOGO ──
+  (function() {
+    const WA = '573227155957';
+    const CATALOG = [
+      {id:1,g:"H",m:"NIKE",r:"AF1 SAIL RIPSTOP",t:"EU 40 AL 44",p:160000},
+      {id:2,g:"M",m:"ADIDAS",r:"ADIDAS BOUNCE",t:"EU 36 AL 40",p:155000},
+      {id:3,g:"M",m:"NIKE",r:"NIKE P7000",t:"EU 36 AL 39",p:150000},
+      {id:4,g:"M",m:"NIKE",r:"METCON",t:"EU 36 AL 40",p:130000},
+      {id:5,g:"M",m:"NIKE",r:"METCON",t:"EU 36 AL 41",p:130000},
+      {id:6,g:"M",m:"NIKE",r:"METCON",t:"EU 36 AL 42",p:130000},
+      {id:7,g:"H",m:"NIKE",r:"NIKE TRAIL",t:"EU 40 AL 44",p:150000},
+      {id:8,g:"H",m:"SKECHERS",r:"SKECHERS",t:"EU 40 AL 44",p:150000},
+      {id:9,g:"M",m:"SKECHERS",r:"SKECHERS",t:"EU 36 AL 40",p:150000},
+      {id:10,g:"M Y H",m:"ADIDAS",r:"ADIZERO",t:"EU 36 AL 44",p:145000},
+      {id:11,g:"M",m:"ADIDAS",r:"ADIZERO",t:"EU 36 AL 40",p:145000},
+      {id:12,g:"H",m:"ASICS",r:"ASICS RUN",t:"EU 40 AL 44",p:150000},
+      {id:13,g:"H",m:"NIKE",r:"NIKE P-7000",t:"EU 40 AL 44",p:145000},
+      {id:14,g:"H",m:"NIKE",r:"NIKE P-7000",t:"EU 40 AL 44",p:145000},
+      {id:15,g:"M",m:"NEW BALANCE",r:"NEW BALANCE",t:"EU 36 AL 44",p:145000},
+      {id:16,g:"H",m:"ARMANI",r:"ARMANI",t:"EU 40 AL 44",p:140000},
+      {id:17,g:"H",m:"ARMANI",r:"ARMANI",t:"EU 40 AL 44",p:140000},
+      {id:18,g:"H",m:"SKECHERS",r:"SKECHERS",t:"EU 40 AL 44",p:150000},
+      {id:19,g:"H",m:"ASICS",r:"ASICS RUN",t:"EU 40 AL 44",p:140000},
+      {id:20,g:"H",m:"NEW BALANCE",r:"NEW BALANCE",t:"EU 40 AL 44",p:140000},
+      {id:21,g:"H",m:"NEW BALANCE",r:"NEW BALANCE RUN",t:"EU 40 AL 44",p:145000},
+      {id:22,g:"H",m:"COACH",r:"COACH",t:"EU 40 AL 44",p:140000},
+      {id:23,g:"H",m:"JORDAN",r:"JORDAN RETRO 1 LOW",t:"EU 40 AL 44",p:155000},
+      {id:24,g:"M",m:"SAMBA",r:"SAMBA",t:"EU 36 AL 39",p:160000},
+      {id:25,g:"H",m:"REEBOK",r:"REEBOK CLUB",t:"EU 40 AL 44",p:155000},
+      {id:26,g:"H",m:"LACOSTE",r:"LACOSTE ALPACINO",t:"EU 40 AL 44",p:155000},
+      {id:27,g:"M Y H",m:"VANS",r:"VANS HYLANE",t:"EU 36 AL 44",p:170000},
+      {id:29,g:"H",m:"REEBOK",r:"REEBOK FLOATZIG",t:"EU 40 AL 44",p:140000},
+      {id:30,g:"M Y H",m:"NEW BALANCE",r:"NEW BALANCE 740",t:"EU 36 AL 44",p:135000},
+      {id:31,g:"H",m:"NIKE",r:"ZOOM PEGASUS",t:"EU 40 AL 44",p:140000},
+      {id:32,g:"M",m:"NIKE",r:"SB PARRA",t:"EU 36 AL 39",p:155000},
+      {id:33,g:"H",m:"NIKE",r:"NIKE SB",t:"EU 40 AL 44",p:155000},
+      {id:34,g:"H",m:"LACOSTE",r:"LACOSTE",t:"EU 40 AL 44",p:150000},
+      {id:35,g:"M Y H",m:"NIKE",r:"SB SUPREME",t:"EU 36 AL 44",p:155000},
+      {id:36,g:"M",m:"NIKE",r:"NIKE SB",t:"EU 36 AL 40",p:155000},
+      {id:37,g:"H",m:"NIKE",r:"AF1 SUPREME",t:"EU 40 AL 44",p:155000},
+      {id:38,g:"H",m:"NIKE",r:"NIKE AF1",t:"EU 40 AL 44",p:155000},
+      {id:39,g:"M",m:"JORDAN",r:"RETRO 1",t:"EU 36 AL 40",p:150000},
+      {id:40,g:"M Y H",m:"LOUIS VUITTON",r:"LV SKATE",t:"EU 36 AL 44",p:150000},
+      {id:41,g:"M Y H",m:"NIKE",r:"NIKE P-6000",t:"EU 36 AL 44",p:160000},
+      {id:42,g:"M",m:"NIKE",r:"NIKE P-6000",t:"EU 36 AL 39",p:160000},
+      {id:43,g:"M Y H",m:"NIKE",r:"ZOOM HAPPY",t:"EU 36 AL 44",p:150000},
+      {id:44,g:"H",m:"NIKE",r:"NIKE AIR MAX TN",t:"EU 40 AL 44",p:145000},
+      {id:45,g:"H",m:"NIKE",r:"NIKE SB DUNK",t:"EU 40 AL 44",p:155000},
+      {id:46,g:"H",m:"NIKE",r:"NIKE SB DUNK",t:"EU 40 AL 44",p:155000},
+      {id:47,g:"M",m:"NIKE",r:"NIKE SB DUNK",t:"EU 36 AL 39",p:160000},
+      {id:48,g:"H",m:"JORDAN",r:"JORDAN AURA",t:"EU 40 AL 44",p:170000},
+      {id:49,g:"H",m:"JORDAN",r:"JORDAN AURA",t:"EU 40 AL 44",p:170000},
+      {id:50,g:"M Y H",m:"NIKE",r:"SHOX GUSANO",t:"EU 36 AL 44",p:160000},
+      {id:51,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 44",p:150000},
+      {id:52,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 45",p:155000},
+      {id:53,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 46",p:155000},
+      {id:54,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 47",p:155000},
+      {id:55,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 48",p:155000},
+      {id:56,g:"H",m:"LACOSTE",r:"LACOSTE TABLA",t:"EU 40 AL 44",p:160000},
+      {id:57,g:"M Y H",m:"NIKE",r:"NIKE AF1",t:"EU 40 AL 44",p:135000},
+      {id:58,g:"M",m:"NIKE",r:"NIKE TRAIL",t:"EU 36 AL 39",p:145000},
+      {id:59,g:"M",m:"PUMA",r:"PUMA PARK",t:"EU 36 AL 39",p:155000},
+      {id:60,g:"M Y H",m:"PUMA",r:"PUMA PARK",t:"EU 36 AL 44",p:155000}
+    ];
+
+    let activeGen = 'all', activeMarca = '', activePrecio = '';
+
+    const marcas = [...new Set(CATALOG.map(p => p.m))].sort();
+    const marcaSel = document.getElementById('cat-marca');
+    marcas.forEach(m => {
+      const o = document.createElement('option');
+      o.value = m; o.textContent = m;
+      marcaSel.appendChild(o);
+    });
+
+    function matches(p) {
+      const genOk = activeGen === 'all' || p.g === activeGen || p.g === 'M Y H';
+      if (!genOk) return false;
+      if (activeMarca && p.m !== activeMarca) return false;
+      if (activePrecio) {
+        const parts = activePrecio.split('-');
+        const lo = Number(parts[0]), hi = Number(parts[1]);
+        if (p.p < lo || p.p > hi) return false;
+      }
+      return true;
+    }
+
+    function fmtPrice(n) {
+      return '$' + n.toLocaleString('es-CO') + ' COP';
+    }
+
+    const WA_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>';
+
+    function buildMsg(p) {
+      const gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex (Hombre y Mujer)';
+      return [
+        "Hola Milena's Shoes, quiero preguntar por:",
+        '',
+        'Zapato #' + p.id,
+        'Marca: ' + p.m,
+        'Referencia: ' + p.r,
+        'Genero: ' + gl,
+        'Tallas disponibles: ' + p.t,
+        'Precio: ' + fmtPrice(p.p),
+        '',
+        'Esta disponible? Gracias!'
+      ].join('\n');
+    }
+
+    function openWA(p) {
+      window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(buildMsg(p)), '_blank');
+    }
+
+    function render() {
+      const grid = document.getElementById('cat-grid');
+      const empty = document.getElementById('cat-empty');
+      const count = document.getElementById('cat-count');
+      const filtered = CATALOG.filter(matches);
+
+      if (count) count.textContent = filtered.length + ' resultado' + (filtered.length !== 1 ? 's' : '');
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        empty.style.display = 'block';
+        return;
+      }
+      empty.style.display = 'none';
+
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'prod-card rv';
+        card.innerHTML =
+          '<div class="prod-img-wrap">' +
+            '<img class="prod-img" src="assets/' + p.id + '.jpeg" alt="Zapato #' + p.id + ' ' + p.m + '" loading="lazy">' +
+          '</div>' +
+          '<div class="prod-info">' +
+            '<div class="prod-id">Zapato #' + p.id + '</div>' +
+            '<div class="prod-marca">' + p.m + '</div>' +
+            '<div class="prod-ref">' + p.r + '</div>' +
+            '<div class="prod-talla">' + p.t + '</div>' +
+            '<div class="prod-precio">' + fmtPrice(p.p) + '</div>' +
+          '</div>' +
+          '<button class="prod-wa-btn">' + WA_SVG + ' Pedir por WhatsApp</button>';
+
+        card.querySelector('.prod-wa-btn').addEventListener('click', function(e) {
+          e.stopPropagation();
+          openWA(p);
+        });
+        card.addEventListener('click', function() { openWA(p); });
+        grid.appendChild(card);
+      });
+
+      // Re-apply scroll observer to new cards
+      grid.querySelectorAll('.rv').forEach(el => revObs.observe(el));
+    }
+
+    document.querySelectorAll('.cat-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        activeGen = tab.dataset.gen;
+        render();
+      });
+    });
+
+    document.getElementById('cat-marca').addEventListener('change', function(e) { activeMarca = e.target.value; render(); });
+    document.getElementById('cat-precio').addEventListener('change', function(e) { activePrecio = e.target.value; render(); });
+
+    render();
+  })();
+
   // ── Kit sí/no ──
   const btnSi  = document.getElementById('btn-si-kit');
   const btnNo  = document.getElementById('btn-no-kit');
@@ -1085,7 +1317,7 @@
   btnSi.addEventListener('click', () => {
     kitForm.classList.add('open');
     btnSi.style.display = 'none';
-    btnNo.style.display = 'none';
+    if (btnNo) btnNo.style.display = 'none';
     setTimeout(() => kitForm.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   });
 </script>
