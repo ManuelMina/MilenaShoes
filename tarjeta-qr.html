@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tarjeta QR — Milena's Shoes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #e8e8e8; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: 'Inter', sans-serif; gap: 40px; padding: 40px; }
+    h1 { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 4px; color: #555; }
+
+    .cards-wrap { display: flex; flex-wrap: wrap; gap: 24px; justify-content: center; }
+
+    /* Tarjeta frontal */
+    .card {
+      width: 85.6mm; height: 54mm;
+      background: #060606;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6mm;
+      gap: 3mm;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #C9A84C, #FF4F7B, #C9A84C);
+    }
+    .card-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      color: #C9A84C;
+    }
+    .card-logo span { color: #F0EDE8; }
+    .card-slogan {
+      font-size: 0.5rem;
+      font-style: italic;
+      color: #666;
+      letter-spacing: 2px;
+    }
+    .card-divider { width: 30mm; height: 1px; background: rgba(201,168,76,0.3); }
+    .card-detail {
+      font-size: 0.48rem;
+      color: #888;
+      letter-spacing: 1px;
+      text-align: center;
+      line-height: 1.8;
+    }
+    .card-detail strong { color: #C9A84C; }
+    .card-wa {
+      font-size: 0.5rem;
+      font-weight: 600;
+      color: #25D366;
+      letter-spacing: 1.5px;
+    }
+
+    /* Tarjeta trasera con QR */
+    .card-back {
+      background: #fff;
+    }
+    .card-back::before { background: linear-gradient(90deg, #C9A84C, #FF4F7B, #C9A84C); }
+    .qr-img { width: 28mm; height: 28mm; }
+    .qr-label {
+      font-size: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #333;
+    }
+    .qr-url {
+      font-size: 0.45rem;
+      color: #C9A84C;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .qr-scan {
+      font-size: 0.42rem;
+      color: #aaa;
+      letter-spacing: 1px;
+    }
+
+    @media print {
+      body { background: white; padding: 10mm; gap: 10mm; }
+      h1 { display: none; }
+      .cards-wrap { gap: 6mm; }
+      .card { box-shadow: none; border: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+  <h1>TARJETAS DE VISITA — Milena's Shoes &nbsp;·&nbsp; Ctrl+P para imprimir</h1>
+
+  <div class="cards-wrap">
+
+    <!-- FRONTAL x2 -->
+    <div class="card">
+      <div class="card-logo">Milena's<span>Shoes</span></div>
+      <div class="card-slogan">"Pisa fuerte. Luce diferente."</div>
+      <div class="card-divider"></div>
+      <div class="card-detail">
+        Zapatos deportivos · Kits de regalo<br>
+        <strong>Cali, Colombia</strong>
+      </div>
+      <div class="card-wa">WhatsApp: 322 715 5957</div>
+    </div>
+
+    <div class="card">
+      <div class="card-logo">Milena's<span>Shoes</span></div>
+      <div class="card-slogan">"Pisa fuerte. Luce diferente."</div>
+      <div class="card-divider"></div>
+      <div class="card-detail">
+        Zapatos deportivos · Kits de regalo<br>
+        <strong>Cali, Colombia</strong>
+      </div>
+      <div class="card-wa">WhatsApp: 322 715 5957</div>
+    </div>
+
+    <!-- TRASERA CON QR x2 -->
+    <div class="card card-back">
+      <div class="qr-scan">Escanea y visítanos</div>
+      <img class="qr-img" src="assets/qr-milenashoes.png" alt="QR Milena's Shoes">
+      <div class="qr-url">milenashoes.online</div>
+      <div class="qr-label">@milenashoes26</div>
+    </div>
+
+    <div class="card card-back">
+      <div class="qr-scan">Escanea y visítanos</div>
+      <img class="qr-img" src="assets/qr-milenashoes.png" alt="QR Milena's Shoes">
+      <div class="qr-url">milenashoes.online</div>
+      <div class="qr-label">@milenashoes26</div>
+    </div>
+
+  </div>
+</body>
+</html>
