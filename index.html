@@ -238,6 +238,43 @@
     .btn-send-wa:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; box-shadow: none; }
     .wa-note { font-size: 0.68rem; color: #555; text-align: center; margin-top: 10px; }
 
+    /* ── Kit pregunta ── */
+    .kit-question-block { text-align: center; margin: 44px auto 0; max-width: 520px; padding: 40px 36px; border: 1px dashed rgba(201,168,76,0.25); background: rgba(201,168,76,0.04); }
+    .kit-q-text { font-family: 'Playfair Display', serif; font-size: 1.25rem; line-height: 1.5; color: var(--text); margin-bottom: 28px; }
+    .kit-q-text span { color: var(--gold); font-style: italic; }
+    .kit-choice { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-si { background: var(--gold); color: var(--bg); padding: 14px 38px; font-size: 0.78rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; border: none; cursor: pointer; transition: all 0.3s; clip-path: polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%); }
+    .btn-si:hover { background: var(--gold-l); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(201,168,76,0.25); }
+    .btn-no-kit { background: transparent; border: 1px solid rgba(201,168,76,0.25); color: var(--muted); padding: 14px 38px; font-size: 0.78rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+    .btn-no-kit:hover { border-color: var(--muted); color: var(--text); }
+    .kit-form-wrap { display: none; }
+    .kit-form-wrap.open { display: block; animation: kitIn 0.7s ease; }
+    @keyframes kitIn { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ── Métodos de pago ── */
+    #pagos { background: var(--bg-3); padding: 80px 48px; }
+    .pagos-inner { max-width: 860px; margin: 0 auto; }
+    .pagos-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 48px; }
+    .pago-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 130px; padding: 20px 12px; border-radius: 4px; transition: transform 0.3s, box-shadow 0.3s; cursor: default; }
+    .pago-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.4); }
+    .pago-icon { font-size: 1.6rem; }
+    .pago-name { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-align: center; }
+    .pago-sub { font-size: 0.58rem; letter-spacing: 1px; opacity: 0.7; text-align: center; }
+    .p-efectivo  { background: #1b4d1e; color: #a8d5ab; border: 1px solid #2e7d32; }
+    .p-nequi     { background: #5b0a3d; color: #f8a8d8; border: 1px solid #c2185b; }
+    .p-daviplata { background: #5a0808; color: #f8b0b0; border: 1px solid #b71c1c; }
+    .p-transferencia { background: #0d2137; color: #90bcd8; border: 1px solid #1565c0; }
+    .p-pse       { background: #002240; color: #80b8d8; border: 1px solid #0277bd; }
+    .p-visa      { background: #1a1f71; color: #fff; border: 1px solid #3949ab; }
+    .p-mc        { background: #1a1a1a; color: #fff; border: 1px solid #333; }
+    .mc-circles  { display: flex; position: relative; width: 44px; height: 28px; }
+    .mc-c1, .mc-c2 { width: 28px; height: 28px; border-radius: 50%; position: absolute; top: 0; }
+    .mc-c1 { background: #EB001B; left: 0; }
+    .mc-c2 { background: #F79E1B; right: 0; opacity: 0.9; }
+    .visa-logo { font-family: 'Times New Roman', serif; font-size: 1.4rem; font-weight: 900; font-style: italic; letter-spacing: -1px; color: #fff; }
+    .pagos-note { text-align: center; font-size: 0.72rem; color: #555; margin-top: 24px; }
+    @media(max-width:700px){ #pagos { padding: 60px 24px; } .pago-card { width: 100px; } }
+
     /* ── GALLERY ── */
     #galeria { background: var(--bg); }
     .gal-note { text-align: center; font-size: 0.82rem; color: var(--muted); margin-bottom: 44px; }
@@ -470,7 +507,18 @@
     <h2 class="s-h2 rv d1">¿Y si este año<br>el regalo la <em>sorprende</em> de verdad?</h2>
     <p class="s-body rv d2" style="max-width:600px;margin:16px auto 0">Preparamos este kit especial para que puedas regalarle algo único: sus zapatos favoritos, un dulce, una rosa y tu mensaje con corazón — todo empacado con amor, listo para entregar.</p>
     <p class="s-body rv d3" style="max-width:500px;margin:8px auto 0;font-size:0.82rem"><strong style="color:var(--gold)">Kit completo por $185.000 COP</strong> &nbsp;·&nbsp; Edición piloto por tiempo limitado</p>
+
+    <!-- Pregunta al usuario -->
+    <div class="kit-question-block rv d4">
+      <p class="kit-q-text">¿Te gustaría armarle un <span>kit especial</span> a ella?</p>
+      <div class="kit-choice">
+        <button class="btn-si" id="btn-si-kit">Sí, quiero armarlo</button>
+        <button class="btn-no-kit" id="btn-no-kit">No, gracias</button>
+      </div>
+    </div>
   </div>
+
+  <div class="kit-form-wrap" id="kit-form-wrap">
   <div class="max kit-wrap">
 
     <!-- STEPS -->
@@ -612,6 +660,7 @@
     </div>
 
   </div><!-- /kit-wrap -->
+  </div><!-- /kit-form-wrap -->
 </section>
 
 <!-- ═══════════ GALERÍA ═══════════ -->
@@ -724,6 +773,63 @@
         </a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══════════ MÉTODOS DE PAGO ═══════════ -->
+<section id="pagos">
+  <div class="pagos-inner">
+    <div class="s-center">
+      <p class="s-tag rv">Sin complicaciones</p>
+      <h2 class="s-h2 rv d1">Medios de <em>pago</em></h2>
+      <p class="s-body rv d2" style="max-width:480px;margin:0 auto">Acepta todos los métodos para que nadie se quede sin su regalo.</p>
+    </div>
+    <div class="pagos-grid">
+
+      <div class="pago-card p-efectivo rv d1">
+        <div class="pago-icon">💵</div>
+        <div class="pago-name">Efectivo</div>
+        <div class="pago-sub">Contra entrega</div>
+      </div>
+
+      <div class="pago-card p-nequi rv d2">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:2px;color:#f8a8d8">Nequi</div>
+        <div class="pago-name">Nequi</div>
+        <div class="pago-sub">Transferencia</div>
+      </div>
+
+      <div class="pago-card p-daviplata rv d3">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:1px;color:#f8b0b0">Davi<br>plata</div>
+        <div class="pago-name">Daviplata</div>
+        <div class="pago-sub">Transferencia</div>
+      </div>
+
+      <div class="pago-card p-transferencia rv d2">
+        <div class="pago-icon">🏦</div>
+        <div class="pago-name">Transferencia</div>
+        <div class="pago-sub">Bancolombia · otros</div>
+      </div>
+
+      <div class="pago-card p-pse rv d3">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:3px;color:#80b8d8">PSE</div>
+        <div class="pago-name">PSE</div>
+        <div class="pago-sub">Débito online</div>
+      </div>
+
+      <div class="pago-card p-visa rv d4">
+        <div class="visa-logo">VISA</div>
+        <div class="pago-name">Visa</div>
+        <div class="pago-sub">Link de pago*</div>
+      </div>
+
+      <div class="pago-card p-mc rv d5">
+        <div class="mc-circles"><div class="mc-c1"></div><div class="mc-c2"></div></div>
+        <div class="pago-name">Mastercard</div>
+        <div class="pago-sub">Link de pago*</div>
+      </div>
+
+    </div>
+    <p class="pagos-note rv">* Pagos con tarjeta vía link de pago — aplica comisión del medio de pago.</p>
   </div>
 </section>
 
@@ -939,6 +1045,21 @@
   });
 
   updatePreview();
+
+  // ── Kit sí/no ──
+  const btnSi  = document.getElementById('btn-si-kit');
+  const btnNo  = document.getElementById('btn-no-kit');
+  const kitForm = document.getElementById('kit-form-wrap');
+
+  btnSi.addEventListener('click', () => {
+    kitForm.classList.add('open');
+    btnSi.style.display = 'none';
+    btnNo.style.display = 'none';
+    setTimeout(() => kitForm.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  });
+  btnNo.addEventListener('click', () => {
+    document.getElementById('colecciones').scrollIntoView({ behavior: 'smooth' });
+  });
 </script>
 </body>
 </html>
