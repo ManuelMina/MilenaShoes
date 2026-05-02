@@ -304,7 +304,10 @@
     .cart-total-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
     .cart-total-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; color: var(--gold); }
     .cart-name-wrap { margin-bottom: 14px; }
-    .cart-name-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+    .cart-name-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+    .cart-item-size-wrap { margin-top: 7px; }
+    .cart-item-size { width: 100%; background: var(--bg-2); border: 1px solid var(--border); color: var(--text); padding: 5px 8px; font-size: 0.75rem; font-family: 'Inter', sans-serif; cursor: pointer; }
+    .cart-item-size:focus { outline: none; border-color: rgba(201,168,76,0.5); }
     .cart-name-input { width: 100%; background: var(--bg-4); border: 1px solid var(--border); color: var(--text); padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: border-color 0.3s; }
     .cart-name-input:focus { outline: none; border-color: rgba(201,168,76,0.5); }
     .cart-name-input::placeholder { color: #444; }
@@ -498,6 +501,18 @@
     var total = 0;
     cart.forEach(function(p, idx) {
       total += p.p;
+
+      // Parse size range "EU 36 AL 40" → [36,37,38,39,40]
+      var sizeOptions = '';
+      var match = p.t.match(/(\d+)\s+AL\s+(\d+)/i);
+      if (match) {
+        sizeOptions = '<option value="">— Elige tu talla —</option>';
+        for (var s = parseInt(match[1]); s <= parseInt(match[2]); s++) {
+          var sel = (p.size === s) ? ' selected' : '';
+          sizeOptions += '<option value="' + s + '"' + sel + '>EU ' + s + '</option>';
+        }
+      }
+
       var item = document.createElement('div');
       item.className = 'cart-item';
       item.innerHTML =
@@ -507,9 +522,17 @@
           '<div class="cart-item-marca">' + p.m + '</div>' +
           '<div class="cart-item-ref">' + p.r + '</div>' +
           '<div class="cart-item-precio">' + fmtPriceShort(p.p) + '</div>' +
+          (sizeOptions ? '<div class="cart-item-size-wrap"><select class="cart-item-size" data-size-idx="' + idx + '">' + sizeOptions + '</select></div>' : '') +
         '</div>' +
         '<button class="cart-item-remove" data-idx="' + idx + '" title="Eliminar">✕</button>';
       cartItemsEl.insertBefore(item, emptyMsg);
+    });
+
+    cartItemsEl.querySelectorAll('.cart-item-size').forEach(function(sel) {
+      sel.addEventListener('change', function() {
+        var i = parseInt(sel.dataset.sizeIdx);
+        cart[i].size = sel.value ? parseInt(sel.value) : null;
+      });
     });
 
     cartItemsEl.querySelectorAll('.cart-item-remove').forEach(function(btn) {
@@ -569,9 +592,10 @@
     ];
     cart.forEach(function(p, i) {
       var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex';
+      var tallaStr = p.size ? 'Talla: EU ' + p.size : 'Talla: por confirmar';
       lines.push(
         (i + 1) + '. Zapato #' + p.id + ' — ' + p.m + ' ' + p.r +
-        ' | ' + gl + ' | Tallas: ' + p.t + ' | ' + fmtPrice(p.p)
+        ' | ' + gl + ' | ' + tallaStr + ' | ' + fmtPrice(p.p)
       );
     });
     var total = cart.reduce(function(s, p) { return s + p.p; }, 0);

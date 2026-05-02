@@ -188,12 +188,12 @@
     .mobile-nav {
       display: none; position: fixed; inset: 0;
       background: rgba(6,6,6,0.98); z-index: 999;
-      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+      flex-direction: column; align-items: center; justify-content: center; gap: 20px;
     }
     .mobile-nav.open { display: flex; }
-    .mobile-nav a { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; letter-spacing: 6px; color: var(--text); transition: color 0.2s; }
+    .mobile-nav a { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 4px; color: var(--text); transition: color 0.2s; }
     .mobile-nav a:hover { color: var(--gold); }
-    .mobile-close { position: absolute; top: 24px; right: 48px; font-size: 2rem; color: var(--muted); cursor: pointer; background: none; border: none; }
+    .mobile-close { position: absolute; top: 20px; right: 28px; font-size: 1.5rem; color: var(--muted); cursor: pointer; background: none; border: none; }
 
     /* ── HERO ── */
     #inicio {
@@ -273,7 +273,7 @@
     .col-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 32px 28px; z-index: 2; transform: translateY(6px); transition: transform 0.4s ease; }
     .col-card:hover .col-info { transform: translateY(0); }
     .col-t { font-size: 0.65rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-    .col-n { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 6px; }
+    .col-n { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; margin-bottom: 6px; text-shadow: 0 2px 16px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,0.8); }
     .col-sz { font-size: 0.78rem; color: #b0b0b0; font-weight: 300; margin-bottom: 18px; }
     .col-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); opacity: 0; transform: translateY(8px); transition: all 0.4s ease; }
     .col-card:hover .col-link { opacity: 1; transform: translateY(0); }
