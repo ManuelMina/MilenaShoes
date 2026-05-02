@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://milenashoes.online/sitemap.xml

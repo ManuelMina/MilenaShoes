@@ -21,6 +21,13 @@
     gtag('config', 'G-Y4XM6RVM2W');
   </script>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+
+  <!-- Google Search Console verificación -->
+  <meta name="google-site-verification" content="kIKQsFlgQdG1izjetkIQAXKesHcDjqOAMgK0BDLa8mY">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
@@ -47,7 +54,8 @@
       padding: 16px 48px;
       display: flex; justify-content: space-between; align-items: center;
     }
-    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
     .nav-logo span { color: var(--text); }
     .nav-back {
       display: flex; align-items: center; gap: 8px;
@@ -264,7 +272,10 @@
 
 <!-- ── NAV ── -->
 <nav>
-  <a href="index.html" class="nav-logo">Milena's<span>Shoes</span></a>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.png" alt="Milena's Shoes logo">
+    Milena's<span>Shoes</span>
+  </a>
   <div class="nav-right">
     <a href="index.html" class="nav-back">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
@@ -389,12 +400,14 @@
     var btnCheckout = document.getElementById('btnCheckout');
 
     badge.textContent = cart.length;
+
+    // Remove only product items — never destroy emptyMsg
+    cartItemsEl.querySelectorAll('.cart-item').forEach(function(el) { el.remove(); });
+
     if (cart.length === 0) {
       fab.classList.add('hidden');
       emptyMsg.style.display = 'block';
       cartFooter.style.display = 'none';
-      cartItemsEl.innerHTML = '';
-      cartItemsEl.appendChild(emptyMsg);
       return;
     }
 
@@ -402,8 +415,6 @@
     emptyMsg.style.display = 'none';
     cartFooter.style.display = 'block';
 
-    // Render items
-    cartItemsEl.innerHTML = '';
     var total = 0;
     cart.forEach(function(p, idx) {
       total += p.p;
@@ -418,16 +429,14 @@
           '<div class="cart-item-precio">' + fmtPriceShort(p.p) + '</div>' +
         '</div>' +
         '<button class="cart-item-remove" data-idx="' + idx + '" title="Eliminar">✕</button>';
-      cartItemsEl.appendChild(item);
+      cartItemsEl.insertBefore(item, emptyMsg);
     });
 
-    // Remove handlers
     cartItemsEl.querySelectorAll('.cart-item-remove').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var i = parseInt(btn.dataset.idx);
         var removedId = cart[i].id;
         cart.splice(i, 1);
-        // Un-mark add button if card still visible
         var addBtn = document.querySelector('[data-prod-id="' + removedId + '"]');
         if (addBtn) { addBtn.classList.remove('added'); addBtn.textContent = '+ Agregar'; }
         updateCartUI();
@@ -435,8 +444,6 @@
     });
 
     cartTotal.textContent = fmtPriceShort(total);
-
-    // Enable checkout only if name is filled
     var name = document.getElementById('cartName').value.trim();
     btnCheckout.disabled = name.length < 2;
   }

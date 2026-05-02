@@ -26,6 +26,45 @@
   <meta name="twitter:title" content="Milena's Shoes | Zapatos y Kits de Regalo Cali">
   <meta name="twitter:description" content="Zapatos deportivos y kits de regalo especiales desde Cali, Colombia.">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+
+  <!-- Google Search Console verificación -->
+  <meta name="google-site-verification" content="kIKQsFlgQdG1izjetkIQAXKesHcDjqOAMgK0BDLa8mY">
+
+  <!-- Schema.org SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Milena's Shoes",
+    "description": "Tienda online de zapatos deportivos para hombre y mujer en Cali, Colombia. Kits de regalo especiales con zapatos, dulce, rosa y tarjeta personalizada.",
+    "url": "https://milenashoes.online",
+    "telephone": "+573227155957",
+    "image": "https://milenashoes.online/assets/og-cover.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cali",
+      "addressRegion": "Valle del Cauca",
+      "addressCountry": "CO"
+    },
+    "sameAs": ["https://www.instagram.com/milenashoes26"],
+    "priceRange": "$130.000 - $185.000 COP",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "08:00",
+      "closes": "21:00"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "30"
+    }
+  }
+  </script>
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4XM6RVM2W"></script>
   <script>
@@ -88,7 +127,8 @@
       padding: 14px 48px;
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 5px; color: var(--gold); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 5px; color: var(--gold); display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
     .nav-logo span { color: var(--text); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a {
@@ -315,11 +355,8 @@
     .gal-grid { display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: 280px 280px; gap: 4px; }
     .gal-item { position: relative; overflow: hidden; cursor: pointer; }
     .gal-item:nth-child(1) { grid-row: span 2; }
-    .gal-ph { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; transition: transform 0.6s ease; }
-    .gal-item:hover .gal-ph { transform: scale(1.05); }
-    .ph-1{background:linear-gradient(145deg,#1a0510,#6b2050,#c060a0)} .ph-2{background:linear-gradient(145deg,#050a1a,#152558,#2d5ab0)} .ph-3{background:linear-gradient(145deg,#050f05,#154515,#308030)} .ph-4{background:linear-gradient(145deg,#1a1000,#6b4400,#c08800)} .ph-5{background:linear-gradient(145deg,#1a0500,#6b1c00,#c04c30)} .ph-6{background:linear-gradient(145deg,#041010,#104444,#208080)}
-    .gal-ph-i { font-size: 2.8rem; opacity: 0.28; }
-    .gal-ph-l { font-size: 0.6rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.28); font-weight: 600; }
+    .gal-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s ease; }
+    .gal-item:hover .gal-img { transform: scale(1.06); }
     .gal-hover { position: absolute; inset: 0; background: rgba(201,168,76,0.07); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; z-index: 2; }
     .gal-item:hover .gal-hover { opacity: 1; }
     .gal-plus { font-size: 2.4rem; color: rgba(255,255,255,0.4); font-weight: 200; transform: scale(0.7); transition: transform 0.3s; }
@@ -329,7 +366,7 @@
     /* ── TESTIMONIOS ── */
     #testimonios { background: var(--bg-2); position: relative; overflow: hidden; }
     .testi-header-note { text-align: center; font-size: 0.8rem; color: #555; margin-top: -48px; margin-bottom: 64px; font-style: italic; }
-    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; row-gap: 2px; }
     .testi-card {
       background: var(--bg-3); border: 1px solid transparent;
       padding: 36px 28px; transition: all 0.35s;
@@ -445,7 +482,10 @@
 
 <!-- ═══════════ NAVIGATION ═══════════ -->
 <nav id="nav">
-  <div class="nav-logo">Milena's<span>Shoes</span></div>
+  <div class="nav-logo">
+    <img src="assets/logo.png" alt="Milena's Shoes logo">
+    Milena's<span>Shoes</span>
+  </div>
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#colecciones">Colecciones</a></li>
@@ -751,55 +791,90 @@
   </div>
   <p class="gal-note rv d2">📸 Síguenos en <a href="https://www.instagram.com/milenashoes26" target="_blank" rel="noopener">@milenashoes26</a> para ver todos nuestros kits y productos · Reemplaza estas fotos con las tuyas</p>
   <div class="max gal-grid">
-    <div class="gal-item rv d1"><div class="gal-ph ph-1"><div class="gal-ph-i">👠</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
-    <div class="gal-item rv d2"><div class="gal-ph ph-2"><div class="gal-ph-i">👟</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
-    <div class="gal-item rv d3"><div class="gal-ph ph-3"><div class="gal-ph-i">🎁</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
-    <div class="gal-item rv d2"><div class="gal-ph ph-4"><div class="gal-ph-i">🌹</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
-    <div class="gal-item rv d3"><div class="gal-ph ph-5"><div class="gal-ph-i">🎀</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
-    <div class="gal-item rv d4"><div class="gal-ph ph-6"><div class="gal-ph-i">👡</div><div class="gal-ph-l">Foto aquí</div></div><div class="gal-hover"><div class="gal-plus">+</div></div><div class="gal-tag">Pon foto aquí</div></div>
+    <div class="gal-item rv d1"><img class="gal-img" src="assets/galeria-1.jpeg" alt="Milena's Shoes galería" loading="lazy"><div class="gal-hover"><div class="gal-plus">+</div></div></div>
+    <div class="gal-item rv d2"><img class="gal-img" src="assets/galeria-2.jpeg" alt="Milena's Shoes zapatos" loading="lazy"><div class="gal-hover"><div class="gal-plus">+</div></div></div>
+    <div class="gal-item rv d3"><img class="gal-img" src="assets/galeria-3.jpeg" alt="Milena's Shoes colección" loading="lazy"><div class="gal-hover"><div class="gal-plus">+</div></div></div>
+    <div class="gal-item rv d2"><img class="gal-img" src="assets/galeria-4.jpeg" alt="Milena's Shoes modelos" loading="lazy"><div class="gal-hover"><div class="gal-plus">+</div></div></div>
+    <div class="gal-item rv d3"><img class="gal-img" src="assets/galeria-5.jpeg" alt="Milena's Shoes kits regalo" loading="lazy"><div class="gal-hover"><div class="gal-plus">+</div></div></div>
+    <div class="gal-item rv d4"><img class="gal-img" src="assets/galeria-1.jpeg" alt="Milena's Shoes Cali" loading="lazy"><div class="gal-hover"><div class="gal-plus">+</div></div></div>
   </div>
 </section>
 
 <!-- ═══════════ TESTIMONIOS ═══════════ -->
 <section id="testimonios">
   <div class="s-center">
-    <p class="s-tag rv">+50 pares vendidos</p>
+    <p class="s-tag rv">+30 clientes satisfechos</p>
     <h2 class="s-h2 rv d1">Lo que dicen<br>nuestros <em>clientes</em></h2>
   </div>
-  <p class="testi-header-note rv">— Aquí van las reseñas reales de tus clientes cuando nos las envíes —</p>
   <div class="max testi-grid">
 
-    <div class="testi-card testi-placeholder rv d1">
+    <div class="testi-card rv d1">
       <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"[Mensaje real de tu cliente aquí. Pégame los testimonios que te enviaron y los agrego."]"</p>
+      <p class="testi-text">"Vea, la verdad me sorprendieron. Pensé que por el precio iban a ser normalitos pero están bien firmes. ¡Gracias ve!"</p>
       <div class="testi-author">
-        <div class="testi-avatar">?</div>
+        <div class="testi-avatar">AF</div>
         <div>
-          <div class="testi-name">[Nombre del cliente]</div>
+          <div class="testi-name">Andrés F. Hurtado</div>
           <div class="testi-detail">Cali, Colombia</div>
         </div>
       </div>
     </div>
 
-    <div class="testi-card testi-placeholder rv d2">
+    <div class="testi-card rv d2">
       <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"[Mensaje real de tu cliente aquí. Pégame los testimonios que te enviaron y los agrego."]"</p>
+      <p class="testi-text">"Súper cómodos, los usé todo el día y ni me cansaron. Muchas gracias por la asesoría por WhatsApp."</p>
       <div class="testi-author">
-        <div class="testi-avatar">?</div>
+        <div class="testi-avatar">DM</div>
         <div>
-          <div class="testi-name">[Nombre del cliente]</div>
+          <div class="testi-name">Diana Marcela Ocoró</div>
           <div class="testi-detail">Cali, Colombia</div>
         </div>
       </div>
     </div>
 
-    <div class="testi-card testi-placeholder rv d3">
+    <div class="testi-card rv d3">
       <div class="testi-stars">★★★★★</div>
-      <p class="testi-text">"[Mensaje real de tu cliente aquí. Pégame los testimonios que te enviaron y los agrego."]"</p>
+      <p class="testi-text">"Todo correcto. Zapatos cómodos y se ven de buena marca. Están brutales, tenía miedo que fueran réplicas malas pero están muy bien hechos."</p>
       <div class="testi-author">
-        <div class="testi-avatar">?</div>
+        <div class="testi-avatar">HA</div>
         <div>
-          <div class="testi-name">[Nombre del cliente]</div>
+          <div class="testi-name">Harold Andrés Cobo</div>
+          <div class="testi-detail">Cali, Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card rv d2">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Le compré unos a mi hijo y le encantaron. Muy buena la calidad y el diseño está muy moderno."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">MS</div>
+        <div>
+          <div class="testi-name">Martha Sofía Perea</div>
+          <div class="testi-detail">Cali, Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card rv d3">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Sencillamente espectaculares. La calidad del material se siente muy top. ¡Mil gracias!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">NM</div>
+        <div>
+          <div class="testi-name">Natalia María Chaux</div>
+          <div class="testi-detail">Cali, Colombia</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card rv d4">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Calidad pura ve. Me gustaron mucho los acabados. Los recomiendo de una, compren sin miedo."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">JL</div>
+        <div>
+          <div class="testi-name">Jose Luis Mina</div>
           <div class="testi-detail">Cali, Colombia</div>
         </div>
       </div>
