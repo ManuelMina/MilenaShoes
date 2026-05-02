@@ -411,10 +411,25 @@
     .gal-item:nth-child(1) { grid-row: span 2; }
     .gal-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s ease; }
     .gal-item:hover .gal-img { transform: scale(1.06); }
-    .gal-hover { position: absolute; inset: 0; background: rgba(201,168,76,0.07); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; z-index: 2; }
+    .gal-hover { position: absolute; inset: 0; background: rgba(0,0,0,0.35); opacity: 0; transition: opacity 0.3s; display: flex; align-items: center; justify-content: center; z-index: 2; }
     .gal-item:hover .gal-hover { opacity: 1; }
-    .gal-plus { font-size: 2.4rem; color: rgba(255,255,255,0.4); font-weight: 200; transform: scale(0.7); transition: transform 0.3s; }
+    .gal-plus { display: flex; flex-direction: column; align-items: center; gap: 8px; transform: scale(0.8); transition: transform 0.3s; }
+    .gal-plus svg { width: 36px; height: 36px; stroke: #fff; }
+    .gal-plus span { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.85); }
     .gal-item:hover .gal-plus { transform: scale(1); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.96); align-items: center; justify-content: center; animation: lb-in 0.2s ease; }
+    .lightbox.open { display: flex; }
+    @keyframes lb-in { from{opacity:0} to{opacity:1} }
+    .lb-img { max-width: 92vw; max-height: 88vh; object-fit: contain; display: block; box-shadow: 0 8px 60px rgba(0,0,0,0.7); }
+    .lb-close { position: absolute; top: 18px; right: 24px; font-size: 1.8rem; color: rgba(255,255,255,0.55); background: none; border: none; cursor: pointer; line-height: 1; transition: color 0.2s; z-index: 2; }
+    .lb-close:hover { color: #fff; }
+    .lb-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.08); border: none; color: rgba(255,255,255,0.6); font-size: 1.8rem; padding: 16px 18px; cursor: pointer; transition: background 0.2s, color 0.2s; line-height: 1; z-index: 2; }
+    .lb-arrow:hover { background: rgba(255,255,255,0.15); color: #fff; }
+    .lb-prev { left: 12px; }
+    .lb-next { right: 12px; }
+    .lb-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 0.72rem; letter-spacing: 3px; color: rgba(255,255,255,0.4); }
     .gal-tag { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); border: 1px solid rgba(201,168,76,0.2); color: rgba(201,168,76,0.55); font-size: 0.55rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 8px; font-weight: 600; }
 
     /* ── TESTIMONIOS ── */
@@ -1463,6 +1478,32 @@
     if (btnNo) btnNo.style.display = 'none';
     setTimeout(() => kitForm.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   });
+</script>
+
+<!-- Lightbox galería -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+  <button class="lb-arrow lb-prev" id="lbPrev">&#10094;</button>
+  <img class="lb-img" id="lbImg" src="" alt="">
+  <button class="lb-arrow lb-next" id="lbNext">&#10095;</button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+<script>
+(function(){
+  var imgs = Array.from(document.querySelectorAll('.gal-item .gal-img'));
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var cur = 0;
+  function show(i){ cur = i; lbImg.src = imgs[cur].src; lbImg.alt = imgs[cur].alt; document.getElementById('lbCounter').textContent = (cur+1) + ' / ' + imgs.length; }
+  function open(i){ show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.gal-item').forEach(function(el, i){ el.addEventListener('click', function(){ open(i); }); });
+  document.getElementById('lbClose').addEventListener('click', close);
+  document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show((cur - 1 + imgs.length) % imgs.length); });
+  document.getElementById('lbNext').addEventListener('click', function(e){ e.stopPropagation(); show((cur + 1) % imgs.length); });
+  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
+  document.addEventListener('keydown', function(e){ if(!lb.classList.contains('open')) return; if(e.key === 'Escape') close(); if(e.key === 'ArrowLeft') show((cur - 1 + imgs.length) % imgs.length); if(e.key === 'ArrowRight') show((cur + 1) % imgs.length); });
+})();
 </script>
 </body>
 </html>
