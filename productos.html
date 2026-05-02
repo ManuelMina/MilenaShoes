@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Zapatos | Milena's Shoes</title>
+  <meta name="description" content="Catálogo completo de zapatos deportivos para hombre y mujer. 59 modelos disponibles desde $130.000 COP. Pedidos por WhatsApp desde Cali, Colombia.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://milenashoes.online/productos.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Catálogo de Zapatos | Milena's Shoes">
+  <meta property="og:description" content="59 modelos de zapatos deportivos para hombre y mujer. Pide el tuyo por WhatsApp.">
+  <meta property="og:url" content="https://milenashoes.online/productos.html">
+  <meta property="og:image" content="https://milenashoes.online/assets/og-cover.jpg">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y4XM6RVM2W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y4XM6RVM2W');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #060606; --bg-2: #0f0f0f; --bg-3: #1a1a1a; --bg-4: #222;
+      --gold: #C9A84C; --gold-l: #E8C97A; --green: #25D366;
+      --text: #F0EDE8; --muted: #b0b0b0; --border: rgba(201,168,76,0.15);
+    }
+    html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--gold) var(--bg-2); }
+    html::-webkit-scrollbar { width: 4px; }
+    html::-webkit-scrollbar-track { background: var(--bg-2); }
+    html::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(6,6,6,0.96); backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 48px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); }
+    .nav-logo span { color: var(--text); }
+    .nav-back {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--muted); transition: color 0.3s;
+    }
+    .nav-back:hover { color: var(--gold); }
+    .nav-back svg { transition: transform 0.3s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    .nav-wa {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--green); color: #fff; padding: 9px 20px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      transition: background 0.3s;
+    }
+    .nav-wa:hover { background: #1ebe5a; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+
+    /* ── HERO HEADER ── */
+    .cat-header {
+      background: var(--bg-2);
+      border-bottom: 1px solid var(--border);
+      padding: 72px 48px 56px;
+      position: relative; overflow: hidden;
+    }
+    .cat-header::before {
+      content: 'CATÁLOGO';
+      position: absolute; font-family: 'Bebas Neue', sans-serif;
+      font-size: 18vw; color: rgba(201,168,76,0.022);
+      right: -2vw; top: 50%; transform: translateY(-50%);
+      pointer-events: none; letter-spacing: 8px; white-space: nowrap;
+    }
+    .cat-header-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+    .cat-tag-h { font-size: 0.68rem; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .cat-h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.05; }
+    .cat-h1 em { color: var(--gold); font-style: italic; }
+    .cat-desc { font-size: 0.95rem; color: var(--muted); font-weight: 300; margin-top: 14px; max-width: 520px; }
+
+    /* ── FILTERS BAR ── */
+    .filters-bar {
+      background: var(--bg-3);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 57px; z-index: 90;
+    }
+    .filters-bar .inner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .cat-tabs { display: flex; gap: 0; overflow-x: auto; border-bottom: 1px solid var(--border); }
+    .cat-tab {
+      background: none; border: none; border-bottom: 2px solid transparent;
+      color: var(--muted); font-size: 0.72rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      padding: 14px 24px; cursor: pointer; transition: all 0.25s;
+      white-space: nowrap; flex-shrink: 0; font-family: 'Inter', sans-serif;
+      margin-bottom: -1px;
+    }
+    .cat-tab:hover { color: var(--text); }
+    .cat-tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .cat-selects { display: flex; gap: 12px; padding: 14px 0; flex-wrap: wrap; align-items: center; }
+    .cat-sel {
+      background: var(--bg-4); border: 1px solid var(--border); color: var(--text);
+      padding: 9px 32px 9px 14px; font-family: 'Inter', sans-serif; font-size: 0.78rem; cursor: pointer;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23C9A84C'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .cat-sel:focus { outline: none; border-color: rgba(201,168,76,0.4); }
+    .cat-count { font-size: 0.68rem; color: var(--muted); letter-spacing: 2px; margin-left: auto; white-space: nowrap; }
+
+    /* ── PRODUCT GRID ── */
+    .cat-body { padding: 40px 48px 80px; max-width: 1200px; margin: 0 auto; }
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .prod-card {
+      background: var(--bg-4); border: 1px solid var(--border);
+      cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column;
+    }
+    .prod-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+    .prod-img-wrap { aspect-ratio: 1/1; overflow: hidden; background: #111; }
+    .prod-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .prod-card:hover .prod-img { transform: scale(1.07); }
+    .prod-info { padding: 14px 14px 0; display: flex; flex-direction: column; gap: 3px; flex: 1; }
+    .prod-id { font-size: 0.57rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
+    .prod-marca { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text); margin-top: 2px; }
+    .prod-ref { font-size: 0.76rem; color: var(--muted); font-weight: 300; }
+    .prod-talla { font-size: 0.62rem; color: #666; letter-spacing: 1px; margin-top: 2px; }
+    .prod-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--gold); letter-spacing: 2px; margin-top: 8px; }
+    .prod-wa-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--green); color: #fff; border: none; padding: 11px;
+      font-size: 0.66rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      cursor: pointer; transition: background 0.25s; margin-top: 14px; width: 100%;
+      font-family: 'Inter', sans-serif;
+    }
+    .prod-wa-btn:hover { background: #1ebe5a; }
+    .cat-empty { text-align: center; color: var(--muted); font-size: 0.9rem; padding: 80px; display: none; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-2); border-top: 1px solid var(--border);
+      padding: 32px 48px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .f-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 5px; color: var(--gold); }
+    .f-links { display: flex; gap: 24px; }
+    .f-links a { font-size: 0.68rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+    .f-links a:hover { color: var(--gold); }
+    .f-copy { font-size: 0.65rem; color: #444; letter-spacing: 1px; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px) {
+      nav { padding: 14px 20px; }
+      .nav-wa { display: none; }
+      .cat-header { padding: 48px 20px 36px; }
+      .filters-bar .inner { padding: 0 16px; }
+      .cat-selects { flex-direction: column; align-items: stretch; gap: 8px; }
+      .cat-count { margin-left: 0; }
+      .cat-body { padding: 24px 16px 60px; }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      footer { flex-direction: column; text-align: center; padding: 24px 20px; }
+      .f-links { justify-content: center; }
+    }
+    @media(max-width:380px) { .cat-grid { grid-template-columns: 1fr; } }
+
+    /* ── CARRITO FLOTANTE ── */
+    .cart-fab {
+      position: fixed; bottom: 28px; right: 28px; z-index: 200;
+      background: var(--gold); color: var(--bg);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 22px; font-family: 'Inter', sans-serif;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+      transition: all 0.3s; clip-path: polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+    }
+    .cart-fab:hover { background: var(--gold-l); transform: translateY(-3px); box-shadow: 0 14px 40px rgba(201,168,76,0.45); }
+    .cart-fab.hidden { transform: translateY(120px); opacity: 0; pointer-events: none; }
+    .cart-badge { background: var(--bg); color: var(--gold); font-size: 0.7rem; font-weight: 900; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* ── MODAL CARRITO ── */
+    .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 300; display: none; backdrop-filter: blur(4px); }
+    .cart-overlay.open { display: flex; align-items: flex-end; justify-content: flex-end; }
+    .cart-panel {
+      background: var(--bg-2); border-left: 1px solid var(--border);
+      width: 420px; max-width: 100vw; height: 100vh;
+      display: flex; flex-direction: column;
+      animation: slideIn 0.35s ease;
+    }
+    @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+    .cart-head {
+      padding: 24px 28px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .cart-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 4px; color: var(--gold); }
+    .cart-close { background: none; border: none; color: var(--muted); font-size: 1.6rem; cursor: pointer; transition: color 0.2s; line-height: 1; }
+    .cart-close:hover { color: var(--text); }
+    .cart-items { flex: 1; overflow-y: auto; padding: 16px 28px; display: flex; flex-direction: column; gap: 12px; }
+    .cart-item { display: flex; gap: 14px; align-items: flex-start; background: var(--bg-3); border: 1px solid var(--border); padding: 12px; }
+    .cart-item-img { width: 64px; height: 64px; object-fit: cover; flex-shrink: 0; }
+    .cart-item-info { flex: 1; }
+    .cart-item-id { font-size: 0.55rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+    .cart-item-marca { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--text); }
+    .cart-item-ref { font-size: 0.72rem; color: var(--muted); }
+    .cart-item-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold); margin-top: 4px; }
+    .cart-item-remove { background: none; border: none; color: #555; cursor: pointer; font-size: 1.1rem; padding: 2px; transition: color 0.2s; flex-shrink: 0; }
+    .cart-item-remove:hover { color: #ff4f4f; }
+    .cart-empty-msg { text-align: center; color: var(--muted); padding: 48px 24px; font-size: 0.9rem; }
+    .cart-footer { padding: 20px 28px; border-top: 1px solid var(--border); flex-shrink: 0; }
+    .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .cart-total-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+    .cart-total-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; color: var(--gold); }
+    .cart-name-wrap { margin-bottom: 14px; }
+    .cart-name-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+    .cart-name-input { width: 100%; background: var(--bg-4); border: 1px solid var(--border); color: var(--text); padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: 0.9rem; transition: border-color 0.3s; }
+    .cart-name-input:focus { outline: none; border-color: rgba(201,168,76,0.5); }
+    .cart-name-input::placeholder { color: #444; }
+    .btn-checkout {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; padding: 16px; background: var(--green); color: #fff; border: none;
+      font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+    }
+    .btn-checkout:hover { background: #1ebe5a; box-shadow: 0 8px 28px rgba(37,211,102,0.3); }
+    .btn-checkout:disabled { background: #2a2a2a; color: #555; cursor: not-allowed; box-shadow: none; }
+
+    /* Botón agregar al carrito en tarjeta */
+    .prod-add-btn {
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      background: transparent; border: 1px solid var(--gold); color: var(--gold);
+      padding: 9px; font-family: 'Inter', sans-serif; font-size: 0.65rem;
+      font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+      cursor: pointer; transition: all 0.25s; width: 100%;
+    }
+    .prod-add-btn:hover { background: rgba(201,168,76,0.12); }
+    .prod-add-btn.added { background: rgba(201,168,76,0.15); border-color: var(--gold-l); color: var(--gold-l); }
+    .prod-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 14px; }
+    .prod-wa-btn { margin-top: 0; }
+
+    /* Nota importados */
+    .import-note {
+      max-width: 1200px; margin: 40px auto 0; padding: 28px 36px;
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      display: flex; align-items: flex-start; gap: 18px;
+    }
+    .import-note-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+    .import-note-text { font-size: 0.84rem; color: var(--muted); font-weight: 300; line-height: 1.8; }
+    .import-note-text strong { color: var(--gold); font-weight: 600; }
+    @media(max-width:768px){
+      .cart-panel { width: 100vw; }
+      .cart-fab { bottom: 20px; right: 16px; padding: 12px 18px; font-size: 0.72rem; }
+      .import-note { margin: 24px 16px 0; padding: 20px; }
+      .prod-btns { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">Milena's<span>Shoes</span></a>
+  <div class="nav-right">
+    <a href="index.html" class="nav-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Inicio
+    </a>
+    <a href="https://wa.me/573227155957" target="_blank" rel="noopener" class="nav-wa">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</nav>
+
+<!-- ── HEADER ── -->
+<div class="cat-header">
+  <div class="cat-header-inner">
+    <p class="cat-tag-h">Milena's Shoes · Cali, Colombia</p>
+    <h1 class="cat-h1">Catálogo <em>completo</em></h1>
+    <p class="cat-desc">59 modelos disponibles · Haz click en cualquier zapato para pedir información por WhatsApp</p>
+  </div>
+</div>
+
+<!-- ── FILTERS ── -->
+<div class="filters-bar">
+  <div class="inner">
+    <div class="cat-tabs">
+      <button class="cat-tab active" data-gen="all">Todos</button>
+      <button class="cat-tab" data-gen="M">Mujer</button>
+      <button class="cat-tab" data-gen="H">Hombre</button>
+    </div>
+    <div class="cat-selects">
+      <select id="cat-marca" class="cat-sel">
+        <option value="">Todas las marcas</option>
+      </select>
+      <select id="cat-precio" class="cat-sel">
+        <option value="">Todos los precios</option>
+        <option value="0-134999">Hasta $135.000</option>
+        <option value="135000-149999">$135.000 – $149.000</option>
+        <option value="150000-159999">$150.000 – $159.000</option>
+        <option value="160000-999999">$160.000 en adelante</option>
+      </select>
+      <span class="cat-count" id="cat-count">59 resultados</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── GRID ── -->
+<div class="cat-body">
+  <div class="cat-grid" id="cat-grid"></div>
+  <p class="cat-empty" id="cat-empty">No hay productos que coincidan con los filtros seleccionados.</p>
+
+  <!-- Nota referencias importadas -->
+  <div class="import-note" id="import-note">
+    <div class="import-note-icon">🌍</div>
+    <div class="import-note-text">
+      <strong>Referencias importadas de la mejor calidad.</strong> Todos nuestros zapatos son referencias importadas, seleccionadas con los más altos estándares de calidad, materiales y acabados. Cada modelo pasa por un proceso de selección riguroso para garantizarte comodidad, durabilidad y estilo. Los precios reflejan la calidad premium de cada par.
+    </div>
+  </div>
+</div>
+
+<!-- ── CARRITO FLOTANTE ── -->
+<button class="cart-fab hidden" id="cartFab">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+  Carrito
+  <span class="cart-badge" id="cartBadge">0</span>
+</button>
+
+<!-- ── PANEL CARRITO ── -->
+<div class="cart-overlay" id="cartOverlay">
+  <div class="cart-panel">
+    <div class="cart-head">
+      <span class="cart-title">Tu Carrito</span>
+      <button class="cart-close" id="cartClose">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty-msg" id="cartEmptyMsg">Tu carrito está vacío.<br>Agrega zapatos desde el catálogo.</p>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total estimado</span>
+        <span class="cart-total-price" id="cartTotal">$0</span>
+      </div>
+      <div class="cart-name-wrap">
+        <label class="cart-name-label" for="cartName">Tu nombre (para el pedido)</label>
+        <input type="text" id="cartName" class="cart-name-input" placeholder="Ej: Juan Pérez" maxlength="60">
+      </div>
+      <button class="btn-checkout" id="btnCheckout" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="f-brand">Milena's Shoes</div>
+  <div class="f-links">
+    <a href="index.html">Inicio</a>
+    <a href="https://www.instagram.com/milenashoes26" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://wa.me/573227155957" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+  <div class="f-copy">© 2026 Milena's Shoes · Cali, Colombia</div>
+</footer>
+
+<script>
+  var WA = '573227155957';
+  var WA_SVG = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>';
+
+  // ── CARRITO ──
+  var cart = []; // array of product objects
+
+  function fmtPrice(n) { return '$' + n.toLocaleString('es-CO') + ' COP'; }
+  function fmtPriceShort(n) { return '$' + n.toLocaleString('es-CO'); }
+
+  function updateCartUI() {
+    var fab = document.getElementById('cartFab');
+    var badge = document.getElementById('cartBadge');
+    var emptyMsg = document.getElementById('cartEmptyMsg');
+    var cartFooter = document.getElementById('cartFooter');
+    var cartItemsEl = document.getElementById('cartItems');
+    var cartTotal = document.getElementById('cartTotal');
+    var btnCheckout = document.getElementById('btnCheckout');
+
+    badge.textContent = cart.length;
+    if (cart.length === 0) {
+      fab.classList.add('hidden');
+      emptyMsg.style.display = 'block';
+      cartFooter.style.display = 'none';
+      cartItemsEl.innerHTML = '';
+      cartItemsEl.appendChild(emptyMsg);
+      return;
+    }
+
+    fab.classList.remove('hidden');
+    emptyMsg.style.display = 'none';
+    cartFooter.style.display = 'block';
+
+    // Render items
+    cartItemsEl.innerHTML = '';
+    var total = 0;
+    cart.forEach(function(p, idx) {
+      total += p.p;
+      var item = document.createElement('div');
+      item.className = 'cart-item';
+      item.innerHTML =
+        '<img class="cart-item-img" src="assets/' + p.id + '.jpeg" alt="' + p.m + '" loading="lazy">' +
+        '<div class="cart-item-info">' +
+          '<div class="cart-item-id">Zapato #' + p.id + '</div>' +
+          '<div class="cart-item-marca">' + p.m + '</div>' +
+          '<div class="cart-item-ref">' + p.r + '</div>' +
+          '<div class="cart-item-precio">' + fmtPriceShort(p.p) + '</div>' +
+        '</div>' +
+        '<button class="cart-item-remove" data-idx="' + idx + '" title="Eliminar">✕</button>';
+      cartItemsEl.appendChild(item);
+    });
+
+    // Remove handlers
+    cartItemsEl.querySelectorAll('.cart-item-remove').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var i = parseInt(btn.dataset.idx);
+        var removedId = cart[i].id;
+        cart.splice(i, 1);
+        // Un-mark add button if card still visible
+        var addBtn = document.querySelector('[data-prod-id="' + removedId + '"]');
+        if (addBtn) { addBtn.classList.remove('added'); addBtn.textContent = '+ Agregar'; }
+        updateCartUI();
+      });
+    });
+
+    cartTotal.textContent = fmtPriceShort(total);
+
+    // Enable checkout only if name is filled
+    var name = document.getElementById('cartName').value.trim();
+    btnCheckout.disabled = name.length < 2;
+  }
+
+  function addToCart(p) {
+    cart.push(p);
+    updateCartUI();
+  }
+
+  // Cart open/close
+  document.getElementById('cartFab').addEventListener('click', function() {
+    document.getElementById('cartOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('cartClose').addEventListener('click', function() {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  document.getElementById('cartOverlay').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Name input → enable/disable checkout
+  document.getElementById('cartName').addEventListener('input', function() {
+    document.getElementById('btnCheckout').disabled = this.value.trim().length < 2;
+  });
+
+  // Checkout → WhatsApp
+  document.getElementById('btnCheckout').addEventListener('click', function() {
+    if (cart.length === 0) return;
+    var name = document.getElementById('cartName').value.trim();
+    if (!name) return;
+
+    var lines = [
+      "Hola Milena's Shoes, quiero hacer un pedido:",
+      '',
+      'Nombre: ' + name,
+      '',
+      'Productos seleccionados:'
+    ];
+    cart.forEach(function(p, i) {
+      var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex';
+      lines.push(
+        (i + 1) + '. Zapato #' + p.id + ' — ' + p.m + ' ' + p.r +
+        ' | ' + gl + ' | Tallas: ' + p.t + ' | ' + fmtPrice(p.p)
+      );
+    });
+    var total = cart.reduce(function(s, p) { return s + p.p; }, 0);
+    lines.push('', 'Total estimado: ' + fmtPrice(total));
+    lines.push('', 'Por favor confirmar disponibilidad y tallas exactas. Gracias!');
+
+    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
+  });
+
+  const CATALOG = [
+    {id:1,g:"H",m:"NIKE",r:"AF1 SAIL RIPSTOP",t:"EU 40 AL 44",p:160000},
+    {id:2,g:"M",m:"ADIDAS",r:"ADIDAS BOUNCE",t:"EU 36 AL 40",p:155000},
+    {id:3,g:"M",m:"NIKE",r:"NIKE P7000",t:"EU 36 AL 39",p:150000},
+    {id:4,g:"M",m:"NIKE",r:"METCON",t:"EU 36 AL 40",p:130000},
+    {id:5,g:"M",m:"NIKE",r:"METCON",t:"EU 36 AL 41",p:130000},
+    {id:6,g:"M",m:"NIKE",r:"METCON",t:"EU 36 AL 42",p:130000},
+    {id:7,g:"H",m:"NIKE",r:"NIKE TRAIL",t:"EU 40 AL 44",p:150000},
+    {id:8,g:"H",m:"SKECHERS",r:"SKECHERS",t:"EU 40 AL 44",p:150000},
+    {id:9,g:"M",m:"SKECHERS",r:"SKECHERS",t:"EU 36 AL 40",p:150000},
+    {id:10,g:"M Y H",m:"ADIDAS",r:"ADIZERO",t:"EU 36 AL 44",p:145000},
+    {id:11,g:"M",m:"ADIDAS",r:"ADIZERO",t:"EU 36 AL 40",p:145000},
+    {id:12,g:"H",m:"ASICS",r:"ASICS RUN",t:"EU 40 AL 44",p:150000},
+    {id:13,g:"H",m:"NIKE",r:"NIKE P-7000",t:"EU 40 AL 44",p:145000},
+    {id:14,g:"H",m:"NIKE",r:"NIKE P-7000",t:"EU 40 AL 44",p:145000},
+    {id:15,g:"M",m:"NEW BALANCE",r:"NEW BALANCE",t:"EU 36 AL 44",p:145000},
+    {id:16,g:"H",m:"ARMANI",r:"ARMANI",t:"EU 40 AL 44",p:140000},
+    {id:17,g:"H",m:"ARMANI",r:"ARMANI",t:"EU 40 AL 44",p:140000},
+    {id:18,g:"H",m:"SKECHERS",r:"SKECHERS",t:"EU 40 AL 44",p:150000},
+    {id:19,g:"H",m:"ASICS",r:"ASICS RUN",t:"EU 40 AL 44",p:140000},
+    {id:20,g:"H",m:"NEW BALANCE",r:"NEW BALANCE",t:"EU 40 AL 44",p:140000},
+    {id:21,g:"H",m:"NEW BALANCE",r:"NEW BALANCE RUN",t:"EU 40 AL 44",p:145000},
+    {id:22,g:"H",m:"COACH",r:"COACH",t:"EU 40 AL 44",p:140000},
+    {id:23,g:"H",m:"JORDAN",r:"JORDAN RETRO 1 LOW",t:"EU 40 AL 44",p:155000},
+    {id:24,g:"M",m:"SAMBA",r:"SAMBA",t:"EU 36 AL 39",p:160000},
+    {id:25,g:"H",m:"REEBOK",r:"REEBOK CLUB",t:"EU 40 AL 44",p:155000},
+    {id:26,g:"H",m:"LACOSTE",r:"LACOSTE ALPACINO",t:"EU 40 AL 44",p:155000},
+    {id:27,g:"M Y H",m:"VANS",r:"VANS HYLANE",t:"EU 36 AL 44",p:170000},
+    {id:29,g:"H",m:"REEBOK",r:"REEBOK FLOATZIG",t:"EU 40 AL 44",p:140000},
+    {id:30,g:"M Y H",m:"NEW BALANCE",r:"NEW BALANCE 740",t:"EU 36 AL 44",p:135000},
+    {id:31,g:"H",m:"NIKE",r:"ZOOM PEGASUS",t:"EU 40 AL 44",p:140000},
+    {id:32,g:"M",m:"NIKE",r:"SB PARRA",t:"EU 36 AL 39",p:155000},
+    {id:33,g:"H",m:"NIKE",r:"NIKE SB",t:"EU 40 AL 44",p:155000},
+    {id:34,g:"H",m:"LACOSTE",r:"LACOSTE",t:"EU 40 AL 44",p:150000},
+    {id:35,g:"M Y H",m:"NIKE",r:"SB SUPREME",t:"EU 36 AL 44",p:155000},
+    {id:36,g:"M",m:"NIKE",r:"NIKE SB",t:"EU 36 AL 40",p:155000},
+    {id:37,g:"H",m:"NIKE",r:"AF1 SUPREME",t:"EU 40 AL 44",p:155000},
+    {id:38,g:"H",m:"NIKE",r:"NIKE AF1",t:"EU 40 AL 44",p:155000},
+    {id:39,g:"M",m:"JORDAN",r:"RETRO 1",t:"EU 36 AL 40",p:150000},
+    {id:40,g:"M Y H",m:"LOUIS VUITTON",r:"LV SKATE",t:"EU 36 AL 44",p:150000},
+    {id:41,g:"M Y H",m:"NIKE",r:"NIKE P-6000",t:"EU 36 AL 44",p:160000},
+    {id:42,g:"M",m:"NIKE",r:"NIKE P-6000",t:"EU 36 AL 39",p:160000},
+    {id:43,g:"M Y H",m:"NIKE",r:"ZOOM HAPPY",t:"EU 36 AL 44",p:150000},
+    {id:44,g:"H",m:"NIKE",r:"NIKE AIR MAX TN",t:"EU 40 AL 44",p:145000},
+    {id:45,g:"H",m:"NIKE",r:"NIKE SB DUNK",t:"EU 40 AL 44",p:155000},
+    {id:46,g:"H",m:"NIKE",r:"NIKE SB DUNK",t:"EU 40 AL 44",p:155000},
+    {id:47,g:"M",m:"NIKE",r:"NIKE SB DUNK",t:"EU 36 AL 39",p:160000},
+    {id:48,g:"H",m:"JORDAN",r:"JORDAN AURA",t:"EU 40 AL 44",p:170000},
+    {id:49,g:"H",m:"JORDAN",r:"JORDAN AURA",t:"EU 40 AL 44",p:170000},
+    {id:50,g:"M Y H",m:"NIKE",r:"SHOX GUSANO",t:"EU 36 AL 44",p:160000},
+    {id:51,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 44",p:150000},
+    {id:52,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 45",p:155000},
+    {id:53,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 46",p:155000},
+    {id:54,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 47",p:155000},
+    {id:55,g:"H",m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",t:"EU 40 AL 48",p:155000},
+    {id:56,g:"H",m:"LACOSTE",r:"LACOSTE TABLA",t:"EU 40 AL 44",p:160000},
+    {id:57,g:"M Y H",m:"NIKE",r:"NIKE AF1",t:"EU 40 AL 44",p:135000},
+    {id:58,g:"M",m:"NIKE",r:"NIKE TRAIL",t:"EU 36 AL 39",p:145000},
+    {id:59,g:"M",m:"PUMA",r:"PUMA PARK",t:"EU 36 AL 39",p:155000},
+    {id:60,g:"M Y H",m:"PUMA",r:"PUMA PARK",t:"EU 36 AL 44",p:155000}
+  ];
+
+  // Read gen from URL params
+  const urlParams = new URLSearchParams(window.location.search);
+  let activeGen = urlParams.get('gen') || 'all';
+  let activeMarca = '', activePrecio = '';
+
+  // Set active tab
+  document.querySelectorAll('.cat-tab').forEach(function(t) {
+    t.classList.remove('active');
+    if (t.dataset.gen === activeGen) t.classList.add('active');
+  });
+
+  // Populate marca options
+  var marcas = Array.from(new Set(CATALOG.map(function(p) { return p.m; }))).sort();
+  var marcaSel = document.getElementById('cat-marca');
+  marcas.forEach(function(m) {
+    var o = document.createElement('option');
+    o.value = m; o.textContent = m;
+    marcaSel.appendChild(o);
+  });
+
+  function matches(p) {
+    var genOk = activeGen === 'all' || p.g === activeGen || p.g === 'M Y H';
+    if (!genOk) return false;
+    if (activeMarca && p.m !== activeMarca) return false;
+    if (activePrecio) {
+      var parts = activePrecio.split('-');
+      var lo = Number(parts[0]), hi = Number(parts[1]);
+      if (p.p < lo || p.p > hi) return false;
+    }
+    return true;
+  }
+
+  function fmtPrice(n) {
+    return '$' + n.toLocaleString('es-CO') + ' COP';
+  }
+
+  function buildMsg(p) {
+    var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex (Hombre y Mujer)';
+    return [
+      "Hola Milena's Shoes, quiero preguntar por:",
+      '',
+      'Zapato #' + p.id,
+      'Marca: ' + p.m,
+      'Referencia: ' + p.r,
+      'Genero: ' + gl,
+      'Tallas disponibles: ' + p.t,
+      'Precio: ' + fmtPrice(p.p),
+      '',
+      'Esta disponible? Gracias!'
+    ].join('\n');
+  }
+
+  function render() {
+    var grid = document.getElementById('cat-grid');
+    var empty = document.getElementById('cat-empty');
+    var count = document.getElementById('cat-count');
+    var filtered = CATALOG.filter(matches);
+
+    count.textContent = filtered.length + ' resultado' + (filtered.length !== 1 ? 's' : '');
+    grid.innerHTML = '';
+
+    if (filtered.length === 0) { empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+
+    filtered.forEach(function(p) {
+      var inCart = cart.some(function(c) { return c.id === p.id; });
+      var card = document.createElement('div');
+      card.className = 'prod-card';
+      card.innerHTML =
+        '<div class="prod-img-wrap">' +
+          '<img class="prod-img" src="assets/' + p.id + '.jpeg" alt="' + p.m + ' ' + p.r + '" loading="lazy">' +
+        '</div>' +
+        '<div class="prod-info">' +
+          '<div class="prod-id">Zapato #' + p.id + '</div>' +
+          '<div class="prod-marca">' + p.m + '</div>' +
+          '<div class="prod-ref">' + p.r + '</div>' +
+          '<div class="prod-talla">' + p.t + '</div>' +
+          '<div class="prod-precio">' + fmtPrice(p.p) + '</div>' +
+        '</div>' +
+        '<div class="prod-btns">' +
+          '<button class="prod-add-btn' + (inCart ? ' added' : '') + '" data-prod-id="' + p.id + '">' +
+            (inCart ? '✓ Agregado' : '+ Agregar') +
+          '</button>' +
+          '<button class="prod-wa-btn">' + WA_SVG + ' WhatsApp</button>' +
+        '</div>';
+
+      // Agregar al carrito
+      var addBtn = card.querySelector('.prod-add-btn');
+      addBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (addBtn.classList.contains('added')) return;
+        addBtn.classList.add('added');
+        addBtn.textContent = '✓ Agregado';
+        addToCart(p);
+      });
+
+      // WhatsApp directo
+      card.querySelector('.prod-wa-btn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(buildMsg(p)), '_blank');
+      });
+
+      grid.appendChild(card);
+    });
+  }
+
+  document.querySelectorAll('.cat-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      activeGen = tab.dataset.gen;
+      render();
+    });
+  });
+
+  document.getElementById('cat-marca').addEventListener('change', function(e) { activeMarca = e.target.value; render(); });
+  document.getElementById('cat-precio').addEventListener('change', function(e) { activePrecio = e.target.value; render(); });
+
+  render();
+</script>
+</body>
+</html>
