@@ -431,6 +431,10 @@
     .lb-next { right: 12px; }
     .lb-counter { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 0.72rem; letter-spacing: 3px; color: rgba(255,255,255,0.4); }
     .gal-tag { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); border: 1px solid rgba(201,168,76,0.2); color: rgba(201,168,76,0.55); font-size: 0.55rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 8px; font-weight: 600; }
+    @media(hover:none){
+      .gal-hover { opacity: 1; background: rgba(0,0,0,0.18); }
+      .gal-plus { transform: scale(1); }
+    }
 
     /* ── TESTIMONIOS ── */
     #testimonios { background: var(--bg-2); position: relative; overflow: hidden; }
@@ -508,15 +512,14 @@
       section { padding: 90px 24px; }
       footer { flex-direction: column; text-align: center; padding: 28px 24px; }
       .hero-ctas { flex-direction: column; align-items: center; }
-      .gal-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
-      .gal-item:nth-child(1) { grid-row: span 1; }
-      .gal-grid .gal-item { height: 200px; }
+      .gal-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 260px 155px; }
+      .gal-item:nth-child(1) { grid-column: 1 / -1; grid-row: auto; }
+      .gal-item:nth-child(n+4) { display: none; }
       .testi-grid { grid-template-columns: 1fr; }
       .sweet-cards { grid-template-columns: 1fr; }
       .gender-cards { grid-template-columns: 1fr; }
     }
     @media(max-width:480px){
-      .gal-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
     }
 
