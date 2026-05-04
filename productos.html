@@ -627,10 +627,7 @@
     return true;
   }
 
-  function fmtPrice(n) { return '
-</body>
-</html>
- + n.toLocaleString('es-CO') + ' COP'; }
+  function fmtPrice(n) { return '$' + n.toLocaleString('es-CO') + ' COP'; }
 
   function buildMsg(p) {
     var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex (Hombre y Mujer)';

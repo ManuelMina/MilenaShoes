@@ -1295,48 +1295,7 @@
     const track = document.getElementById('carouselTrack');
     if (!track) return;
 
-    function fmtPriceC(n) { return '
-  // ── Kit sí/no ──
-  const btnSi  = document.getElementById('btn-si-kit');
-  const btnNo  = document.getElementById('btn-no-kit');
-  const kitForm = document.getElementById('kit-form-wrap');
-
-  btnSi.addEventListener('click', () => {
-    kitForm.classList.add('open');
-    btnSi.style.display = 'none';
-    if (btnNo) btnNo.style.display = 'none';
-    setTimeout(() => kitForm.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-  });
-</script>
-
-<!-- Lightbox galería -->
-<div class="lightbox" id="lightbox">
-  <button class="lb-close" id="lbClose">✕</button>
-  <button class="lb-arrow lb-prev" id="lbPrev">&#10094;</button>
-  <img class="lb-img" id="lbImg" src="" alt="">
-  <button class="lb-arrow lb-next" id="lbNext">&#10095;</button>
-  <div class="lb-counter" id="lbCounter"></div>
-</div>
-<script>
-(function(){
-  var imgs = Array.from(document.querySelectorAll('.gal-item .gal-img'));
-  var lb = document.getElementById('lightbox');
-  var lbImg = document.getElementById('lbImg');
-  var cur = 0;
-  function show(i){ cur = i; lbImg.src = imgs[cur].src; lbImg.alt = imgs[cur].alt; document.getElementById('lbCounter').textContent = (cur+1) + ' / ' + imgs.length; }
-  function open(i){ show(i); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
-  function close(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
-  document.querySelectorAll('.gal-item').forEach(function(el, i){ el.addEventListener('click', function(){ open(i); }); });
-  document.getElementById('lbClose').addEventListener('click', close);
-  document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show((cur - 1 + imgs.length) % imgs.length); });
-  document.getElementById('lbNext').addEventListener('click', function(e){ e.stopPropagation(); show((cur + 1) % imgs.length); });
-  lb.addEventListener('click', function(e){ if(e.target === lb) close(); });
-  document.addEventListener('keydown', function(e){ if(!lb.classList.contains('open')) return; if(e.key === 'Escape') close(); if(e.key === 'ArrowLeft') show((cur - 1 + imgs.length) % imgs.length); if(e.key === 'ArrowRight') show((cur + 1) % imgs.length); });
-})();
-</script>
-</body>
-</html>
- + n.toLocaleString('es-CO'); }
+    function fmtPriceC(n) { return '$' + n.toLocaleString('es-CO'); }
     function buildMsgC(p) {
       var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex';
       return ["Hola Milena's Shoes, quiero preguntar por:", '', 'Zapato #' + p.id,
