@@ -1288,10 +1288,21 @@
 
   updatePreview();
 
-  // ── CARRUSEL — carga desde catalogo.json ──
+  // ── CARRUSEL — 10 productos populares (sin fetch para máxima velocidad) ──
   (function() {
     const WA = '573227155957';
-    const featured = [1,2,10,23,24,25,26,27,32,12,39,40,41,47,48,50,57,60,7,9,66,67,68,69,70,91,98,104,108,113,117,118,122,125,126,127,130,135,140,145,150,155,157];
+    const carProds = [
+      {id:1,  g:"H", m:"NIKE",        r:"AF1 SAIL RIPSTOP",  t:"EU 40-44", p:160000},
+      {id:27, g:"U", m:"VANS",        r:"VANS HYLANE",       t:"EU 36-44", p:170000},
+      {id:23, g:"H", m:"JORDAN",      r:"JORDAN RETRO 1 LOW",t:"EU 40-44", p:155000},
+      {id:32, g:"M", m:"NIKE",        r:"SB PARRA",          t:"EU 36-39", p:155000},
+      {id:50, g:"U", m:"NIKE",        r:"SHOX GUSANO",       t:"EU 36-44", p:160000},
+      {id:91, g:"H", m:"BROOKS",      r:"HYPERION MAX",      t:"EU 40-44", p:175000},
+      {id:104,g:"H", m:"NIKE",        r:"NIKE NOCTA",        t:"EU 40-44", p:180000},
+      {id:118,g:"U", m:"NEW BALANCE", r:"BALANCE 9060",      t:"EU 36-44", p:170000},
+      {id:108,g:"M", m:"NIKE",        r:"NIKE V2K",          t:"EU 36-40", p:165000},
+      {id:2,  g:"M", m:"ADIDAS",      r:"ADIDAS BOUNCE",     t:"EU 36-40", p:155000}
+    ];
     const track = document.getElementById('carouselTrack');
     if (!track) return;
 
@@ -1317,16 +1328,7 @@
       return card;
     }
 
-    fetch('catalogo.json')
-      .then(function(res) { return res.json(); })
-      .then(function(catalog) {
-        // Usar productos destacados si existen, si no tomar los primeros 30
-        var featSet = new Set(featured);
-        var carProds = catalog.filter(function(p) { return featSet.has(p.id); });
-        if (carProds.length < 10) carProds = catalog.slice(0, 30);
-        carProds.concat(carProds).forEach(function(p) { track.appendChild(makeCarCard(p)); });
-      })
-      .catch(function() {});
+    carProds.concat(carProds).forEach(function(p) { track.appendChild(makeCarCard(p)); });
   })();
 
   // ── Kit sí/no ──
