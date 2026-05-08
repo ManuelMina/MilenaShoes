@@ -392,13 +392,6 @@
       <select id="cat-marca" class="cat-sel">
         <option value="">Todas las marcas</option>
       </select>
-      <select id="cat-precio" class="cat-sel">
-        <option value="">Todos los precios</option>
-        <option value="0-134999">Hasta $135.000</option>
-        <option value="135000-149999">$135.000 – $149.000</option>
-        <option value="150000-159999">$150.000 – $159.000</option>
-        <option value="160000-999999">$160.000 en adelante</option>
-      </select>
       <span class="cat-count" id="cat-count">59 resultados</span>
     </div>
   </div>
@@ -657,7 +650,6 @@
           '<div class="prod-marca">' + p.m + '</div>' +
           '<div class="prod-ref">' + p.r + '</div>' +
           '<div class="prod-talla">' + p.t + '</div>' +
-          '<div class="prod-precio">' + fmtPrice(p.p) + '</div>' +
         '</div>' +
         '<div class="prod-btns">' +
           '<button class="prod-add-btn' + (inCart ? ' added' : '') + '" data-prod-id="' + p.id + '">' + (inCart ? '✓ Agregado' : '+ Agregar') + '</button>' +
@@ -688,13 +680,69 @@
     });
   });
   document.getElementById('cat-marca').addEventListener('change', function(e) { activeMarca = e.target.value; render(); });
-  document.getElementById('cat-precio').addEventListener('change', function(e) { activePrecio = e.target.value; render(); });
-
-  // Catalogo dinamico — lee catalogo.json generado por actualizar-inventario.ps1
-  fetch('catalogo.json')
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      CATALOG = data;
+  // Catalogo de productos
+  CATALOG = [
+    {id:1,  m:"Nike",           r:"AF1 Sail Ripstop", g:"H", t:"EU 40 AL 44", p:160000},
+    {id:2,  m:"Adidas",         r:"Bounce",           g:"M", t:"EU 36 AL 40", p:155000},
+    {id:3,  m:"Nike",           r:"P-7000",           g:"M", t:"EU 36 AL 39", p:150000},
+    {id:4,  m:"Nike",           r:"Metcon",           g:"M", t:"EU 36 AL 40", p:130000},
+    {id:5,  m:"Nike",           r:"Metcon",           g:"M", t:"EU 36 AL 41", p:130000},
+    {id:6,  m:"Nike",           r:"Metcon",           g:"M", t:"EU 36 AL 40", p:130000},
+    {id:7,  m:"Nike",           r:"Trail",            g:"H", t:"EU 40 AL 44", p:150000},
+    {id:8,  m:"Skechers",       r:"Urban",            g:"H", t:"EU 40 AL 44", p:150000},
+    {id:9,  m:"Skechers",       r:"Urban",            g:"M", t:"EU 36 AL 40", p:150000},
+    {id:10, m:"Adidas",         r:"Adizero",          g:"U", t:"EU 36 AL 44", p:145000},
+    {id:11, m:"Adidas",         r:"Adizero",          g:"M", t:"EU 36 AL 40", p:145000},
+    {id:12, m:"Asics",          r:"Run",              g:"H", t:"EU 40 AL 44", p:150000},
+    {id:13, m:"Nike",           r:"P-7000",           g:"H", t:"EU 40 AL 44", p:145000},
+    {id:14, m:"Nike",           r:"P-7000",           g:"H", t:"EU 40 AL 44", p:145000},
+    {id:15, m:"New Balance",    r:"Classic",          g:"M", t:"EU 36 AL 40", p:145000},
+    {id:16, m:"Armani",         r:"Sport",            g:"H", t:"EU 40 AL 44", p:140000},
+    {id:17, m:"Armani",         r:"Sport",            g:"H", t:"EU 40 AL 44", p:140000},
+    {id:18, m:"Skechers",       r:"Urban",            g:"H", t:"EU 40 AL 44", p:150000},
+    {id:19, m:"Asics",          r:"Run",              g:"H", t:"EU 40 AL 44", p:140000},
+    {id:20, m:"New Balance",    r:"Classic",          g:"H", t:"EU 40 AL 44", p:140000},
+    {id:21, m:"New Balance",    r:"Run",              g:"H", t:"EU 40 AL 44", p:145000},
+    {id:22, m:"Coach",          r:"Sport",            g:"H", t:"EU 40 AL 44", p:140000},
+    {id:23, m:"Jordan",         r:"Retro 1 Low",      g:"H", t:"EU 40 AL 44", p:155000},
+    {id:24, m:"Adidas",         r:"Samba",            g:"M", t:"EU 36 AL 40", p:160000},
+    {id:25, m:"Reebok",         r:"Club",             g:"H", t:"EU 40 AL 44", p:155000},
+    {id:26, m:"Lacoste",        r:"Alpacino",         g:"H", t:"EU 40 AL 44", p:155000},
+    {id:27, m:"Vans",           r:"Hylane",           g:"U", t:"EU 36 AL 44", p:170000},
+    {id:28, m:"Vans",           r:"KNU",              g:"U", t:"EU 36 AL 44", p:160000},
+    {id:29, m:"Reebok",         r:"Floatzig",         g:"H", t:"EU 40 AL 44", p:140000},
+    {id:30, m:"New Balance",    r:"740",              g:"U", t:"EU 36 AL 44", p:135000},
+    {id:31, m:"Nike",           r:"Zoom Pegasus",     g:"H", t:"EU 40 AL 44", p:140000},
+    {id:32, m:"Nike",           r:"SB Parra",         g:"M", t:"EU 36 AL 40", p:155000},
+    {id:33, m:"Nike",           r:"SB",               g:"H", t:"EU 40 AL 44", p:155000},
+    {id:34, m:"Lacoste",        r:"Classic",          g:"H", t:"EU 40 AL 44", p:150000},
+    {id:35, m:"Nike",           r:"SB Supreme",       g:"U", t:"EU 36 AL 44", p:155000},
+    {id:36, m:"Nike",           r:"SB",               g:"M", t:"EU 36 AL 40", p:155000},
+    {id:37, m:"Nike",           r:"AF1 Supreme",      g:"H", t:"EU 40 AL 44", p:155000},
+    {id:38, m:"Nike",           r:"AF1",              g:"H", t:"EU 40 AL 44", p:155000},
+    {id:39, m:"Jordan",         r:"Retro 1",          g:"M", t:"EU 36 AL 40", p:150000},
+    {id:40, m:"Louis Vuitton",  r:"Skate",            g:"U", t:"EU 36 AL 44", p:150000},
+    {id:41, m:"Nike",           r:"P-6000",           g:"U", t:"EU 36 AL 44", p:160000},
+    {id:42, m:"Nike",           r:"P-6001",           g:"M", t:"EU 36 AL 40", p:160000},
+    {id:43, m:"Nike",           r:"Zoom Happy",       g:"U", t:"EU 36 AL 44", p:150000},
+    {id:44, m:"Nike",           r:"Air Max TN",       g:"H", t:"EU 40 AL 44", p:145000},
+    {id:45, m:"Nike",           r:"SB Dunk",          g:"H", t:"EU 40 AL 44", p:155000},
+    {id:46, m:"Nike",           r:"SB Dunk",          g:"H", t:"EU 40 AL 44", p:155000},
+    {id:47, m:"Nike",           r:"SB Dunk",          g:"M", t:"EU 36 AL 40", p:160000},
+    {id:48, m:"Jordan",         r:"Aura",             g:"H", t:"EU 40 AL 44", p:170000},
+    {id:49, m:"Jordan",         r:"Aura",             g:"H", t:"EU 40 AL 44", p:170000},
+    {id:50, m:"Nike",           r:"Shox Gusano",      g:"U", t:"EU 36 AL 44", p:160000},
+    {id:51, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:150000},
+    {id:52, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:155000},
+    {id:53, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:155000},
+    {id:54, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:155000},
+    {id:55, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:155000},
+    {id:56, m:"Lacoste",        r:"Tabla",            g:"H", t:"EU 40 AL 44", p:160000},
+    {id:57, m:"Nike",           r:"AF1",              g:"U", t:"EU 36 AL 44", p:135000},
+    {id:58, m:"Nike",           r:"Trail",            g:"M", t:"EU 36 AL 40", p:145000},
+    {id:59, m:"Puma",           r:"Park",             g:"M", t:"EU 36 AL 40", p:155000}
+  ];
+  (function() {
       var marcas = Array.from(new Set(CATALOG.map(function(p) { return p.m; }))).sort();
       var marcaSel = document.getElementById('cat-marca');
       marcas.forEach(function(m) {
@@ -714,8 +762,7 @@
       ld.text = JSON.stringify({"@context":"https://schema.org","@type":"ItemList",
         "name":"Catalogo Milena's Shoes","numberOfItems":CATALOG.length,"itemListElement":items});
       document.head.appendChild(ld);
-    })
-    .catch(function() { document.getElementById('cat-count').textContent = 'Error al cargar el catalogo'; });
+  })();
 </script>
 </body>
 </html>
