@@ -1,0 +1,8 @@
+Fecha,Version,Cambio,Archivo,Notas
+2026-05-08,1.0,Creacion inicial del sitio web,index.html + productos.html,Sitio desplegado en milenashoes.online via GitHub Pages
+2026-05-08,1.1,Catalogo ampliado de 59 a 157 productos,productos.html,Se leyo LISTA ZAPATILLAS.xlsx y se actualizo array CATALOG completo
+2026-05-08,1.1,Actualizacion de contadores y meta tags,productos.html,Textos actualizados de 59 a 157 referencias en todo el HTML
+2026-05-08,1.2,Reconexion de productos.html con catalogo.json,productos.html,La pagina ahora carga desde catalogo.json (generado por el script). Fallback al array hardcodeado si el JSON falla
+2026-05-08,1.2,Script actualizar-inventario.ps1 corregido,actualizar-inventario.ps1,Ahora tambien sube fotos nuevas (*.jpeg/*.jpg/*.png/*.webp) al hacer push
+2026-05-08,1.2,Creacion de CLAUDE.md,CLAUDE.md,Archivo de contexto del proyecto para futuras sesiones de Claude Code
+2026-05-08,1.2,Creacion de CHANGELOG.csv,CHANGELOG.csv,Este archivo — historial de cambios del proyecto

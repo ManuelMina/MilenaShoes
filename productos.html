@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de Zapatos | Milena's Shoes</title>
-  <meta name="description" content="Catálogo de 125 modelos de zapatos deportivos para hombre y mujer. Desde $130.000 COP. Nike, Adidas, Jordan, Vans y más. Pedidos por WhatsApp desde Cali, Colombia.">
+  <meta name="description" content="Catálogo de 157 modelos de zapatos deportivos para hombre y mujer. Desde $130.000 COP. Nike, Adidas, Jordan, Vans y más. Pedidos por WhatsApp desde Cali, Colombia.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://milenashoes.online/productos.html">
   <link rel="alternate" hreflang="es-CO" href="https://milenashoes.online/productos.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Catálogo de Zapatos Deportivos | Milena's Shoes Cali">
-  <meta property="og:description" content="59 modelos de zapatos deportivos para hombre y mujer. Tallas 36–44. Pide el tuyo por WhatsApp desde Cali, Colombia.">
+  <meta property="og:description" content="157 modelos de zapatos deportivos para hombre y mujer. Tallas 36–44. Pide el tuyo por WhatsApp desde Cali, Colombia.">
   <meta property="og:url" content="https://milenashoes.online/productos.html">
   <meta property="og:image" content="https://milenashoes.online/assets/og-cover.jpg">
   <meta property="og:locale" content="es_CO">
@@ -43,7 +43,7 @@
     "@type": "ItemList",
     "name": "Catálogo de Zapatos Deportivos — Milena's Shoes",
     "url": "https://milenashoes.online/productos.html",
-    "numberOfItems": 59,
+    "numberOfItems": 157,
     "itemListElement": [
       {"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Nike AF1 Sail Ripstop Hombre","image":"https://milenashoes.online/assets/1.jpeg","offers":{"@type":"Offer","price":"160000","priceCurrency":"COP","availability":"https://schema.org/InStock"}}},
       {"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Adidas Bounce Mujer","image":"https://milenashoes.online/assets/2.jpeg","offers":{"@type":"Offer","price":"155000","priceCurrency":"COP","availability":"https://schema.org/InStock"}}},
@@ -376,7 +376,7 @@
   <div class="cat-header-inner">
     <p class="cat-tag-h">Milena's Shoes · Cali, Colombia</p>
     <h1 class="cat-h1">Catálogo de Zapatos <em>Deportivos</em> — Milena's Shoes</h1>
-    <p class="cat-desc">59 modelos disponibles · Tallas 36–44 · Haz click en cualquier zapato para pedir información por WhatsApp</p>
+    <p class="cat-desc">157 modelos disponibles · Tallas 36–44 · Haz click en cualquier zapato para pedir información por WhatsApp</p>
   </div>
 </div>
 
@@ -392,7 +392,7 @@
       <select id="cat-marca" class="cat-sel">
         <option value="">Todas las marcas</option>
       </select>
-      <span class="cat-count" id="cat-count">59 resultados</span>
+      <span class="cat-count" id="cat-count">157 resultados</span>
     </div>
   </div>
 </div>
@@ -672,87 +672,207 @@
   document.getElementById('cat-marca').addEventListener('change', function(e) { activeMarca = e.target.value; render(); });
   // Catalogo de productos
   CATALOG = [
-    {id:1,  m:"Nike",           r:"AF1 Sail Ripstop", g:"H", t:"EU 40 AL 44", p:160000},
-    {id:2,  m:"Adidas",         r:"Bounce",           g:"M", t:"EU 36 AL 40", p:155000},
-    {id:3,  m:"Nike",           r:"P-7000",           g:"M", t:"EU 36 AL 39", p:150000},
-    {id:4,  m:"Nike",           r:"Metcon",           g:"M", t:"EU 36 AL 40", p:130000},
-    {id:5,  m:"Nike",           r:"Metcon",           g:"M", t:"EU 36 AL 41", p:130000},
-    {id:6,  m:"Nike",           r:"Metcon",           g:"M", t:"EU 36 AL 40", p:130000},
-    {id:7,  m:"Nike",           r:"Trail",            g:"H", t:"EU 40 AL 44", p:150000},
-    {id:8,  m:"Skechers",       r:"Urban",            g:"H", t:"EU 40 AL 44", p:150000},
-    {id:9,  m:"Skechers",       r:"Urban",            g:"M", t:"EU 36 AL 40", p:150000},
-    {id:10, m:"Adidas",         r:"Adizero",          g:"U", t:"EU 36 AL 44", p:145000},
-    {id:11, m:"Adidas",         r:"Adizero",          g:"M", t:"EU 36 AL 40", p:145000},
-    {id:12, m:"Asics",          r:"Run",              g:"H", t:"EU 40 AL 44", p:150000},
-    {id:13, m:"Nike",           r:"P-7000",           g:"H", t:"EU 40 AL 44", p:145000},
-    {id:14, m:"Nike",           r:"P-7000",           g:"H", t:"EU 40 AL 44", p:145000},
-    {id:15, m:"New Balance",    r:"Classic",          g:"M", t:"EU 36 AL 40", p:145000},
-    {id:16, m:"Armani",         r:"Sport",            g:"H", t:"EU 40 AL 44", p:140000},
-    {id:17, m:"Armani",         r:"Sport",            g:"H", t:"EU 40 AL 44", p:140000},
-    {id:18, m:"Skechers",       r:"Urban",            g:"H", t:"EU 40 AL 44", p:150000},
-    {id:19, m:"Asics",          r:"Run",              g:"H", t:"EU 40 AL 44", p:140000},
-    {id:20, m:"New Balance",    r:"Classic",          g:"H", t:"EU 40 AL 44", p:140000},
-    {id:21, m:"New Balance",    r:"Run",              g:"H", t:"EU 40 AL 44", p:145000},
-    {id:22, m:"Coach",          r:"Sport",            g:"H", t:"EU 40 AL 44", p:140000},
-    {id:23, m:"Jordan",         r:"Retro 1 Low",      g:"H", t:"EU 40 AL 44", p:155000},
-    {id:24, m:"Adidas",         r:"Samba",            g:"M", t:"EU 36 AL 40", p:160000},
-    {id:25, m:"Reebok",         r:"Club",             g:"H", t:"EU 40 AL 44", p:155000},
-    {id:26, m:"Lacoste",        r:"Alpacino",         g:"H", t:"EU 40 AL 44", p:155000},
-    {id:27, m:"Vans",           r:"Hylane",           g:"U", t:"EU 36 AL 44", p:170000},
-    {id:28, m:"Vans",           r:"KNU",              g:"U", t:"EU 36 AL 44", p:160000},
-    {id:29, m:"Reebok",         r:"Floatzig",         g:"H", t:"EU 40 AL 44", p:140000},
-    {id:30, m:"New Balance",    r:"740",              g:"U", t:"EU 36 AL 44", p:135000},
-    {id:31, m:"Nike",           r:"Zoom Pegasus",     g:"H", t:"EU 40 AL 44", p:140000},
-    {id:32, m:"Nike",           r:"SB Parra",         g:"M", t:"EU 36 AL 40", p:155000},
-    {id:33, m:"Nike",           r:"SB",               g:"H", t:"EU 40 AL 44", p:155000},
-    {id:34, m:"Lacoste",        r:"Classic",          g:"H", t:"EU 40 AL 44", p:150000},
-    {id:35, m:"Nike",           r:"SB Supreme",       g:"U", t:"EU 36 AL 44", p:155000},
-    {id:36, m:"Nike",           r:"SB",               g:"M", t:"EU 36 AL 40", p:155000},
-    {id:37, m:"Nike",           r:"AF1 Supreme",      g:"H", t:"EU 40 AL 44", p:155000},
-    {id:38, m:"Nike",           r:"AF1",              g:"H", t:"EU 40 AL 44", p:155000},
-    {id:39, m:"Jordan",         r:"Retro 1",          g:"M", t:"EU 36 AL 40", p:150000},
-    {id:40, m:"Louis Vuitton",  r:"Skate",            g:"U", t:"EU 36 AL 44", p:150000},
-    {id:41, m:"Nike",           r:"P-6000",           g:"U", t:"EU 36 AL 44", p:160000},
-    {id:42, m:"Nike",           r:"P-6001",           g:"M", t:"EU 36 AL 40", p:160000},
-    {id:43, m:"Nike",           r:"Zoom Happy",       g:"U", t:"EU 36 AL 44", p:150000},
-    {id:44, m:"Nike",           r:"Air Max TN",       g:"H", t:"EU 40 AL 44", p:145000},
-    {id:45, m:"Nike",           r:"SB Dunk",          g:"H", t:"EU 40 AL 44", p:155000},
-    {id:46, m:"Nike",           r:"SB Dunk",          g:"H", t:"EU 40 AL 44", p:155000},
-    {id:47, m:"Nike",           r:"SB Dunk",          g:"M", t:"EU 36 AL 40", p:160000},
-    {id:48, m:"Jordan",         r:"Aura",             g:"H", t:"EU 40 AL 44", p:170000},
-    {id:49, m:"Jordan",         r:"Aura",             g:"H", t:"EU 40 AL 44", p:170000},
-    {id:50, m:"Nike",           r:"Shox Gusano",      g:"U", t:"EU 36 AL 44", p:160000},
-    {id:51, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:150000},
-    {id:52, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:155000},
-    {id:53, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:155000},
-    {id:54, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:155000},
-    {id:55, m:"Le Coq Sportif", r:"Classic",          g:"H", t:"EU 40 AL 44", p:155000},
-    {id:56, m:"Lacoste",        r:"Tabla",            g:"H", t:"EU 40 AL 44", p:160000},
-    {id:57, m:"Nike",           r:"AF1",              g:"U", t:"EU 36 AL 44", p:135000},
-    {id:58, m:"Nike",           r:"Trail",            g:"M", t:"EU 36 AL 40", p:145000},
-    {id:59, m:"Puma",           r:"Park",             g:"M", t:"EU 36 AL 40", p:155000}
+    {id:1,  m:"NIKE",          r:"AF1 SAIL RIPSTOP",        g:"H", t:"EU 40 AL 44", p:160000},
+    {id:2,  m:"ADIDAS",        r:"ADIDAS BOUNCE",           g:"M", t:"EU 36 AL 40", p:155000},
+    {id:3,  m:"NIKE",          r:"NIKE P7000",              g:"M", t:"EU 36 AL 39", p:150000},
+    {id:4,  m:"NIKE",          r:"METCON",                  g:"M", t:"EU 36 AL 40", p:130000},
+    {id:5,  m:"NIKE",          r:"METCON",                  g:"M", t:"EU 36 AL 41", p:130000},
+    {id:6,  m:"NIKE",          r:"METCON",                  g:"M", t:"EU 36 AL 42", p:130000},
+    {id:7,  m:"NIKE",          r:"NIKE TRAIL",              g:"H", t:"EU 40 AL 44", p:150000},
+    {id:8,  m:"SKECHERS",      r:"SKECHERS",                g:"H", t:"EU 40 AL 44", p:150000},
+    {id:9,  m:"SKECHERS",      r:"SKECHERS",                g:"M", t:"EU 36 AL 40", p:150000},
+    {id:10, m:"ADIDAS",        r:"ADIZERO",                 g:"U", t:"EU 36 AL 44", p:145000},
+    {id:11, m:"ADIDAS",        r:"ADIZERO",                 g:"M", t:"EU 36 AL 40", p:145000},
+    {id:12, m:"ASICS",         r:"ASICS RUN",               g:"H", t:"EU 40 AL 44", p:150000},
+    {id:13, m:"NIKE",          r:"NIKE P-7000",             g:"H", t:"EU 40 AL 44", p:145000},
+    {id:14, m:"NIKE",          r:"NIKE P-7000",             g:"H", t:"EU 40 AL 44", p:145000},
+    {id:15, m:"NEW BALANCE",   r:"NEW BALANCE",             g:"M", t:"EU 36 AL 44", p:145000},
+    {id:16, m:"ARMANI",        r:"ARMANI",                  g:"H", t:"EU 40 AL 44", p:140000},
+    {id:17, m:"ARMANI",        r:"ARMANI",                  g:"H", t:"EU 40 AL 44", p:140000},
+    {id:18, m:"SKECHERS",      r:"SKECHERS",                g:"H", t:"EU 40 AL 44", p:150000},
+    {id:19, m:"ASICS",         r:"ASICS RUN",               g:"H", t:"EU 40 AL 44", p:140000},
+    {id:20, m:"NEW BALANCE",   r:"NEW BALANCE",             g:"H", t:"EU 40 AL 44", p:140000},
+    {id:21, m:"NEW BALANCE",   r:"NEW BALANCE RUN",         g:"H", t:"EU 40 AL 44", p:145000},
+    {id:22, m:"COACH",         r:"COACH",                   g:"H", t:"EU 40 AL 44", p:140000},
+    {id:23, m:"JORDAN",        r:"JORDAN RETRO 1 LOW",      g:"H", t:"EU 40 AL 44", p:155000},
+    {id:24, m:"ADIDAS",        r:"SAMBA",                   g:"M", t:"EU 36 AL 39", p:160000},
+    {id:25, m:"REEBOK",        r:"REEBOK CLUB",             g:"H", t:"EU 40 AL 44", p:155000},
+    {id:26, m:"LACOSTE",       r:"LACOSTE ALPACINO",        g:"H", t:"EU 40 AL 44", p:155000},
+    {id:27, m:"VANS",          r:"VANS HYLANE",             g:"U", t:"EU 36 AL 44", p:170000},
+    {id:28, m:"VANS",          r:"VANS KNU",                g:"U", t:"EU 36 AL 44", p:160000},
+    {id:29, m:"REEBOK",        r:"REEBOK FLOATZIG",         g:"H", t:"EU 40 AL 44", p:140000},
+    {id:30, m:"NEW BALANCE",   r:"NEW BALANCE 740",         g:"U", t:"EU 36 AL 44", p:135000},
+    {id:31, m:"NIKE",          r:"ZOOM PEGASUS",            g:"H", t:"EU 40 AL 44", p:140000},
+    {id:32, m:"NIKE",          r:"SB PARRA",                g:"M", t:"EU 36 AL 39", p:155000},
+    {id:33, m:"NIKE",          r:"NIKE SB",                 g:"H", t:"EU 40 AL 44", p:155000},
+    {id:34, m:"LACOSTE",       r:"LACOSTE CLASSIC",         g:"H", t:"EU 40 AL 44", p:150000},
+    {id:35, m:"NIKE",          r:"SB SUPREME",              g:"U", t:"EU 36 AL 44", p:155000},
+    {id:36, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 40", p:155000},
+    {id:37, m:"NIKE",          r:"AF1 SUPREME",             g:"H", t:"EU 40 AL 44", p:155000},
+    {id:38, m:"NIKE",          r:"NIKE AF1",                g:"H", t:"EU 40 AL 44", p:155000},
+    {id:39, m:"JORDAN",        r:"JORDAN RETRO 1",          g:"M", t:"EU 36 AL 40", p:150000},
+    {id:40, m:"LOUIS VUITTON", r:"LV SKATE",                g:"U", t:"EU 36 AL 44", p:150000},
+    {id:41, m:"NIKE",          r:"NIKE P-6000",             g:"U", t:"EU 36 AL 44", p:160000},
+    {id:42, m:"NIKE",          r:"NIKE P-6001",             g:"M", t:"EU 36 AL 39", p:160000},
+    {id:43, m:"NIKE",          r:"ZOOM HAPPY",              g:"U", t:"EU 36 AL 44", p:150000},
+    {id:44, m:"NIKE",          r:"NIKE AIR MAX TN",         g:"H", t:"EU 40 AL 44", p:145000},
+    {id:45, m:"NIKE",          r:"SB DUNK",                 g:"H", t:"EU 40 AL 44", p:155000},
+    {id:46, m:"NIKE",          r:"SB DUNK",                 g:"H", t:"EU 40 AL 44", p:155000},
+    {id:47, m:"NIKE",          r:"SB DUNK",                 g:"M", t:"EU 36 AL 39", p:160000},
+    {id:48, m:"JORDAN",        r:"JORDAN AURA",             g:"H", t:"EU 40 AL 44", p:170000},
+    {id:49, m:"JORDAN",        r:"JORDAN AURA",             g:"H", t:"EU 40 AL 44", p:170000},
+    {id:50, m:"NIKE",          r:"SHOX GUSANO",             g:"U", t:"EU 36 AL 44", p:160000},
+    {id:51, m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",          g:"H", t:"EU 40 AL 44", p:150000},
+    {id:52, m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",          g:"H", t:"EU 40 AL 45", p:155000},
+    {id:53, m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",          g:"H", t:"EU 40 AL 46", p:155000},
+    {id:54, m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",          g:"H", t:"EU 40 AL 47", p:155000},
+    {id:55, m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",          g:"H", t:"EU 40 AL 48", p:155000},
+    {id:56, m:"LACOSTE",       r:"LACOSTE TABLA",           g:"H", t:"EU 40 AL 44", p:160000},
+    {id:57, m:"NIKE",          r:"NIKE AF1",                g:"U", t:"EU 40 AL 44", p:135000},
+    {id:58, m:"NIKE",          r:"NIKE TRAIL",              g:"M", t:"EU 36 AL 39", p:145000},
+    {id:59, m:"PUMA",          r:"PUMA PARK",               g:"M", t:"EU 36 AL 39", p:155000},
+    {id:60, m:"PUMA",          r:"PUMA PARK",               g:"U", t:"EU 36 AL 44", p:155000},
+    {id:61, m:"PUMA",          r:"PUMA PARK",               g:"U", t:"EU 36 AL 45", p:155000},
+    {id:62, m:"NIKE",          r:"NIKE",                    g:"H", t:"EU 40 AL 44", p:155000},
+    {id:63, m:"NIKE",          r:"NIKE",                    g:"H", t:"EU 40 AL 44", p:155000},
+    {id:64, m:"NIKE",          r:"NIKE",                    g:"H", t:"EU 40 AL 44", p:155000},
+    {id:65, m:"NIKE",          r:"NIKE",                    g:"H", t:"EU 40 AL 44", p:155000},
+    {id:66, m:"ADIDAS",        r:"ADIDAS SUPERMAGMA",       g:"M", t:"EU 36 AL 39", p:170000},
+    {id:67, m:"NIKE",          r:"NIKE INITIATOR",          g:"U", t:"EU 36 AL 44", p:160000},
+    {id:68, m:"JORDAN",        r:"JORDAN R1 LOW PARIS TOP", g:"M", t:"EU 36 AL 39", p:160000},
+    {id:69, m:"JORDAN",        r:"JORDAN R3 TRAVIS SCOTT",  g:"U", t:"EU 36 AL 44", p:160000},
+    {id:70, m:"ADIDAS",        r:"ADIDAS SAMBA",            g:"M", t:"EU 36 AL 39", p:170000},
+    {id:71, m:"JORDAN",        r:"JORDAN CLUB",             g:"U", t:"EU 36 AL 44", p:155000},
+    {id:72, m:"ADIDAS",        r:"ADIDAS SAMBA",            g:"M", t:"EU 36 AL 39", p:135000},
+    {id:73, m:"PUMA",          r:"PUMA SUEDE XL",           g:"M", t:"EU 36 AL 39", p:155000},
+    {id:74, m:"PUMA",          r:"PUMA PARK",               g:"M", t:"EU 36 AL 39", p:160000},
+    {id:75, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 40", p:170000},
+    {id:76, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 41", p:170000},
+    {id:77, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 42", p:170000},
+    {id:78, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 43", p:150000},
+    {id:79, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 44", p:150000},
+    {id:80, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 44", p:150000},
+    {id:81, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 44", p:150000},
+    {id:82, m:"NIKE",          r:"NIKE SB",                 g:"M", t:"EU 36 AL 44", p:150000},
+    {id:83, m:"NIKE",          r:"NIKE SB",                 g:"H", t:"EU 40 AL 44", p:150000},
+    {id:84, m:"GLOBE",         r:"GLOBE SKATE",             g:"H", t:"EU 40 AL 44", p:165000},
+    {id:85, m:"GLOBE",         r:"GLOBE SKATE",             g:"H", t:"EU 40 AL 44", p:165000},
+    {id:86, m:"GLOBE",         r:"GLOBE SKATE",             g:"H", t:"EU 40 AL 44", p:165000},
+    {id:87, m:"GLOBE",         r:"GLOBE SKATE",             g:"H", t:"EU 40 AL 44", p:165000},
+    {id:88, m:"GLOBE",         r:"GLOBE SKATE",             g:"H", t:"EU 40 AL 44", p:165000},
+    {id:89, m:"VANS",          r:"VANS VISION",             g:"U", t:"EU 36 AL 44", p:165000},
+    {id:90, m:"JORDAN",        r:"JORDAN RETRO 1 LOW",      g:"M", t:"EU 36 AL 39", p:165000},
+    {id:91, m:"BROOKS",        r:"BROOKS RUN",              g:"H", t:"EU 40 AL 44", p:175000},
+    {id:92, m:"BROOKS",        r:"BROOKS RUN",              g:"H", t:"EU 40 AL 44", p:175000},
+    {id:93, m:"BROOKS",        r:"BROOKS RUN",              g:"H", t:"EU 40 AL 44", p:175000},
+    {id:94, m:"BROOKS",        r:"BROOKS RUN",              g:"H", t:"EU 40 AL 44", p:175000},
+    {id:95, m:"BROOKS",        r:"BROOKS RUN",              g:"H", t:"EU 40 AL 45", p:175000},
+    {id:96, m:"PUMA",          r:"PUMA",                    g:"M", t:"EU 36 AL 39", p:155000},
+    {id:97, m:"NIKE",          r:"NIKE AIR MAX 97",         g:"H", t:"EU 40 AL 44", p:155000},
+    {id:98, m:"NIKE",          r:"NIKE AIR MAX 2000",       g:"H", t:"EU 40 AL 44", p:165000},
+    {id:99, m:"NIKE",          r:"NIKE AIR MAX CORRELATE",  g:"H", t:"EU 40 AL 44", p:155000},
+    {id:100,m:"ADIDAS",        r:"ADIDAS SAMBA",            g:"M", t:"EU 36 AL 39", p:160000},
+    {id:101,m:"JORDAN",        r:"JORDAN RETRO 1 LOW",      g:"M", t:"EU 36 AL 39", p:160000},
+    {id:102,m:"JORDAN",        r:"JORDAN RETRO 1 LOW",      g:"M", t:"EU 36 AL 40", p:160000},
+    {id:103,m:"JORDAN",        r:"JORDAN RETRO 1 LOW",      g:"M", t:"EU 36 AL 41", p:160000},
+    {id:104,m:"NIKE",          r:"NIKE NOCTA",              g:"H", t:"EU 40 AL 44", p:180000},
+    {id:105,m:"NIKE",          r:"NIKE TEKNO",              g:"M", t:"EU 36 AL 39", p:150000},
+    {id:106,m:"NIKE",          r:"NIKE AF1",                g:"H", t:"EU 40 AL 44", p:140000},
+    {id:107,m:"ADIDAS",        r:"ADIDAS SUPER STAR",       g:"M", t:"EU 36 AL 39", p:145000},
+    {id:108,m:"NIKE",          r:"NIKE V2K",                g:"M", t:"EU 36 AL 40", p:165000},
+    {id:109,m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",          g:"H", t:"EU 40 AL 44", p:160000},
+    {id:110,m:"LE COQ SPORTIF",r:"LE COQ SPORTIF",          g:"M", t:"EU 36 AL 39", p:150000},
+    {id:111,m:"NIKE",          r:"NIKE AF1",                g:"U", t:"EU 36 AL 44", p:135000},
+    {id:112,m:"ADIDAS",        r:"ADIDAS SL-72",            g:"M", t:"EU 36 AL 39", p:145000},
+    {id:113,m:"NIKE",          r:"NIKE SHOX",               g:"H", t:"EU 40 AL 44", p:165000},
+    {id:114,m:"NIKE",          r:"NIKE P-6000",             g:"H", t:"EU 40 AL 44", p:160000},
+    {id:115,m:"VANS",          r:"VANS HYLANE",             g:"U", t:"EU 36 AL 44", p:155000},
+    {id:116,m:"ADIDAS",        r:"ADIDAS CAMPUS",           g:"M", t:"EU 36 AL 39", p:160000},
+    {id:117,m:"ADIDAS",        r:"ADIDAS SUPERMAGMA",       g:"M", t:"EU 36 AL 39", p:170000},
+    {id:118,m:"NEW BALANCE",   r:"NEW BALANCE 9060",        g:"U", t:"EU 36 AL 44", p:170000},
+    {id:119,m:"NIKE",          r:"NIKE SB JARRITO",         g:"H", t:"EU 40 AL 44", p:160000},
+    {id:120,m:"NIKE",          r:"NIKE SB JARRITO",         g:"H", t:"EU 40 AL 44", p:160000},
+    {id:121,m:"DIESEL",        r:"DIESEL",                  g:"H", t:"EU 40 AL 44", p:155000},
+    {id:122,m:"JORDAN",        r:"JORDAN RETRO 11",         g:"H", t:"EU 40 AL 44", p:160000},
+    {id:123,m:"REEBOK",        r:"REEBOK ANUEL",            g:"H", t:"EU 40 AL 44", p:145000},
+    {id:124,m:"ON CLOUD",      r:"ON CLOUD",                g:"H", t:"EU 36 AL 40", p:150000},
+    {id:125,m:"NIKE",          r:"NIKE TN PLUS",            g:"H", t:"EU 40 AL 44", p:165000},
+    {id:126,m:"SKECHERS",      r:"SKECHERS",                g:"M", t:"EU 36 AL 39", p:145000},
+    {id:127,m:"SKECHERS",      r:"SKECHERS",                g:"M", t:"EU 36 AL 39", p:145000},
+    {id:128,m:"NIKE",          r:"NIKE AF1 SUPREME",        g:"H", t:"EU 40 AL 44", p:150000},
+    {id:129,m:"NIKE",          r:"NIKE AF1 SUPREME",        g:"H", t:"EU 40 AL 44", p:150000},
+    {id:130,m:"ADIDAS",        r:"ADIDAS TERREX",           g:"H", t:"EU 40 AL 44", p:165000},
+    {id:131,m:"ADIDAS",        r:"ADIDAS TERREX",           g:"H", t:"EU 40 AL 44", p:165000},
+    {id:132,m:"ADIDAS",        r:"ADIDAS FASHION",          g:"H", t:"EU 40 AL 44", p:160000},
+    {id:133,m:"ADIDAS",        r:"ADIDAS FASHION",          g:"H", t:"EU 40 AL 44", p:160000},
+    {id:134,m:"ALTRA",         r:"ALTRA TRAIL",             g:"H", t:"EU 40 AL 44", p:175000},
+    {id:135,m:"ALTRA",         r:"ALTRA TRAIL",             g:"H", t:"EU 40 AL 44", p:175000},
+    {id:136,m:"ADIDAS",        r:"ADIDAS SUPERMAGMA",       g:"H", t:"EU 40 AL 44", p:160000},
+    {id:137,m:"JORDAN",        r:"JORDAN RETRO 1 LOW PARIS",g:"M", t:"EU 36 AL 39", p:165000},
+    {id:138,m:"ADIDAS",        r:"ADIDAS SUPERMAGMA",       g:"M", t:"EU 36 AL 39", p:170000},
+    {id:139,m:"ADIDAS",        r:"ADIDAS SUPERMAGMA",       g:"M", t:"EU 36 AL 39", p:170000},
+    {id:140,m:"ADIDAS",        r:"ADIDAS SUPERMAGMA",       g:"M", t:"EU 36 AL 39", p:170000},
+    {id:141,m:"ADIDAS",        r:"ADIDAS SUPERMAGMA",       g:"M", t:"EU 36 AL 39", p:170000},
+    {id:142,m:"ADIDAS",        r:"ADIDAS EQUIPMENT",        g:"H", t:"EU 40 AL 44", p:150000},
+    {id:143,m:"ADIDAS",        r:"ADIDAS EQUIPMENT",        g:"H", t:"EU 40 AL 44", p:150000},
+    {id:144,m:"NIKE",          r:"NIKE TRAIL",              g:"U", t:"EU 36 AL 44", p:145000},
+    {id:145,m:"ADIDAS",        r:"ADIDAS ADISTAR",          g:"H", t:"EU 40 AL 44", p:145000},
+    {id:146,m:"ADIDAS",        r:"ADIDAS ADISTAR",          g:"H", t:"EU 40 AL 44", p:145000},
+    {id:147,m:"ARMANI",        r:"ARMANI EXCHANGE",         g:"H", t:"EU 40 AL 44", p:140000},
+    {id:148,m:"ARMANI",        r:"ARMANI EXCHANGE",         g:"H", t:"EU 40 AL 44", p:140000},
+    {id:149,m:"LOUIS VUITTON", r:"LOUIS VUITTON",           g:"M", t:"EU 36 AL 39", p:170000},
+    {id:150,m:"PUMA",          r:"PUMA TABLA",              g:"M", t:"EU 36 AL 40", p:155000},
+    {id:151,m:"ADIDAS",        r:"ADIDAS SAMBA XLG",        g:"M", t:"EU 36 AL 40", p:165000},
+    {id:152,m:"NIKE",          r:"NIKE CORTEZ",             g:"M", t:"EU 36 AL 39", p:150000},
+    {id:153,m:"JORDAN",        r:"JORDAN RETRO 4",          g:"H", t:"EU 40 AL 44", p:155000},
+    {id:154,m:"NIKE",          r:"NIKE SHOX SUPREME",       g:"H", t:"EU 40 AL 44", p:165000},
+    {id:155,m:"NIKE",          r:"NIKE SHOX SUPREME",       g:"H", t:"EU 40 AL 44", p:165000},
+    {id:156,m:"REEBOK",        r:"REEBOK ERA",              g:"H", t:"EU 40 AL 44", p:145000},
+    {id:157,m:"NIKE",          r:"NIKE V2K",                g:"M", t:"EU 36 AL 39", p:160000}
   ];
-  (function() {
-      var marcas = Array.from(new Set(CATALOG.map(function(p) { return p.m; }))).sort();
-      var marcaSel = document.getElementById('cat-marca');
-      marcas.forEach(function(m) {
-        var o = document.createElement('option'); o.value = m; o.textContent = m; marcaSel.appendChild(o);
-      });
-      render();
-      var items = CATALOG.map(function(p, i) {
-        return {"@type":"ListItem","position":i+1,"item":{"@type":"Product","name":p.m+' '+p.r,
-          "image":"https://milenashoes.online/assets/"+p.id+".jpeg",
-          "brand":{"@type":"Brand","name":p.m},
-          "offers":{"@type":"Offer","price":p.p,"priceCurrency":"COP",
-            "availability":"https://schema.org/InStock",
-            "seller":{"@type":"Organization","name":"Milena's Shoes"},
-            "url":"https://milenashoes.online/productos.html"}}};
-      });
-      var ld = document.createElement('script'); ld.type = 'application/ld+json';
-      ld.text = JSON.stringify({"@context":"https://schema.org","@type":"ItemList",
-        "name":"Catalogo Milena's Shoes","numberOfItems":CATALOG.length,"itemListElement":items});
-      document.head.appendChild(ld);
-  })();
+  function initCatalog(data) {
+    CATALOG = data.filter(function(p) { return p.id && p.m; });
+    var countEl = document.getElementById('cat-count');
+    if (countEl) countEl.textContent = CATALOG.length + ' resultados';
+    var marcas = Array.from(new Set(CATALOG.map(function(p) { return p.m; }))).sort();
+    var marcaSel = document.getElementById('cat-marca');
+    marcaSel.innerHTML = '<option value="">Todas las marcas</option>';
+    marcas.forEach(function(m) {
+      var o = document.createElement('option'); o.value = m; o.textContent = m; marcaSel.appendChild(o);
+    });
+    render();
+    var items = CATALOG.map(function(p, i) {
+      return {"@type":"ListItem","position":i+1,"item":{"@type":"Product","name":p.m+' '+p.r,
+        "image":"https://milenashoes.online/assets/"+p.id+".jpeg",
+        "brand":{"@type":"Brand","name":p.m},
+        "offers":{"@type":"Offer","price":p.p,"priceCurrency":"COP",
+          "availability":"https://schema.org/InStock",
+          "seller":{"@type":"Organization","name":"Milena's Shoes"},
+          "url":"https://milenashoes.online/productos.html"}}};
+    });
+    var ld = document.createElement('script'); ld.type = 'application/ld+json';
+    ld.text = JSON.stringify({"@context":"https://schema.org","@type":"ItemList",
+      "name":"Catalogo Milena's Shoes","numberOfItems":CATALOG.length,"itemListElement":items});
+    document.head.appendChild(ld);
+  }
+
+  // Intenta cargar desde catalogo.json (generado por actualizar-inventario.ps1).
+  // Si falla o el archivo no existe, usa el array CATALOG hardcodeado como respaldo.
+  fetch('catalogo.json?v=' + Date.now())
+    .then(function(r) {
+      if (!r.ok) throw new Error('no json');
+      return r.json();
+    })
+    .then(function(data) {
+      if (Array.isArray(data) && data.length > 0) {
+        initCatalog(data);
+      } else {
+        initCatalog(CATALOG);
+      }
+    })
+    .catch(function() {
+      initCatalog(CATALOG);
+    });
 </script>
 </body>
 </html>

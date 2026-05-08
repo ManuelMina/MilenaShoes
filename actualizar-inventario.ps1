@@ -125,13 +125,23 @@ $json = $jsonArr | ConvertTo-Json -Compress
 [System.IO.File]::WriteAllText($jsonPath, $json, [System.Text.Encoding]::UTF8)
 Write-Host "catalogo.json actualizado: $($products.Count) productos" -ForegroundColor Green
 
-# Git push
+# Git push (incluye catalogo.json, Excel actualizado y cualquier foto nueva)
 Write-Host ""
 Write-Host "Subiendo a GitHub..." -ForegroundColor Cyan
 Set-Location $base
-git add catalogo.json "assets/LISTA ZAPATILLAS.xlsx"
-git commit -m "inventario: $($products.Count) productos disponibles ($(Get-Date -Format 'yyyy-MM-dd'))"
-git push origin main
+git add catalogo.json
+git add "assets/LISTA ZAPATILLAS.xlsx"
+git add "assets/*.jpeg"
+git add "assets/*.jpg"
+git add "assets/*.png"
+git add "assets/*.webp"
+$status = git status --porcelain
+if ($status) {
+  git commit -m "inventario: $($products.Count) productos disponibles ($(Get-Date -Format 'yyyy-MM-dd'))"
+  git push origin main
+} else {
+  Write-Host "Sin cambios nuevos que subir." -ForegroundColor Yellow
+}
 
 if ($LASTEXITCODE -eq 0) {
   Write-Host ""
