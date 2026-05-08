@@ -429,10 +429,6 @@
       <p class="cart-empty-msg" id="cartEmptyMsg">Tu carrito está vacío.<br>Agrega zapatos desde el catálogo.</p>
     </div>
     <div class="cart-footer" id="cartFooter" style="display:none">
-      <div class="cart-total-row">
-        <span class="cart-total-label">Total estimado</span>
-        <span class="cart-total-price" id="cartTotal">$0</span>
-      </div>
       <div class="cart-name-wrap">
         <label class="cart-name-label" for="cartName">Tu nombre (para el pedido)</label>
         <input type="text" id="cartName" class="cart-name-input" placeholder="Ej: Juan Pérez" maxlength="60">
@@ -493,8 +489,6 @@
 
     var total = 0;
     cart.forEach(function(p, idx) {
-      total += p.p;
-
       // Parse size range "EU 36 AL 40" → [36,37,38,39,40]
       var sizeOptions = '';
       var match = p.t.match(/(\d+)\s+AL\s+(\d+)/i);
@@ -514,7 +508,6 @@
           '<div class="cart-item-id">Zapato #' + p.id + '</div>' +
           '<div class="cart-item-marca">' + p.m + '</div>' +
           '<div class="cart-item-ref">' + p.r + '</div>' +
-          '<div class="cart-item-precio">' + fmtPriceShort(p.p) + '</div>' +
           (sizeOptions ? '<div class="cart-item-size-wrap"><select class="cart-item-size" data-size-idx="' + idx + '">' + sizeOptions + '</select></div>' : '') +
         '</div>' +
         '<button class="cart-item-remove" data-idx="' + idx + '" title="Eliminar">✕</button>';
@@ -539,7 +532,6 @@
       });
     });
 
-    cartTotal.textContent = fmtPriceShort(total);
     var name = document.getElementById('cartName').value.trim();
     btnCheckout.disabled = name.length < 2;
   }
@@ -588,12 +580,10 @@
       var tallaStr = p.size ? 'Talla: EU ' + p.size : 'Talla: por confirmar';
       lines.push(
         (i + 1) + '. Zapato #' + p.id + ' — ' + p.m + ' ' + p.r +
-        ' | ' + gl + ' | ' + tallaStr + ' | ' + fmtPrice(p.p)
+        ' | ' + gl + ' | ' + tallaStr
       );
     });
-    var total = cart.reduce(function(s, p) { return s + p.p; }, 0);
-    lines.push('', 'Total estimado: ' + fmtPrice(total));
-    lines.push('', 'Por favor confirmar disponibilidad y tallas exactas. Gracias!');
+    lines.push('', 'Por favor confirmar disponibilidad y precios. Gracias!');
 
     window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n')), '_blank');
   });
@@ -626,8 +616,8 @@
     var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex (Hombre y Mujer)';
     return ["Hola Milena's Shoes, quiero preguntar por:", '', 'Zapato #' + p.id,
       'Marca: ' + p.m, 'Referencia: ' + p.r, 'Genero: ' + gl,
-      'Tallas disponibles: ' + p.t, 'Precio: ' + fmtPrice(p.p),
-      '', 'Esta disponible? Gracias!'].join('\n');
+      'Tallas disponibles: ' + p.t,
+      '', 'Cuanto vale y está disponible? Gracias!'].join('\n');
   }
 
   function render() {
