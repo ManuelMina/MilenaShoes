@@ -1017,6 +1017,53 @@
   }, { threshold: 0.4 });
   secs.forEach(s => acObs.observe(s));
 
+  // ── CARRUSEL ──
+  (function() {
+    var WA = '573227155957';
+    var carProds = [
+      {id:1,  g:"H", m:"NIKE",        r:"AF1 SAIL RIPSTOP",   t:"EU 40-44", p:145000},
+      {id:27, g:"U", m:"VANS",        r:"VANS HYLANE",        t:"EU 36-44", p:145000},
+      {id:23, g:"H", m:"JORDAN",      r:"JORDAN RETRO 1 LOW", t:"EU 40-44", p:145000},
+      {id:32, g:"M", m:"NIKE",        r:"SB PARRA",           t:"EU 36-39", p:155000},
+      {id:50, g:"U", m:"NIKE",        r:"SHOX GUSANO",        t:"EU 36-44", p:155000},
+      {id:91, g:"H", m:"BROOKS",      r:"HYPERION MAX",       t:"EU 40-44", p:155000},
+      {id:104,g:"H", m:"NIKE",        r:"NIKE NOCTA",         t:"EU 40-44", p:155000},
+      {id:118,g:"U", m:"NEW BALANCE", r:"BALANCE 9060",       t:"EU 36-44", p:155000},
+      {id:108,g:"M", m:"NIKE",        r:"NIKE V2K",           t:"EU 36-40", p:145000},
+      {id:2,  g:"M", m:"ADIDAS",      r:"ADIDAS BOUNCE",      t:"EU 36-40", p:140000},
+      {id:24, g:"M", m:"ADIDAS",      r:"SAMBA",              t:"EU 36-39", p:145000},
+      {id:69, g:"U", m:"JORDAN",      r:"JORDAN R3 TRAVIS SCOTT", t:"EU 36-44", p:155000},
+      {id:163,g:"H", m:"ADIDAS",      r:"TERREX",             t:"EU 40-44", p:140000},
+      {id:173,g:"H", m:"ADIDAS",      r:"SUPER STAR",         t:"EU 40-44", p:145000},
+      {id:176,g:"M", m:"PUMA",        r:"SMASH",              t:"EU 36-39", p:145000}
+    ];
+    var track = document.getElementById('carouselTrack');
+    if (!track) return;
+
+    function fmtPriceC(n) { return '$' + n.toLocaleString('es-CO'); }
+    function buildMsgC(p) {
+      var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex';
+      return ["Hola Milena's Shoes, quiero preguntar por:", '', 'Zapato #' + p.id,
+        'Marca: ' + p.m, 'Referencia: ' + p.r, 'Genero: ' + gl,
+        'Tallas: ' + p.t, 'Precio: ' + fmtPriceC(p.p) + ' COP', '', 'Esta disponible? Gracias!'].join('\n');
+    }
+    function makeCarCard(p) {
+      var card = document.createElement('div'); card.className = 'car-card';
+      var imgWrap = document.createElement('div'); imgWrap.style.overflow = 'hidden';
+      var img = document.createElement('img');
+      img.className = 'car-img'; img.src = 'assets/' + p.id + '.jpeg'; img.alt = p.m; img.loading = 'lazy';
+      imgWrap.appendChild(img);
+      var info = document.createElement('div'); info.className = 'car-info';
+      info.innerHTML = '<div class="car-id">#' + p.id + '</div><div class="car-marca">' + p.m + '</div><div class="car-precio">' + fmtPriceC(p.p) + '</div>';
+      card.appendChild(imgWrap); card.appendChild(info);
+      card.addEventListener('click', function() {
+        window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(buildMsgC(p)), '_blank');
+      });
+      return card;
+    }
+    carProds.concat(carProds).forEach(function(p) { track.appendChild(makeCarCard(p)); });
+  })();
+
 </script>
 
 <!-- Lightbox galería -->
