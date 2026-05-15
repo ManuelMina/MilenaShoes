@@ -553,7 +553,6 @@
     .car-info { padding: 10px 12px 14px; }
     .car-id { font-size: 0.52rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); }
     .car-marca { font-size: 0.66rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .car-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; color: var(--gold); margin-top: 4px; letter-spacing: 1px; }
     .novedades-cta { text-align: center; margin-top: 44px; }
     .btn-catalog { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(201,168,76,0.35); color: var(--text); padding: 14px 38px; font-size: 0.75rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; transition: all 0.3s; }
     .btn-catalog:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
@@ -1045,7 +1044,7 @@
       var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex';
       return ["Hola Milena's Shoes, quiero preguntar por:", '', 'Zapato #' + p.id,
         'Marca: ' + p.m, 'Referencia: ' + p.r, 'Genero: ' + gl,
-        'Tallas: ' + p.t, 'Precio: ' + fmtPriceC(p.p) + ' COP', '', 'Esta disponible? Gracias!'].join('\n');
+        'Tallas: ' + p.t, '', 'Esta disponible? Gracias!'].join('\n');
     }
     function makeCarCard(p) {
       var card = document.createElement('div'); card.className = 'car-card';
@@ -1054,7 +1053,7 @@
       img.className = 'car-img'; img.src = 'assets/' + p.id + '.jpeg'; img.alt = p.m; img.loading = 'lazy';
       imgWrap.appendChild(img);
       var info = document.createElement('div'); info.className = 'car-info';
-      info.innerHTML = '<div class="car-id">#' + p.id + '</div><div class="car-marca">' + p.m + '</div><div class="car-precio">' + fmtPriceC(p.p) + '</div>';
+      info.innerHTML = '<div class="car-id">#' + p.id + '</div><div class="car-marca">' + p.m + '</div>';
       card.appendChild(imgWrap); card.appendChild(info);
       card.addEventListener('click', function() {
         window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(buildMsgC(p)), '_blank');

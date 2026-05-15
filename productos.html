@@ -218,7 +218,7 @@
     .prod-marca { font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text); margin-top: 2px; }
     .prod-ref { font-size: 0.76rem; color: var(--muted); font-weight: 300; }
     .prod-talla { font-size: 0.62rem; color: #666; letter-spacing: 1px; margin-top: 2px; }
-    .prod-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; color: var(--gold); letter-spacing: 2px; margin-top: 8px; }
+
     .prod-wa-btn {
       display: flex; align-items: center; justify-content: center;
       background: var(--green); color: #fff; border: none;
@@ -294,14 +294,12 @@
     .cart-item-id { font-size: 0.55rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
     .cart-item-marca { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--text); }
     .cart-item-ref { font-size: 0.72rem; color: var(--muted); }
-    .cart-item-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--gold); margin-top: 4px; }
+
     .cart-item-remove { background: none; border: none; color: #555; cursor: pointer; font-size: 1.1rem; padding: 2px; transition: color 0.2s; flex-shrink: 0; }
     .cart-item-remove:hover { color: #ff4f4f; }
     .cart-empty-msg { text-align: center; color: var(--muted); padding: 48px 24px; font-size: 0.9rem; }
     .cart-footer { padding: 20px 28px; border-top: 1px solid var(--border); flex-shrink: 0; }
-    .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .cart-total-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
-    .cart-total-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; color: var(--gold); }
+
     .cart-name-wrap { margin-bottom: 14px; }
     .cart-name-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
     .cart-item-size-wrap { margin-top: 7px; }
@@ -342,7 +340,7 @@
     .plb-marca { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:3px; color:#fff; margin-bottom:4px; }
     .plb-ref { font-size:0.78rem; color:#ccc; margin-bottom:4px; font-weight:300; }
     .plb-talla { font-size:0.68rem; color:#777; letter-spacing:1px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.07); padding-bottom:16px; }
-    .plb-price { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:var(--gold); letter-spacing:2px; margin-bottom:20px; }
+
     .plb-btns { display:flex; flex-direction:column; gap:8px; }
     .plb-add-btn { display:flex; align-items:center; justify-content:center; padding:12px; background:transparent; border:1px solid var(--gold); color:var(--gold); font-size:0.7rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:all 0.25s; font-family:'Inter',sans-serif; }
     .plb-add-btn:hover { background:rgba(201,168,76,0.12); }
@@ -490,16 +488,12 @@
   // ── CARRITO ──
   var cart = []; // array of product objects
 
-  function fmtPrice(n) { return '$' + n.toLocaleString('es-CO') + ' COP'; }
-  function fmtPriceShort(n) { return '$' + n.toLocaleString('es-CO'); }
-
   function updateCartUI() {
     var fab = document.getElementById('cartFab');
     var badge = document.getElementById('cartBadge');
     var emptyMsg = document.getElementById('cartEmptyMsg');
     var cartFooter = document.getElementById('cartFooter');
     var cartItemsEl = document.getElementById('cartItems');
-    var cartTotal = document.getElementById('cartTotal');
     var btnCheckout = document.getElementById('btnCheckout');
 
     badge.textContent = cart.length;
@@ -518,7 +512,6 @@
     emptyMsg.style.display = 'none';
     cartFooter.style.display = 'block';
 
-    var total = 0;
     cart.forEach(function(p, idx) {
       // Parse size range "EU 36 AL 40" → [36,37,38,39,40]
       var sizeOptions = '';
@@ -623,7 +616,7 @@
   // Parametros URL y tabs
   const urlParams = new URLSearchParams(window.location.search);
   let activeGen = urlParams.get('gen') || 'all';
-  let activeMarca = '', activePrecio = '';
+  let activeMarca = '';
   var CATALOG = [];
 
   document.querySelectorAll('.cat-tab').forEach(function(t) {
@@ -635,14 +628,8 @@
     var genOk = activeGen === 'all' || p.g === activeGen || p.g === 'U';
     if (!genOk) return false;
     if (activeMarca && p.m !== activeMarca) return false;
-    if (activePrecio) {
-      var parts = activePrecio.split('-');
-      if (p.p < Number(parts[0]) || p.p > Number(parts[1])) return false;
-    }
     return true;
   }
-
-  function fmtPrice(n) { return '$' + n.toLocaleString('es-CO') + ' COP'; }
 
   function buildMsg(p) {
     var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex (Hombre y Mujer)';
@@ -939,7 +926,6 @@
       <div class="plb-marca" id="plbMarca"></div>
       <div class="plb-ref" id="plbRef"></div>
       <div class="plb-talla" id="plbTalla"></div>
-      <div class="plb-price" id="plbPrice"></div>
       <div class="plb-btns">
         <button class="plb-add-btn" id="plbAddBtn">+ Agregar al carrito</button>
         <button class="plb-wa-btn" id="plbWaBtn">
@@ -961,13 +947,11 @@
   var visibleProds = [];
   var cur = 0;
 
-  function fmtPrice(n) { return '$' + Number(n).toLocaleString('es-CO') + ' COP'; }
-
   function buildWaMsg(p) {
     var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex';
     return ["Hola Milena's Shoes, quiero preguntar por:", '',
       'Zapato #' + p.id, 'Marca: ' + p.m, 'Referencia: ' + p.r,
-      'Genero: ' + gl, 'Tallas: ' + p.t, 'Precio: ' + fmtPrice(p.p),
+      'Genero: ' + gl, 'Tallas: ' + p.t,
       '', 'Esta disponible? Gracias!'].join('\n');
   }
 
@@ -980,7 +964,6 @@
     document.getElementById('plbMarca').textContent = p.m;
     document.getElementById('plbRef').textContent   = p.r;
     document.getElementById('plbTalla').textContent = p.t;
-    document.getElementById('plbPrice').textContent = fmtPrice(p.p);
     lbCounter.textContent = (cur + 1) + ' / ' + visibleProds.length;
 
     // Actualizar botón agregar
