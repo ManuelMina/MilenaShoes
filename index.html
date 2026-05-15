@@ -378,6 +378,15 @@
     .kit-form-wrap.open { display: block; animation: kitIn 0.7s ease; }
     @keyframes kitIn { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
 
+    /* ── Días Celebres ── */
+    #festivo { background: var(--bg-2); }
+    .festivo-wrap { position: relative; overflow: hidden; border: 1px solid var(--border); }
+    .festivo-img { width: 100%; max-height: 520px; object-fit: cover; display: block; }
+    .festivo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 60%); display: flex; align-items: flex-end; justify-content: center; padding-bottom: 48px; }
+    .festivo-cta { display: inline-flex; align-items: center; gap: 10px; background: var(--green); color: #fff; padding: 16px 40px; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+    .festivo-cta:hover { background: #1ebe5a; box-shadow: 0 8px 32px rgba(37,211,102,0.35); transform: translateY(-2px); }
+    @media(max-width:700px) { .festivo-img { max-height: 280px; } .festivo-overlay { padding-bottom: 24px; } .festivo-cta { font-size: 0.75rem; padding: 12px 24px; } }
+
     /* ── Métodos de pago ── */
     #pagos { background: var(--bg-3); padding: 80px 48px; }
     .pagos-inner { max-width: 860px; margin: 0 auto; }
@@ -563,7 +572,6 @@
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#colecciones">Colecciones</a></li>
     <li><a href="productos.html">Catálogo</a></li>
-    <li><a href="#kits">Kits</a></li>
     <li><a href="#testimonios">Reseñas</a></li>
     <li><a href="#contacto" class="nav-cta">Contacto</a></li>
   </ul>
@@ -575,7 +583,6 @@
   <a href="#inicio">Inicio</a>
   <a href="#colecciones">Colecciones</a>
   <a href="productos.html">Catálogo</a>
-  <a href="#kits">Kits</a>
   <a href="#testimonios">Reseñas</a>
   <a href="#contacto">Contacto</a>
 </div>
@@ -594,10 +601,9 @@
     <div class="hero-h1" aria-hidden="true">MILENA'S<br><span class="acc">SHOES</span></div>
     <div class="hero-rule"></div>
     <p class="hero-slogan">Pisa fuerte. Luce diferente.</p>
-    <p class="hero-price">Kit de regalo desde <strong>$185.000 COP</strong> &nbsp;·&nbsp; Zapatos desde <strong>$100.000 COP</strong></p>
+    <p class="hero-price">Zapatos deportivos desde <strong>$130.000 COP</strong></p>
     <div class="hero-ctas">
-      <a href="#kits" class="btn-gold">Arma tu Kit</a>
-      <a href="#colecciones" class="btn-outline">Ver Colecciones</a>
+      <a href="#colecciones" class="btn-gold">Ver Colecciones</a>
       <a href="https://wa.me/573227155957" target="_blank" rel="noopener" class="btn-wa">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         WhatsApp
@@ -610,33 +616,18 @@
   </div>
 </section>
 
-<!-- ═══════════ SOBRE NOSOTROS ═══════════ -->
-<section id="sobre-nosotros">
-  <div class="max about-wrap">
-    <div>
-      <p class="s-tag rv">Nuestra historia</p>
-      <h2 class="s-h2 rv d1">Moda que se <em>siente</em><br>en cada paso</h2>
-      <p class="s-body rv d2">En Milena's Shoes creemos que el calzado correcto transforma cómo te sientes. Desde Cali, Colombia, llevamos a tu puerta los mejores diseños en calzado deportivo para hombre y mujer.</p>
-      <p class="s-body rv d3">Y si buscas el regalo perfecto, nuestros kits lo tienen todo: zapatos, dulce, flores y una tarjeta con tu mensaje. Todo empacado con amor.</p>
-    </div>
-    <div class="stats-grid rv-r">
-      <div class="stat-cell">
-        <div class="stat-n" id="stat-pares">0</div>
-        <div class="stat-d">Pares vendidos</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n counter" data-target="100">0</div>
-        <div class="stat-d">% Online</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n" style="font-size:1.7rem;padding-top:6px">Cali</div>
-        <div class="stat-d">Colombia</div>
-      </div>
-      <div class="stat-cell">
-        <div class="stat-n" style="font-size:1.5rem;padding-top:6px">$185K</div>
-        <div class="stat-d">Kit completo</div>
-      </div>
-    </div>
+<!-- ═══════════ NOVEDADES / CARRUSEL ═══════════ -->
+<section id="novedades">
+  <div class="s-center">
+    <p class="s-tag rv">Disponibles ahora</p>
+    <h2 class="s-h2 rv d1">Zapatos Deportivos más <em>populares</em></h2>
+    <p class="s-body rv d2" style="max-width:480px;margin:0 auto">176 modelos en stock. Haz click en cualquier zapato para pedir por WhatsApp.</p>
+  </div>
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carouselTrack"></div>
+  </div>
+  <div class="novedades-cta rv">
+    <a href="productos.html" class="btn-catalog">Ver catálogo completo &nbsp;→</a>
   </div>
 </section>
 
@@ -680,189 +671,56 @@
   </div>
 </section>
 
-<!-- ═══════════ NOVEDADES / CARRUSEL ═══════════ -->
-<section id="novedades">
-  <div class="s-center">
-    <p class="s-tag rv">Disponibles ahora</p>
-    <h2 class="s-h2 rv d1">Zapatos Deportivos más <em>populares</em></h2>
-    <p class="s-body rv d2" style="max-width:480px;margin:0 auto">59 modelos en stock. Haz click en cualquier zapato para pedir por WhatsApp.</p>
-  </div>
-  <div class="carousel-wrap">
-    <div class="carousel-track" id="carouselTrack"></div>
-  </div>
-  <div class="novedades-cta rv">
-    <a href="productos.html" class="btn-catalog">Ver catálogo completo &nbsp;→</a>
+<!-- ═══════════ SOBRE NOSOTROS ═══════════ -->
+<section id="sobre-nosotros">
+  <div class="max about-wrap">
+    <div>
+      <p class="s-tag rv">Nuestra historia</p>
+      <h2 class="s-h2 rv d1">Moda que se <em>siente</em><br>en cada paso</h2>
+      <p class="s-body rv d2">En Milena's Shoes creemos que el calzado correcto transforma cómo te sientes. Desde Cali, Colombia, llevamos a tu puerta los mejores diseños en calzado deportivo para hombre y mujer.</p>
+      <p class="s-body rv d3">Y si buscas el regalo perfecto, nuestros kits lo tienen todo: zapatos, dulce, flores y una tarjeta con tu mensaje. Todo empacado con amor.</p>
+    </div>
+    <div class="stats-grid rv-r">
+      <div class="stat-cell">
+        <div class="stat-n" id="stat-pares">0</div>
+        <div class="stat-d">Pares vendidos</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n counter" data-target="100">0</div>
+        <div class="stat-d">% Online</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n" style="font-size:1.7rem;padding-top:6px">Cali</div>
+        <div class="stat-d">Colombia</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-n" style="font-size:1.5rem;padding-top:6px">1.1</div>
+        <div class="stat-d">Réplicas exactas</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ═══════════ KIT BUILDER ═══════════ -->
-<section id="kits">
+<!-- ═══════════ DÍAS CELEBRES ═══════════ -->
+<!-- 📸 CÓMO CAMBIAR LA FOTO: reemplaza el archivo "assets/banner-festivo.jpg"
+     con tu imagen nueva (misma carpeta, mismo nombre).
+     Tamaño recomendado: 1200 × 500 px. El diseño se adapta automáticamente. -->
+<section id="festivo">
   <div class="s-center">
-    <div class="dmb-wrap rv">
-      <span class="dmb-ico">🌸</span>
-      <span class="dmb-ico">🎀</span>
-      <span class="dmb-text">Edición Especial · Día de las Madres</span>
-      <span class="dmb-ico">🎀</span>
-      <span class="dmb-ico">🌸</span>
-    </div>
-    <h2 class="s-h2 rv d1">¿Y si este año<br>el regalo la <em>sorprende</em> de verdad?</h2>
-    <p class="s-body rv d2" style="max-width:600px;margin:16px auto 0">Preparamos este kit especial para que puedas regalarle algo único: sus zapatos favoritos, un dulce, una rosa y tu mensaje con corazón — todo empacado con amor, listo para entregar.</p>
-    <p class="s-body rv d3" style="max-width:500px;margin:8px auto 0;font-size:0.82rem"><strong style="color:var(--gold)">Kit completo por $185.000 COP</strong> &nbsp;·&nbsp; Edición piloto por tiempo limitado</p>
-
-    <!-- Pregunta al usuario -->
-    <div class="kit-question-block rv d4">
-      <p class="kit-q-text">¿Te gustaría armarle un <span>kit especial</span>?</p>
-      <div class="kit-choice">
-        <button class="btn-si" id="btn-si-kit">Sí, quiero armarlo</button>
-      </div>
-    </div>
+    <p class="s-tag rv">Fechas especiales</p>
+    <h2 class="s-h2 rv d1">El regalo que <em>enamora</em></h2>
+    <p class="s-body rv d2" style="max-width:480px;margin:0 auto">Escoge el par perfecto para ese día especial. Deportivos para hombre y mujer, listos para entregar.</p>
   </div>
-
-  <div class="kit-form-wrap" id="kit-form-wrap">
-  <div class="max kit-wrap">
-
-    <!-- STEPS -->
-    <div class="kit-steps">
-
-      <!-- Paso 1 -->
-      <div class="kit-step active rv d1">
-        <div class="step-header">
-          <div class="step-num">1</div>
-          <span class="step-title">¿Para quién es el regalo?</span>
-        </div>
-        <div class="gender-cards">
-          <label class="gender-card" id="lbl-mujer">
-            <input type="radio" name="genero" value="Mujer" id="g-mujer">
-            <div class="gender-icon">👩</div>
-            <div class="gender-label">Mujer</div>
-            <div class="gender-sub">Tallas 35 – 40</div>
-          </label>
-          <label class="gender-card" id="lbl-hombre">
-            <input type="radio" name="genero" value="Hombre" id="g-hombre">
-            <div class="gender-icon">👨</div>
-            <div class="gender-label">Hombre</div>
-            <div class="gender-sub">Tallas 38 – 44</div>
-          </label>
-        </div>
-      </div>
-
-      <!-- Paso 2 -->
-      <div class="kit-step rv d2">
-        <div class="step-header">
-          <div class="step-num">2</div>
-          <span class="step-title">¿Qué talla necesitas?</span>
-        </div>
-        <div class="size-grid" id="size-grid"></div>
-        <p id="size-hint">Selecciona primero el género para ver las tallas disponibles.</p>
-      </div>
-
-      <!-- Paso 3 -->
-      <div class="kit-step rv d3">
-        <div class="step-header">
-          <div class="step-num">3</div>
-          <span class="step-title">¿Qué dulce va en el kit?</span>
-        </div>
-        <div class="sweet-cards">
-          <label class="sweet-card" id="sw-choco">
-            <input type="radio" name="dulce" value="Chocolatina">
-            <div class="sweet-icon">🍫</div>
-            <div class="sweet-name">Chocolatina</div>
-          </label>
-          <label class="sweet-card" id="sw-gomi">
-            <input type="radio" name="dulce" value="Gomitas">
-            <div class="sweet-icon">🍬</div>
-            <div class="sweet-name">Gomitas</div>
-          </label>
-          <label class="sweet-card" id="sw-mani">
-            <input type="radio" name="dulce" value="Maní confitado">
-            <div class="sweet-icon">🥜</div>
-            <div class="sweet-name">Maní confitado</div>
-          </label>
-        </div>
-      </div>
-
-      <!-- Paso 4 -->
-      <div class="kit-step rv d4">
-        <div class="step-header">
-          <div class="step-num">4</div>
-          <span class="step-title">Escribe tu mensaje personalizado</span>
-        </div>
-        <textarea id="mensaje" class="msg-area" maxlength="200" placeholder="Ej: Feliz cumpleaños mi amor, que este regalo te llene de alegría..."></textarea>
-        <div class="char-count"><span id="char-n">0</span> / 200 caracteres</div>
-      </div>
-
-    </div><!-- /kit-steps -->
-
-    <!-- PREVIEW -->
-    <div class="kit-preview rv-r">
-      <div class="preview-title">Tu Kit</div>
-      <div class="kit-visual">
-        <div class="kit-visual-items" id="kit-emoji">🎁</div>
-        <div class="kit-visual-label">Vista previa de tu kit</div>
-      </div>
-      <ul class="preview-items">
-        <li class="preview-item">
-          <span class="pi-icon">👟</span>
-          <div>
-            <div class="pi-label">Zapatos</div>
-            <div class="pi-val" id="prev-zapatos">Selecciona género y talla</div>
-          </div>
-        </li>
-        <li class="preview-item">
-          <span class="pi-icon">🍬</span>
-          <div>
-            <div class="pi-label">Dulce</div>
-            <div class="pi-val" id="prev-dulce">Selecciona un dulce</div>
-          </div>
-        </li>
-        <li class="preview-item">
-          <span class="pi-icon">🌹</span>
-          <div>
-            <div class="pi-label">Ramo de rosa</div>
-            <div class="pi-val filled">Incluido en el kit</div>
-          </div>
-        </li>
-        <li class="preview-item">
-          <span class="pi-icon">🎀</span>
-          <div>
-            <div class="pi-label">Empaque de regalo</div>
-            <div class="pi-val filled">Incluido en el kit</div>
-          </div>
-        </li>
-        <li class="preview-item">
-          <span class="pi-icon">💌</span>
-          <div>
-            <div class="pi-label">Mensaje personalizado</div>
-            <div class="pi-val" id="prev-mensaje">Escribe tu mensaje</div>
-          </div>
-        </li>
-      </ul>
-      <div class="preview-total">
-        <span class="pt-label">Total kit</span>
-        <span class="pt-price">$185.000</span>
-      </div>
-      <div style="margin-top:16px;padding:14px 16px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);">
-        <p style="font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Metodos de pago</p>
-        <div style="display:flex;flex-wrap:wrap;gap:8px">
-          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Efectivo</span>
-          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Nequi</span>
-          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Daviplata</span>
-          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Transferencia</span>
-          <span style="font-size:0.72rem;color:#aaa;background:rgba(255,255,255,0.05);padding:4px 10px;border-radius:2px">Tarjeta credito/debito*</span>
-        </div>
-        <p style="font-size:0.62rem;color:#555;margin-top:8px">* Pago con tarjeta via link — aplica comision del medio de pago.</p>
-      </div>
-      <button class="btn-send-wa" id="btn-wa" disabled>
+  <div class="max festivo-wrap rv" style="margin-top:48px">
+    <img src="assets/banner-festivo.jpg" alt="Promoción especial Milena's Shoes" class="festivo-img" loading="lazy">
+    <div class="festivo-overlay">
+      <a href="https://wa.me/573227155957" target="_blank" rel="noopener" class="festivo-cta">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        Enviar pedido por WhatsApp
-      </button>
-      <p class="wa-note">Completa todos los pasos para habilitar el botón</p>
+        Pedir ahora por WhatsApp
+      </a>
     </div>
-
-  </div><!-- /kit-wrap -->
-  </div><!-- /kit-form-wrap -->
+  </div>
 </section>
-
 <!-- ═══════════ GALERÍA ═══════════ -->
 <section id="galeria">
   <div class="s-center">
@@ -1159,190 +1017,6 @@
   }, { threshold: 0.4 });
   secs.forEach(s => acObs.observe(s));
 
-  // ────────────────────────────
-  // KIT BUILDER LOGIC
-  // ────────────────────────────
-  const WA_NUMBER = '573227155957';
-
-  let kitState = { genero: '', talla: '', dulce: '', mensaje: '' };
-
-  // Tallas por género
-  const tallas = {
-    Mujer:  [35,36,37,38,39,40],
-    Hombre: [38,39,40,41,42,43,44]
-  };
-
-  function updatePreview() {
-    // Zapatos
-    const pZ = document.getElementById('prev-zapatos');
-    if (kitState.genero && kitState.talla) {
-      pZ.textContent = `${kitState.genero} · Talla ${kitState.talla}`;
-      pZ.className = 'pi-val filled';
-    } else {
-      pZ.textContent = 'Selecciona género y talla';
-      pZ.className = 'pi-val';
-    }
-    // Dulce
-    const pD = document.getElementById('prev-dulce');
-    if (kitState.dulce) {
-      pD.textContent = kitState.dulce;
-      pD.className = 'pi-val filled';
-    } else {
-      pD.textContent = 'Selecciona un dulce';
-      pD.className = 'pi-val';
-    }
-    // Mensaje
-    const pM = document.getElementById('prev-mensaje');
-    if (kitState.mensaje.trim()) {
-      const short = kitState.mensaje.trim().length > 45 ? kitState.mensaje.trim().slice(0, 42) + '...' : kitState.mensaje.trim();
-      pM.textContent = '"' + short + '"';
-      pM.className = 'pi-val filled';
-    } else {
-      pM.textContent = 'Escribe tu mensaje';
-      pM.className = 'pi-val';
-    }
-    // Kit visual emoji
-    const emojiEl = document.getElementById('kit-emoji');
-    const icons = [];
-    if (kitState.genero) icons.push(kitState.genero === 'Mujer' ? '👟' : '👟');
-    icons.push('🌹');
-    if (kitState.dulce === 'Chocolatina') icons.push('🍫');
-    else if (kitState.dulce === 'Gomitas') icons.push('🍬');
-    else if (kitState.dulce === 'Maní confitado') icons.push('🥜');
-    else icons.push('🍬');
-    icons.push('🎀');
-    emojiEl.textContent = icons.join(' ');
-    // Botón WhatsApp
-    const btn = document.getElementById('btn-wa');
-    const complete = kitState.genero && kitState.talla && kitState.dulce;
-    btn.disabled = !complete;
-    btn.nextElementSibling.style.display = complete ? 'none' : 'block';
-  }
-
-  // Género
-  document.querySelectorAll('input[name="genero"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      kitState.genero = radio.value;
-      kitState.talla = '';
-      // Visual
-      document.getElementById('lbl-mujer').classList.toggle('selected', kitState.genero === 'Mujer');
-      document.getElementById('lbl-hombre').classList.toggle('selected', kitState.genero === 'Hombre');
-      // Render tallas
-      const grid = document.getElementById('size-grid');
-      const hint = document.getElementById('size-hint');
-      hint.style.display = 'none';
-      grid.innerHTML = '';
-      tallas[kitState.genero].forEach(t => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'size-btn';
-        btn.textContent = t;
-        btn.addEventListener('click', () => {
-          kitState.talla = String(t);
-          grid.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          updatePreview();
-        });
-        grid.appendChild(btn);
-      });
-      updatePreview();
-    });
-  });
-
-  // Dulce
-  document.querySelectorAll('input[name="dulce"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      kitState.dulce = radio.value;
-      document.getElementById('sw-choco').classList.toggle('selected', kitState.dulce === 'Chocolatina');
-      document.getElementById('sw-gomi').classList.toggle('selected', kitState.dulce === 'Gomitas');
-      document.getElementById('sw-mani').classList.toggle('selected', kitState.dulce === 'Maní confitado');
-      updatePreview();
-    });
-  });
-
-  // Mensaje
-  const msgArea = document.getElementById('mensaje');
-  const charN   = document.getElementById('char-n');
-  msgArea.addEventListener('input', () => {
-    kitState.mensaje = msgArea.value;
-    charN.textContent = msgArea.value.length;
-    updatePreview();
-  });
-
-  // Botón WhatsApp
-  document.getElementById('btn-wa').addEventListener('click', () => {
-    if (!kitState.genero || !kitState.talla || !kitState.dulce) return;
-    const msg = [
-      "Hola Milena's Shoes, quiero hacer un pedido:",
-      '',
-      'Zapatos: ' + kitState.genero + ' - Talla ' + kitState.talla,
-      'Dulce: ' + kitState.dulce,
-      'Empaque: Incluido (rosa + lazo + bolsa)',
-      kitState.mensaje.trim() ? 'Mensaje personalizado: "' + kitState.mensaje.trim() + '"' : 'Sin mensaje personalizado',
-      '',
-      'Total: $185.000 COP',
-      '',
-      'Esta disponible? Gracias!'
-    ].join('\n');
-    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank');
-  });
-
-  updatePreview();
-
-  // ── CARRUSEL — 10 productos populares (sin fetch para máxima velocidad) ──
-  (function() {
-    const WA = '573227155957';
-    const carProds = [
-      {id:1,  g:"H", m:"NIKE",        r:"AF1 SAIL RIPSTOP",  t:"EU 40-44", p:160000},
-      {id:27, g:"U", m:"VANS",        r:"VANS HYLANE",       t:"EU 36-44", p:170000},
-      {id:23, g:"H", m:"JORDAN",      r:"JORDAN RETRO 1 LOW",t:"EU 40-44", p:155000},
-      {id:32, g:"M", m:"NIKE",        r:"SB PARRA",          t:"EU 36-39", p:155000},
-      {id:50, g:"U", m:"NIKE",        r:"SHOX GUSANO",       t:"EU 36-44", p:160000},
-      {id:91, g:"H", m:"BROOKS",      r:"HYPERION MAX",      t:"EU 40-44", p:175000},
-      {id:104,g:"H", m:"NIKE",        r:"NIKE NOCTA",        t:"EU 40-44", p:180000},
-      {id:118,g:"U", m:"NEW BALANCE", r:"BALANCE 9060",      t:"EU 36-44", p:170000},
-      {id:108,g:"M", m:"NIKE",        r:"NIKE V2K",          t:"EU 36-40", p:165000},
-      {id:2,  g:"M", m:"ADIDAS",      r:"ADIDAS BOUNCE",     t:"EU 36-40", p:155000}
-    ];
-    const track = document.getElementById('carouselTrack');
-    if (!track) return;
-
-    function fmtPriceC(n) { return '$' + n.toLocaleString('es-CO'); }
-    function buildMsgC(p) {
-      var gl = p.g === 'H' ? 'Hombre' : p.g === 'M' ? 'Mujer' : 'Unisex';
-      return ["Hola Milena's Shoes, quiero preguntar por:", '', 'Zapato #' + p.id,
-        'Marca: ' + p.m, 'Referencia: ' + p.r, 'Genero: ' + gl,
-        'Tallas: ' + p.t, 'Precio: ' + fmtPriceC(p.p) + ' COP', '', 'Esta disponible? Gracias!'].join('\n');
-    }
-    function makeCarCard(p) {
-      var card = document.createElement('div'); card.className = 'car-card';
-      var imgWrap = document.createElement('div'); imgWrap.style.overflow = 'hidden';
-      var img = document.createElement('img');
-      img.className = 'car-img'; img.src = 'assets/' + p.id + '.jpeg'; img.alt = p.m; img.loading = 'lazy';
-      imgWrap.appendChild(img);
-      var info = document.createElement('div'); info.className = 'car-info';
-      info.innerHTML = '<div class="car-id">#' + p.id + '</div><div class="car-marca">' + p.m + '</div><div class="car-precio">' + fmtPriceC(p.p) + '</div>';
-      card.appendChild(imgWrap); card.appendChild(info);
-      card.addEventListener('click', function() {
-        window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(buildMsgC(p)), '_blank');
-      });
-      return card;
-    }
-
-    carProds.concat(carProds).forEach(function(p) { track.appendChild(makeCarCard(p)); });
-  })();
-
-  // ── Kit sí/no ──
-  const btnSi  = document.getElementById('btn-si-kit');
-  const btnNo  = document.getElementById('btn-no-kit');
-  const kitForm = document.getElementById('kit-form-wrap');
-
-  btnSi.addEventListener('click', () => {
-    kitForm.classList.add('open');
-    btnSi.style.display = 'none';
-    if (btnNo) btnNo.style.display = 'none';
-    setTimeout(() => kitForm.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-  });
 </script>
 
 <!-- Lightbox galería -->

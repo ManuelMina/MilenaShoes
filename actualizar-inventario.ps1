@@ -1,4 +1,4 @@
-# =============================================================
+﻿# =============================================================
 # actualizar-inventario.ps1  —  Milena's Shoes
 # =============================================================
 # Uso: clic derecho → Ejecutar con PowerShell
@@ -40,7 +40,7 @@ for ($i = 1; $i -le $wb.Sheets.Count; $i++) {
   $sh = $wb.Sheets.Item($i)
   if ($sh.Type -eq 1) { $ws = $sh; break }
 }
-if ($ws -eq $null) {
+if ($null -eq $ws) {
   Write-Host "ERROR: No se encontro hoja de datos en el Excel." -ForegroundColor Red
   $wb.Close($false); $xl.Quit(); exit 1
 }
@@ -62,10 +62,10 @@ for ($r = 1; $r -le 5; $r++) {
     if ($v -in @("VENTA","PRECIO")) { $colVenta = $c }
     if ($v -eq "DISPONIBLE") { $colDisp  = $c }
   }
-  if ($headerRow -ne $null) { break }
+  if ($null -ne $headerRow) { break }
 }
 
-if ($headerRow -eq $null) {
+if ($null -eq $headerRow) {
   Write-Host "ERROR: No se encontro la fila de encabezados." -ForegroundColor Red
   $wb.Close($false); $xl.Quit(); exit 1
 }
@@ -83,7 +83,7 @@ for ($r = ($headerRow + 1); $r -le $lastRow; $r++) {
   if ($num -eq $null -or "$num".Trim() -eq "") { continue }
 
   # Filtrar por DISPONIBLE
-  if ($colDisp -ne $null) {
+  if ($null -ne $colDisp) {
     $disp = "$($ws.Cells.Item($r, $colDisp).Value2)".Trim().ToUpper()
     if ($disp -eq "N") { $skipped++; continue }
   }
@@ -97,9 +97,9 @@ for ($r = ($headerRow + 1); $r -le $lastRow; $r++) {
   }
 
   $p = 0
-  if ($colVenta -ne $null) {
+  if ($null -ne $colVenta) {
     $pv = $ws.Cells.Item($r, $colVenta).Value2
-    if ($pv -ne $null) { $p = [int]$pv }
+    if ($null -ne $pv) { $p = [int]$pv }
   }
 
   $products += [ordered]@{
@@ -135,6 +135,8 @@ git add "assets/*.jpeg"
 git add "assets/*.jpg"
 git add "assets/*.png"
 git add "assets/*.webp"
+git add "assets-thumb/*.jpeg"
+git add "assets-thumb/*.jpg"
 $status = git status --porcelain
 if ($status) {
   git commit -m "inventario: $($products.Count) productos disponibles ($(Get-Date -Format 'yyyy-MM-dd'))"
