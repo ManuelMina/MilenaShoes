@@ -405,7 +405,7 @@
   <div class="cat-header-inner">
     <p class="cat-tag-h">Milena's Shoes · Cali, Colombia</p>
     <h1 class="cat-h1">Catálogo de Zapatos <em>Deportivos</em> — Milena's Shoes</h1>
-    <p class="cat-desc">169 modelos disponibles · Tallas 36–44 · Haz click en cualquier zapato para pedir información por WhatsApp</p>
+    <p class="cat-desc" id="cat-desc">Tallas 36–44 · Haz click en cualquier zapato para pedir información por WhatsApp</p>
   </div>
 </div>
 
@@ -421,7 +421,7 @@
       <select id="cat-marca" class="cat-sel">
         <option value="">Todas las marcas</option>
       </select>
-      <span class="cat-count" id="cat-count">169 resultados</span>
+      <span class="cat-count" id="cat-count"></span>
     </div>
   </div>
 </div>
@@ -435,7 +435,7 @@
   <div class="import-note" id="import-note">
     <div class="import-note-icon">🌍</div>
     <div class="import-note-text">
-      <strong>Referencias importadas de la mejor calidad.</strong> Todos nuestros zapatos son referencias importadas, seleccionadas con los más altos estándares de calidad, materiales y acabados. Cada modelo pasa por un proceso de selección riguroso para garantizarte comodidad, durabilidad y estilo. Los precios reflejan la calidad premium de cada par.
+      <strong>Referencias importadas de la mejor calidad.</strong> Todos nuestros zapatos son referencias importadas, seleccionadas con los más altos estándares de calidad, materiales y acabados. Cada modelo pasa por un proceso de selección riguroso para garantizarte comodidad, durabilidad y estilo.
     </div>
   </div>
 </div>
@@ -870,8 +870,8 @@
   function initCatalog(data) {
     CATALOG = data.filter(function(p) { return p.id && p.m; });
     window._CATALOG = CATALOG;
-    var countEl = document.getElementById('cat-count');
-    if (countEl) countEl.textContent = CATALOG.length + ' resultados';
+    var descEl = document.getElementById('cat-desc');
+    if (descEl) descEl.textContent = CATALOG.length + ' modelos disponibles · Tallas 36–44 · Haz click en cualquier zapato para pedir información por WhatsApp';
     var marcas = Array.from(new Set(CATALOG.map(function(p) { return p.m; }))).sort();
     var marcaSel = document.getElementById('cat-marca');
     marcaSel.innerHTML = '<option value="">Todas las marcas</option>';
