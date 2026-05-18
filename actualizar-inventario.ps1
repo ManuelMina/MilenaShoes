@@ -38,7 +38,7 @@ $wb = $xl.Workbooks.Open($xlPath, 0, $true)
 $ws = $null
 for ($i = 1; $i -le $wb.Sheets.Count; $i++) {
   $sh = $wb.Sheets.Item($i)
-  if ($sh.Type -eq 1) { $ws = $sh; break }
+  if ($sh.Type -eq 1 -or $sh.Type -eq -4167) { $ws = $sh; break }
 }
 if ($null -eq $ws) {
   Write-Host "ERROR: No se encontro hoja de datos en el Excel." -ForegroundColor Red
