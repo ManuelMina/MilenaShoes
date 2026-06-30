@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auditoría SEO — Milena's Shoes</title>
+  <style>
+    :root {
+      --verde: #22c55e;
+      --amarillo: #f59e0b;
+      --rojo: #ef4444;
+      --azul: #3b82f6;
+      --gris-oscuro: #111827;
+      --gris-medio: #1f2937;
+      --gris-claro: #374151;
+      --texto: #f9fafb;
+      --texto-suave: #9ca3af;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--gris-oscuro);
+      color: var(--texto);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+      padding: 40px 32px 32px;
+      border-bottom: 1px solid #4338ca;
+    }
+    .header-inner { max-width: 1100px; margin: 0 auto; }
+    .badge {
+      display: inline-block;
+      background: rgba(99,102,241,0.3);
+      border: 1px solid #6366f1;
+      color: #a5b4fc;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .header h1 { font-size: 32px; font-weight: 800; margin-bottom: 6px; }
+    .header h1 span { color: #818cf8; }
+    .header p { color: #a5b4fc; font-size: 14px; }
+    .fecha { color: var(--texto-suave); font-size: 13px; margin-top: 8px; }
+
+    /* SCORE GLOBAL */
+    .score-global {
+      max-width: 1100px;
+      margin: 32px auto 0;
+      padding: 0 32px;
+    }
+    .score-card {
+      background: var(--gris-medio);
+      border: 1px solid var(--gris-claro);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .score-circle {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      flex-shrink: 0;
+    }
+    .score-circle svg { width: 140px; height: 140px; transform: rotate(-90deg); }
+    .score-circle .bg { fill: none; stroke: var(--gris-claro); stroke-width: 10; }
+    .score-circle .fill {
+      fill: none;
+      stroke: #ef4444;
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 345;
+      stroke-dashoffset: 242; /* 345 - (345 * 30/100) = 345 - 103.5 = 241.5 */
+    }
+    .score-number {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .score-number .num { font-size: 38px; font-weight: 900; color: #ef4444; line-height: 1; }
+    .score-number .den { font-size: 14px; color: var(--texto-suave); }
+    .score-info h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .score-info p { color: var(--texto-suave); font-size: 14px; line-height: 1.6; max-width: 500px; }
+    .score-nivel {
+      display: inline-block;
+      background: rgba(239,68,68,0.15);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-top: 12px;
+    }
+
+    /* MAIN GRID */
+    .main { max-width: 1100px; margin: 32px auto; padding: 0 32px 64px; }
+
+    /* CATEGORÍAS */
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 16px;
+      margin-top: 40px;
+    }
+
+    .categorias-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .cat-card {
+      background: var(--gris-medio);
+      border: 1px solid var(--gris-claro);
+      border-radius: 12px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .cat-card.rojo::before { background: var(--rojo); }
+    .cat-card.amarillo::before { background: var(--amarillo); }
+    .cat-card.verde::before { background: var(--verde); }
+
+    .cat-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .cat-icon { font-size: 22px; }
+    .cat-score {
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .cat-score.rojo { color: var(--rojo); }
+    .cat-score.amarillo { color: var(--amarillo); }
+    .cat-score.verde { color: var(--verde); }
+    .cat-name { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .cat-sub { font-size: 12px; color: var(--texto-suave); }
+
+    .bar-track {
+      height: 4px;
+      background: var(--gris-claro);
+      border-radius: 999px;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+    .bar-fill { height: 100%; border-radius: 999px; }
+    .bar-fill.rojo { background: var(--rojo); }
+    .bar-fill.amarillo { background: var(--amarillo); }
+    .bar-fill.verde { background: var(--verde); }
+
+    /* PROBLEMAS CRÍTICOS */
+    .problemas-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .problema {
+      background: var(--gris-medio);
+      border: 1px solid var(--gris-claro);
+      border-radius: 12px;
+      padding: 20px 20px 20px 72px;
+      position: relative;
+    }
+    .problema-impacto {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .impacto-critico { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+    .impacto-alto { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+    .impacto-medio { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+
+    .problema-titulo { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .problema-desc { font-size: 13px; color: var(--texto-suave); line-height: 1.5; margin-bottom: 10px; }
+    .problema-fix {
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .problema-fix-label { font-size: 11px; font-weight: 700; color: #4ade80; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .problema-fix-code {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #86efac;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .tag-impacto {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: 8px;
+    }
+    .tag-critico { background: rgba(239,68,68,0.2); color: #fca5a5; }
+    .tag-alto { background: rgba(245,158,11,0.2); color: #fde68a; }
+    .tag-medio { background: rgba(59,130,246,0.2); color: #bfdbfe; }
+
+    /* HALLAZGOS */
+    .hallazgos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .hallazgos-grid { grid-template-columns: 1fr; } }
+
+    .hallazgo-card {
+      background: var(--gris-medio);
+      border: 1px solid var(--gris-claro);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .hallazgo-card h4 { font-size: 13px; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .check-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.4; }
+    .check-list li .ico { flex-shrink: 0; margin-top: 1px; }
+    .ok { color: var(--verde); }
+    .mal { color: var(--rojo); }
+    .warn { color: var(--amarillo); }
+
+    /* META DATA TABLE */
+    .meta-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .meta-table td { padding: 8px 12px; border-bottom: 1px solid var(--gris-claro); vertical-align: top; }
+    .meta-table td:first-child { color: var(--texto-suave); width: 40%; font-weight: 600; }
+    .meta-table tr:last-child td { border-bottom: none; }
+    .pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+    .pill-ok { background: rgba(34,197,94,0.15); color: #4ade80; }
+    .pill-mal { background: rgba(239,68,68,0.15); color: #f87171; }
+    .pill-warn { background: rgba(245,158,11,0.15); color: #fbbf24; }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 32px;
+      color: var(--texto-suave);
+      font-size: 12px;
+      border-top: 1px solid var(--gris-claro);
+      margin-top: 32px;
+    }
+    .footer strong { color: var(--texto); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="badge">Auditoría SEO Completa</div>
+    <h1>Milena's <span>Shoes</span></h1>
+    <p>milenashoes.online &nbsp;·&nbsp; 2 páginas analizadas &nbsp;·&nbsp; 8 categorías</p>
+    <div class="fecha">Generado el 8 de mayo de 2026</div>
+  </div>
+</div>
+
+<!-- SCORE GLOBAL -->
+<div class="score-global">
+  <div class="score-card">
+    <div class="score-circle">
+      <svg viewBox="0 0 120 120">
+        <circle class="bg" cx="60" cy="60" r="55"/>
+        <circle class="fill" cx="60" cy="60" r="55"/>
+      </svg>
+      <div class="score-number">
+        <div class="num">30</div>
+        <div class="den">/100</div>
+      </div>
+    </div>
+    <div class="score-info">
+      <h2>Puntuación SEO Global</h2>
+      <p>El sitio tiene bases sólidas (robots.txt, sitemap, alt texts con palabras clave geolocalizadas) pero le faltan elementos críticos que impiden ser encontrado en Google: sin meta description, sin Open Graph, sin schema, sin viewport, y múltiples H1. <strong>Ninguna página está indexada actualmente.</strong></p>
+      <span class="score-nivel">Nivel: Crítico — Requiere intervención urgente</span>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORÍAS -->
+<div class="main">
+  <div class="section-title">Puntuación por categoría</div>
+  <div class="categorias-grid">
+
+    <div class="cat-card rojo">
+      <div class="cat-header">
+        <div class="cat-icon">🏷️</div>
+        <div class="cat-score rojo">20</div>
+      </div>
+      <div class="cat-name">Meta Tags</div>
+      <div class="cat-sub">Sin description, canonical ni viewport</div>
+      <div class="bar-track"><div class="bar-fill rojo" style="width:20%"></div></div>
+    </div>
+
+    <div class="cat-card rojo">
+      <div class="cat-header">
+        <div class="cat-icon">📑</div>
+        <div class="cat-score rojo">35</div>
+      </div>
+      <div class="cat-name">Estructura de Headings</div>
+      <div class="cat-sub">3 etiquetas H1 en homepage</div>
+      <div class="bar-track"><div class="bar-fill rojo" style="width:35%"></div></div>
+    </div>
+
+    <div class="cat-card amarillo">
+      <div class="cat-header">
+        <div class="cat-icon">🖼️</div>
+        <div class="cat-score amarillo">65</div>
+      </div>
+      <div class="cat-name">Imágenes</div>
+      <div class="cat-sub">Alt texts buenos, sin width/height</div>
+      <div class="bar-track"><div class="bar-fill amarillo" style="width:65%"></div></div>
+    </div>
+
+    <div class="cat-card rojo">
+      <div class="cat-header">
+        <div class="cat-icon">📱</div>
+        <div class="cat-score rojo">5</div>
+      </div>
+      <div class="cat-name">Open Graph / Social</div>
+      <div class="cat-sub">Sin OG tags ni Twitter Card</div>
+      <div class="bar-track"><div class="bar-fill rojo" style="width:5%"></div></div>
+    </div>
+
+    <div class="cat-card rojo">
+      <div class="cat-header">
+        <div class="cat-icon">🔧</div>
+        <div class="cat-score rojo">0</div>
+      </div>
+      <div class="cat-name">Schema Estructurado</div>
+      <div class="cat-sub">Sin JSON-LD de ningún tipo</div>
+      <div class="bar-track"><div class="bar-fill rojo" style="width:0%"></div></div>
+    </div>
+
+    <div class="cat-card amarillo">
+      <div class="cat-header">
+        <div class="cat-icon">⚙️</div>
+        <div class="cat-score amarillo">45</div>
+      </div>
+      <div class="cat-name">SEO Técnico</div>
+      <div class="cat-sub">robots.txt y sitemap OK, sin canonical</div>
+      <div class="bar-track"><div class="bar-fill amarillo" style="width:45%"></div></div>
+    </div>
+
+    <div class="cat-card amarillo">
+      <div class="cat-header">
+        <div class="cat-icon">📝</div>
+        <div class="cat-score amarillo">65</div>
+      </div>
+      <div class="cat-name">Contenido</div>
+      <div class="cat-sub">~1300 palabras, buen targeting geo</div>
+      <div class="bar-track"><div class="bar-fill amarillo" style="width:65%"></div></div>
+    </div>
+
+    <div class="cat-card rojo">
+      <div class="cat-header">
+        <div class="cat-icon">🔍</div>
+        <div class="cat-score rojo">5</div>
+      </div>
+      <div class="cat-name">Indexación Google</div>
+      <div class="cat-sub">0 páginas indexadas actualmente</div>
+      <div class="bar-track"><div class="bar-fill rojo" style="width:5%"></div></div>
+    </div>
+
+  </div>
+
+  <!-- PROBLEMAS CRÍTICOS -->
+  <div class="section-title" style="margin-top:48px">Correcciones prioritarias por impacto</div>
+  <div class="problemas-list">
+
+    <!-- 1 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-critico">🚨</div>
+      <div class="problema-titulo">
+        Meta description ausente en todas las páginas
+        <span class="tag-impacto tag-critico">CRÍTICO</span>
+      </div>
+      <div class="problema-desc">
+        La meta description es el texto que aparece bajo el título en Google. Sin ella, Google genera uno automático (generalmente mal). Afecta directamente el CTR (clics que recibes). Ambas páginas la necesitan.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección — añadir en el &lt;head&gt; de index.html</div>
+        <div class="problema-fix-code">&lt;meta name="description" content="Zapatos deportivos Nike, Adidas y Jordan en Cali. Kits de regalo personalizados para mujer y hombre. Envíos a toda Colombia. Visítanos o pide por WhatsApp."&gt;</div>
+      </div>
+      <div class="problema-fix" style="margin-top:8px">
+        <div class="problema-fix-label">Corrección — añadir en el &lt;head&gt; de productos.html</div>
+        <div class="problema-fix-code">&lt;meta name="description" content="Catálogo completo de zapatos deportivos en Cali — Nike, Adidas, Jordan, Asics. Tallas para mujer y hombre. Compra online o visítanos en Cali, Colombia."&gt;</div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-critico">🚨</div>
+      <div class="problema-titulo">
+        Viewport meta tag ausente — el sitio no es mobile-friendly
+        <span class="tag-impacto tag-critico">CRÍTICO</span>
+      </div>
+      <div class="problema-desc">
+        Sin la etiqueta viewport, el sitio se renderiza como escritorio en móviles. Google penaliza fuertemente los sitios no responsive. Más del 70% de las búsquedas de zapatos se hacen desde móvil.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección — añadir en el &lt;head&gt; de TODAS las páginas</div>
+        <div class="problema-fix-code">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-critico">🚨</div>
+      <div class="problema-titulo">
+        3 etiquetas H1 en la homepage (solo debe haber 1)
+        <span class="tag-impacto tag-critico">CRÍTICO</span>
+      </div>
+      <div class="problema-desc">
+        Se detectaron 3 H1: "Zapatos Deportivos en Cali — Milena's Shoes", "MILENA'S SHOES" y "Pisa fuerte. Luce diferente." Google usa el H1 para entender el tema principal de la página. Múltiples H1 confunden al crawler.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección</div>
+        <div class="problema-fix-code">Mantener SOLO: &lt;h1&gt;Zapatos Deportivos en Cali — Milena's Shoes&lt;/h1&gt;
+Cambiar "MILENA'S SHOES" a: &lt;p class="brand-name"&gt; o &lt;span&gt;
+Cambiar "Pisa fuerte. Luce diferente." a: &lt;p class="tagline"&gt;</div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-critico">🚨</div>
+      <div class="problema-titulo">
+        Sin Open Graph — los links de WhatsApp e Instagram no generan preview
+        <span class="tag-impacto tag-critico">CRÍTICO</span>
+      </div>
+      <div class="problema-desc">
+        Cuando alguien comparte el link en WhatsApp, Instagram o Facebook, no aparece preview con imagen, título ni descripción. Para una tienda de zapatos que opera en redes sociales, esto es crítico para las ventas.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección — añadir en el &lt;head&gt; de index.html</div>
+        <div class="problema-fix-code">&lt;meta property="og:type" content="website"&gt;
+&lt;meta property="og:url" content="https://milenashoes.online/"&gt;
+&lt;meta property="og:title" content="Milena's Shoes | Zapatos Deportivos en Cali"&gt;
+&lt;meta property="og:description" content="Nike, Adidas, Jordan y más. Kits de regalo para mujer y hombre. Envíos a Colombia."&gt;
+&lt;meta property="og:image" content="https://milenashoes.online/assets/galeria-2.jpeg"&gt;
+&lt;meta property="og:locale" content="es_CO"&gt;</div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-alto">⚠️</div>
+      <div class="problema-titulo">
+        Sin Schema JSON-LD (datos estructurados)
+        <span class="tag-impacto tag-alto">ALTO</span>
+      </div>
+      <div class="problema-desc">
+        Schema permite a Google mostrar tu negocio con información enriquecida: dirección, horario, reseñas con estrellas, productos con precio. Una tienda local en Cali debería tener al menos LocalBusiness.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección — añadir al final del &lt;body&gt; en index.html</div>
+        <div class="problema-fix-code">&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Milena's Shoes",
+  "description": "Tienda de zapatos deportivos en Cali. Nike, Adidas, Jordan, Asics.",
+  "url": "https://milenashoes.online/",
+  "telephone": "+573227155957",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Cali",
+    "addressRegion": "Valle del Cauca",
+    "addressCountry": "CO"
+  },
+  "sameAs": [
+    "https://www.instagram.com/milenashoes26"
+  ],
+  "openingHours": "Mo-Sa 09:00-18:00"
+}
+&lt;/script&gt;</div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-alto">⚠️</div>
+      <div class="problema-titulo">
+        Title tag demasiado largo en homepage (71 chars, máx recomendado: 60)
+        <span class="tag-impacto tag-alto">ALTO</span>
+      </div>
+      <div class="problema-desc">
+        "Milena's Shoes | Zapatos Deportivos en Cali — Kits de Regalo Colombia" tiene 71 caracteres. Google lo trunca en los resultados con "…" lo que reduce el CTR.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección</div>
+        <div class="problema-fix-code">&lt;title&gt;Milena's Shoes | Zapatos Deportivos en Cali&lt;/title&gt;
+&lt;!-- 50 caracteres — deja espacio para que Google lo muestre completo --&gt;</div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-alto">⚠️</div>
+      <div class="problema-titulo">
+        Atributos lang ausentes — Google no sabe el idioma
+        <span class="tag-impacto tag-alto">ALTO</span>
+      </div>
+      <div class="problema-desc">
+        El atributo lang="es-CO" en el &lt;html&gt; le indica a Google y lectores de pantalla que el contenido está en español colombiano. Sin él, Google puede inferir mal el idioma destino.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección — primera línea del HTML</div>
+        <div class="problema-fix-code">&lt;html lang="es-CO"&gt;</div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-alto">⚠️</div>
+      <div class="problema-titulo">
+        Sin canonical URL — riesgo de contenido duplicado
+        <span class="tag-impacto tag-alto">ALTO</span>
+      </div>
+      <div class="problema-desc">
+        Sin canonical, si el sitio se accede con y sin "www", o con "/index.html", Google puede indexarlas como páginas duplicadas y dividir el peso SEO entre ellas.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección — añadir en el &lt;head&gt;</div>
+        <div class="problema-fix-code">&lt;!-- En index.html / --&gt;
+&lt;link rel="canonical" href="https://milenashoes.online/"&gt;
+
+&lt;!-- En productos.html --&gt;
+&lt;link rel="canonical" href="https://milenashoes.online/productos.html"&gt;</div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-medio">ℹ️</div>
+      <div class="problema-titulo">
+        Imágenes sin dimensiones width/height — causa Layout Shift (CLS)
+        <span class="tag-impacto tag-medio">MEDIO</span>
+      </div>
+      <div class="problema-desc">
+        Las 14 imágenes detectadas no tienen width ni height declarados. Esto causa que el contenido "salte" mientras carga, afectando el Core Web Vital CLS (Cumulative Layout Shift), que Google mide para el ranking.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Corrección — ejemplo</div>
+        <div class="problema-fix-code">&lt;!-- Antes --&gt;
+&lt;img src="assets/2.jpeg" alt="Adidas Bounce mujer Cali"&gt;
+
+&lt;!-- Después --&gt;
+&lt;img src="assets/2.jpeg" alt="Adidas Bounce mujer Cali" width="400" height="400" loading="lazy"&gt;</div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="problema">
+      <div class="problema-impacto impacto-medio">ℹ️</div>
+      <div class="problema-titulo">
+        0 páginas indexadas en Google — el sitio es invisible
+        <span class="tag-impacto tag-medio">MEDIO</span>
+      </div>
+      <div class="problema-desc">
+        La búsqueda "site:milenashoes.online" en Google devuelve 0 resultados. El sitemap existe (actualizado 2026-05-02) pero aún no ha sido procesado. Hay que solicitar indexación manual en Google Search Console.
+      </div>
+      <div class="problema-fix">
+        <div class="problema-fix-label">Pasos para indexar</div>
+        <div class="problema-fix-code">1. Crear cuenta en Google Search Console (search.google.com/search-console)
+2. Verificar el dominio milenashoes.online
+3. Ir a Sitemaps → enviar: https://milenashoes.online/sitemap.xml
+4. Ir a Inspección de URL → pedir indexación de /  y /productos.html
+5. Esperar 3-7 días para que Google procese</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HALLAZGOS -->
+  <div class="section-title" style="margin-top:48px">Hallazgos detallados</div>
+  <div class="hallazgos-grid">
+
+    <div class="hallazgo-card">
+      <h4>Meta Tags</h4>
+      <ul class="check-list">
+        <li><span class="ico warn">⚠️</span> Title: 71 chars (excede 60 recomendados)</li>
+        <li><span class="ico mal">❌</span> Meta description: ausente en ambas páginas</li>
+        <li><span class="ico mal">❌</span> Viewport: ausente en todas las páginas</li>
+        <li><span class="ico mal">❌</span> Lang attribute: no declarado</li>
+        <li><span class="ico mal">❌</span> Canonical: ausente en todas las páginas</li>
+        <li><span class="ico ok">✅</span> Title en productos.html: 41 chars (perfecto)</li>
+      </ul>
+    </div>
+
+    <div class="hallazgo-card">
+      <h4>Headings</h4>
+      <ul class="check-list">
+        <li><span class="ico mal">❌</span> Homepage: 3 H1 (solo debe haber 1)</li>
+        <li><span class="ico ok">✅</span> productos.html: 1 H1 correcto</li>
+        <li><span class="ico ok">✅</span> 13 H2 descriptivos con keywords</li>
+        <li><span class="ico ok">✅</span> H3 para subcategorías mujer/hombre</li>
+        <li><span class="ico ok">✅</span> Jerarquía H2→H3 bien estructurada</li>
+      </ul>
+    </div>
+
+    <div class="hallazgo-card">
+      <h4>Imágenes (14 detectadas)</h4>
+      <ul class="check-list">
+        <li><span class="ico ok">✅</span> 100% tienen alt text descriptivo</li>
+        <li><span class="ico ok">✅</span> Alt texts incluyen keywords + ciudad (Cali)</li>
+        <li><span class="ico ok">✅</span> Nombres de marca en alt: Nike, Adidas, Jordan</li>
+        <li><span class="ico mal">❌</span> Ninguna tiene width/height (CLS)</li>
+        <li><span class="ico mal">❌</span> Sin atributo loading="lazy"</li>
+      </ul>
+    </div>
+
+    <div class="hallazgo-card">
+      <h4>Social & Open Graph</h4>
+      <ul class="check-list">
+        <li><span class="ico mal">❌</span> Sin Open Graph tags (og:title, og:description, og:image)</li>
+        <li><span class="ico mal">❌</span> Sin Twitter Card tags</li>
+        <li><span class="ico ok">✅</span> Link a Instagram @milenashoes26</li>
+        <li><span class="ico ok">✅</span> WhatsApp directo +573227155957</li>
+        <li><span class="ico ok">✅</span> Link a Google Maps reseñas</li>
+      </ul>
+    </div>
+
+    <div class="hallazgo-card">
+      <h4>SEO Técnico</h4>
+      <ul class="check-list">
+        <li><span class="ico ok">✅</span> robots.txt existe y es correcto</li>
+        <li><span class="ico ok">✅</span> sitemap.xml con 2 URLs (actualizado 2026-05-02)</li>
+        <li><span class="ico ok">✅</span> sitemap referenciado en robots.txt</li>
+        <li><span class="ico mal">❌</span> Sin canonical tags</li>
+        <li><span class="ico mal">❌</span> Sin viewport (mobile)</li>
+        <li><span class="ico mal">❌</span> 0 páginas indexadas en Google</li>
+      </ul>
+    </div>
+
+    <div class="hallazgo-card">
+      <h4>Contenido & Keywords</h4>
+      <ul class="check-list">
+        <li><span class="ico ok">✅</span> ~1300 palabras en homepage</li>
+        <li><span class="ico ok">✅</span> Keywords geo: "Cali", "Colombia" frecuentes</li>
+        <li><span class="ico ok">✅</span> Marcas mencionadas: Nike, Adidas, Jordan, Asics</li>
+        <li><span class="ico ok">✅</span> Secciones diferenciadas: mujer, hombre, kits</li>
+        <li><span class="ico ok">✅</span> Testimonios de clientes (social proof)</li>
+        <li><span class="ico warn">⚠️</span> Sin blog ni contenido adicional para SEO</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- TABLA META DATA -->
+  <div class="section-title" style="margin-top:48px">Resumen técnico completo</div>
+  <div class="hallazgo-card">
+    <table class="meta-table">
+      <tr>
+        <td>Title (homepage)</td>
+        <td>"Milena's Shoes | Zapatos Deportivos en Cali — Kits de Regalo Colombia" <span class="pill pill-warn">71 chars</span></td>
+      </tr>
+      <tr>
+        <td>Title (productos.html)</td>
+        <td>"Catálogo de Zapatos | Milena's Shoes" <span class="pill pill-ok">41 chars ✓</span></td>
+      </tr>
+      <tr>
+        <td>Meta Description</td>
+        <td><span class="pill pill-mal">Ausente en todas las páginas</span></td>
+      </tr>
+      <tr>
+        <td>Viewport</td>
+        <td><span class="pill pill-mal">Ausente — sitio no mobile-friendly</span></td>
+      </tr>
+      <tr>
+        <td>Lang attribute</td>
+        <td><span class="pill pill-mal">No declarado</span></td>
+      </tr>
+      <tr>
+        <td>Canonical URL</td>
+        <td><span class="pill pill-mal">Ausente en todas las páginas</span></td>
+      </tr>
+      <tr>
+        <td>H1 en homepage</td>
+        <td><span class="pill pill-mal">3 H1 detectados (máximo: 1)</span></td>
+      </tr>
+      <tr>
+        <td>H1 en productos.html</td>
+        <td><span class="pill pill-ok">1 H1 correcto ✓</span></td>
+      </tr>
+      <tr>
+        <td>Open Graph</td>
+        <td><span class="pill pill-mal">Completamente ausente</span></td>
+      </tr>
+      <tr>
+        <td>Twitter Card</td>
+        <td><span class="pill pill-mal">Completamente ausente</span></td>
+      </tr>
+      <tr>
+        <td>Schema JSON-LD</td>
+        <td><span class="pill pill-mal">Completamente ausente</span></td>
+      </tr>
+      <tr>
+        <td>robots.txt</td>
+        <td><span class="pill pill-ok">Existe y es correcto ✓</span></td>
+      </tr>
+      <tr>
+        <td>sitemap.xml</td>
+        <td><span class="pill pill-ok">2 URLs, actualizado 2026-05-02 ✓</span></td>
+      </tr>
+      <tr>
+        <td>Imágenes con alt text</td>
+        <td><span class="pill pill-ok">14/14 — 100% tienen alt ✓</span></td>
+      </tr>
+      <tr>
+        <td>Imágenes con dimensiones</td>
+        <td><span class="pill pill-mal">0/14 — ninguna tiene width/height</span></td>
+      </tr>
+      <tr>
+        <td>Páginas indexadas en Google</td>
+        <td><span class="pill pill-mal">0 páginas — sitio invisible</span></td>
+      </tr>
+      <tr>
+        <td>Google Search Console</td>
+        <td><span class="pill pill-mal">No verificado / no configurado</span></td>
+      </tr>
+      <tr>
+        <td>WhatsApp integrado</td>
+        <td><span class="pill pill-ok">Sí — +573227155957 ✓</span></td>
+      </tr>
+      <tr>
+        <td>Instagram</td>
+        <td><span class="pill pill-ok">@milenashoes26 ✓</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- PLAN DE ACCIÓN -->
+  <div class="section-title" style="margin-top:48px">Plan de acción — orden de prioridad</div>
+  <div class="hallazgo-card">
+    <table class="meta-table">
+      <tr>
+        <td style="color:#f87171; font-weight:800;">Hoy mismo</td>
+        <td>Añadir &lt;meta name="viewport"&gt; — sin esto el sitio falla en móvil</td>
+      </tr>
+      <tr>
+        <td style="color:#f87171; font-weight:800;">Hoy mismo</td>
+        <td>Añadir &lt;html lang="es-CO"&gt; en todas las páginas</td>
+      </tr>
+      <tr>
+        <td style="color:#f87171; font-weight:800;">Esta semana</td>
+        <td>Añadir meta description en index.html y productos.html</td>
+      </tr>
+      <tr>
+        <td style="color:#f87171; font-weight:800;">Esta semana</td>
+        <td>Corregir los 3 H1 a solo 1 en homepage</td>
+      </tr>
+      <tr>
+        <td style="color:#f87171; font-weight:800;">Esta semana</td>
+        <td>Añadir Open Graph tags completos en ambas páginas</td>
+      </tr>
+      <tr>
+        <td style="color:#fbbf24; font-weight:800;">Esta semana</td>
+        <td>Añadir canonical tags en todas las páginas</td>
+      </tr>
+      <tr>
+        <td style="color:#fbbf24; font-weight:800;">Esta semana</td>
+        <td>Añadir Schema LocalBusiness JSON-LD en index.html</td>
+      </tr>
+      <tr>
+        <td style="color:#fbbf24; font-weight:800;">Esta semana</td>
+        <td>Configurar Google Search Console y enviar sitemap</td>
+      </tr>
+      <tr>
+        <td style="color:#4ade80; font-weight:800;">Próximas 2 semanas</td>
+        <td>Añadir width, height y loading="lazy" a todas las imágenes</td>
+      </tr>
+      <tr>
+        <td style="color:#4ade80; font-weight:800;">Próximas 2 semanas</td>
+        <td>Añadir Schema Product en productos.html para cada modelo</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Auditoría SEO — Milena's Shoes</strong> &nbsp;·&nbsp; milenashoes.online &nbsp;·&nbsp; 8 de mayo 2026<br>
+  Generado con Claude Code · Auditoría automatizada de 8 categorías · 2 páginas analizadas
+</div>
+
+</body>
+</html>

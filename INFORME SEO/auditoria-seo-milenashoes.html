@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría SEO — Milena's Shoes</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #07090f;
+    --bg2: #0f1219;
+    --bg3: #161b27;
+    --bg4: #1e2535;
+    --gold: #C9A84C;
+    --gold-l: #E8C97A;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --border: rgba(201,168,76,0.15);
+    --border2: rgba(255,255,255,0.07);
+  }
+  body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; font-size: 14px; }
+  a { color: var(--gold); text-decoration: none; }
+  /* NAV */
+  .topnav { position: sticky; top: 0; z-index: 100; background: rgba(7,9,15,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border2); padding: 12px 32px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .topnav-brand { font-weight: 700; font-size: 15px; color: var(--gold); }
+  .topnav a { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; transition: color 0.2s; }
+  .topnav a:hover { color: var(--text); }
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #07090f 0%, #101420 50%, #0c1018 100%); padding: 64px 32px; text-align: center; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .hero::before { content: 'SEO'; position: absolute; font-size: 28vw; font-weight: 900; color: rgba(201,168,76,0.025); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; letter-spacing: 20px; }
+  .hero-badge { display: inline-block; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px; margin-bottom: 24px; }
+  .hero-url { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+  .hero-date { color: #4a5568; font-size: 12px; margin-bottom: 40px; }
+  .score-ring { width: 180px; height: 180px; margin: 0 auto 32px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .score-ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+  .score-ring circle { fill: none; stroke-width: 10; }
+  .score-ring .track { stroke: rgba(255,255,255,0.05); }
+  .score-ring .fill { stroke: var(--gold); stroke-linecap: round; stroke-dasharray: 502; stroke-dashoffset: 90; transition: stroke-dashoffset 1s ease; }
+  .score-center { text-align: center; position: relative; z-index: 1; }
+  .score-num { font-size: 3.5rem; font-weight: 900; color: var(--gold); line-height: 1; }
+  .score-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .score-level { font-size: 13px; font-weight: 600; color: var(--green); margin-top: 20px; }
+  /* CARDS */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+  .section { margin-top: 56px; }
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .cards-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card { background: var(--bg2); border: 1px solid var(--border2); padding: 24px 20px; }
+  .card-num { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+  .card-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+  .c-gold .card-num { color: var(--gold); }
+  .c-red .card-num { color: var(--red); }
+  .c-yellow .card-num { color: var(--yellow); }
+  .c-green .card-num { color: var(--green); }
+  /* PRIORITY LIST */
+  .priority-list { display: flex; flex-direction: column; gap: 16px; }
+  .priority-item { background: var(--bg2); border: 1px solid var(--border2); border-left: 3px solid; padding: 20px 24px; }
+  .priority-item.p-critical { border-left-color: var(--red); }
+  .priority-item.p-warning { border-left-color: var(--yellow); }
+  .priority-item.p-ok { border-left-color: var(--green); }
+  .pi-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .pi-badge { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; }
+  .p-critical .pi-badge { background: rgba(239,68,68,0.15); color: var(--red); }
+  .p-warning .pi-badge { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .p-ok .pi-badge { background: rgba(34,197,94,0.15); color: var(--green); }
+  .pi-title { font-size: 14px; font-weight: 700; color: var(--text); }
+  .pi-why { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+  .pi-fix { background: var(--bg3); border: 1px solid var(--border2); padding: 14px 16px; font-size: 12px; }
+  .pi-fix-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  code { font-family: 'Courier New', monospace; font-size: 12px; color: var(--gold-l); background: rgba(201,168,76,0.07); padding: 2px 6px; }
+  pre { font-family: 'Courier New', monospace; font-size: 11px; color: #94a3b8; background: #0a0d14; padding: 12px; overflow-x: auto; line-height: 1.7; margin-top: 8px; }
+  /* CATEGORY BARS */
+  .cat-grid { display: flex; flex-direction: column; gap: 20px; }
+  .cat-item { background: var(--bg2); border: 1px solid var(--border2); padding: 20px 24px; }
+  .cat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .cat-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .cat-pct { font-size: 18px; font-weight: 900; }
+  .cat-weight { font-size: 11px; color: var(--muted); margin-left: 8px; }
+  .bar-track { height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; margin-bottom: 16px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+  .score-g { color: var(--green); } .bar-g { background: var(--green); }
+  .score-y { color: var(--yellow); } .bar-y { background: var(--yellow); }
+  .score-r { color: var(--red); } .bar-r { background: var(--red); }
+  .findings { display: flex; flex-direction: column; gap: 8px; }
+  .finding { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--muted); }
+  .finding .ico { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  /* TABLE */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { background: var(--bg3); color: var(--gold); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border2); color: var(--muted); vertical-align: top; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .status-ok { color: var(--green); font-weight: 700; }
+  .status-warn { color: var(--yellow); font-weight: 700; }
+  .status-err { color: var(--red); font-weight: 700; }
+  /* FOOTER */
+  .rpt-footer { text-align: center; padding: 32px; border-top: 1px solid var(--border2); color: #2d3748; font-size: 11px; margin-top: 56px; }
+  @media(max-width:700px) {
+    .cards-4 { grid-template-columns: 1fr 1fr; }
+    .cards-2 { grid-template-columns: 1fr; }
+    .container { padding: 0 16px 60px; }
+    .hero { padding: 48px 16px; }
+    .topnav { padding: 10px 16px; gap: 16px; }
+  }
+  @media print {
+    .topnav { position: static; }
+    .hero::before { display: none; }
+    .bar-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <span class="topnav-brand">Auditoría SEO</span>
+  <a href="#resumen">Resumen</a>
+  <a href="#prioridades">Correcciones</a>
+  <a href="#categorias">Categorías</a>
+  <a href="#detalle">Detalle técnico</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Informe SEO Completo</div>
+  <div class="hero-url">milenashoes.online</div>
+  <div class="hero-date">Auditado el 29 de junio de 2026</div>
+  <div class="score-ring">
+    <svg viewBox="0 0 180 180">
+      <circle class="track" cx="90" cy="90" r="80"/>
+      <circle class="fill" cx="90" cy="90" r="80" style="stroke-dashoffset: calc(502 - 502 * 82 / 100)"/>
+    </svg>
+    <div class="score-center">
+      <div class="score-num">82</div>
+      <div class="score-label">/ 100</div>
+    </div>
+  </div>
+  <div class="score-level">✅ Buen SEO — Con margen de mejora</div>
+</div>
+
+<div class="container">
+
+  <!-- RESUMEN -->
+  <div class="section" id="resumen">
+    <div class="section-title">Resumen ejecutivo</div>
+    <div class="cards-4">
+      <div class="card c-gold">
+        <div class="card-num">82</div>
+        <div class="card-label">Puntuación global</div>
+      </div>
+      <div class="card c-red">
+        <div class="card-num">3</div>
+        <div class="card-label">Problemas críticos</div>
+      </div>
+      <div class="card c-yellow">
+        <div class="card-num">6</div>
+        <div class="card-label">Advertencias</div>
+      </div>
+      <div class="card c-green">
+        <div class="card-num">18</div>
+        <div class="card-label">Tests aprobados</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP CORRECCIONES -->
+  <div class="section" id="prioridades">
+    <div class="section-title">Top 5 correcciones prioritarias</div>
+    <div class="priority-list">
+
+      <div class="priority-item p-critical">
+        <div class="pi-header">
+          <span class="pi-badge">Crítico</span>
+          <span class="pi-title">Imágenes sin atributo ALT — pérdida directa de SEO de imágenes</span>
+        </div>
+        <p class="pi-why">Google indexa imágenes y las usa para entender el contenido de la página. Las imágenes sin ALT son invisibles para el buscador. En un catálogo de zapatos, cada imagen sin ALT es una oportunidad de posicionamiento perdida. Se detectaron múltiples imágenes críticas (banner hero, fotos de galería) sin descripción.</p>
+        <div class="pi-fix">
+          <div class="pi-fix-label">Cómo corregirlo</div>
+          <p>Añade ALT descriptivo a todas las imágenes del catálogo. Patrón recomendado para productos:</p>
+          <pre>&lt;img src="assets/1.jpeg" alt="Nike AF1 Sail Ripstop hombre talla 40-44 Cali Colombia" loading="lazy"&gt;
+&lt;img src="assets/2.jpeg" alt="Adidas Bounce mujer talla 36-40 zapatos deportivos Cali" loading="lazy"&gt;
+&lt;img src="assets/Banner/Banner2.jpg" alt="Milena's Shoes zapatos deportivos Cali Colombia" loading="lazy"&gt;</pre>
+        </div>
+      </div>
+
+      <div class="priority-item p-critical">
+        <div class="pi-header">
+          <span class="pi-badge">Crítico</span>
+          <span class="pi-title">productos.html: inconsistencias en meta description y twitter:description</span>
+        </div>
+        <p class="pi-why">El <code>twitter:description</code> de productos.html dice "59 modelos" cuando en realidad hay 157+. La meta description principal dice "169 modelos". Estas inconsistencias hacen que Google desconfíe del contenido y puede penalizar el posicionamiento. Además el title de productos.html no incluye "Cali" ni "Colombia", keywords clave para búsquedas locales.</p>
+        <div class="pi-fix">
+          <div class="pi-fix-label">Cómo corregirlo — en productos.html</div>
+          <pre>&lt;title&gt;Catálogo Zapatos Deportivos Cali | Milena's Shoes Colombia&lt;/title&gt;
+&lt;meta name="description" content="Más de 157 modelos de zapatos deportivos Nike, Adidas, Jordan y más. Hombre y mujer. Desde $130.000 COP. Pedidos por WhatsApp desde Cali, Colombia."&gt;
+&lt;meta name="twitter:description" content="157+ zapatos deportivos Nike, Adidas, Jordan. Hombre y mujer desde $130.000 COP. Pide por WhatsApp desde Cali, Colombia."&gt;</pre>
+        </div>
+      </div>
+
+      <div class="priority-item p-critical">
+        <div class="pi-header">
+          <span class="pi-badge">Crítico</span>
+          <span class="pi-title">Logo.png pesa 366 KB — ralentiza la carga en móvil</span>
+        </div>
+        <p class="pi-why">Una imagen de logo de 366 KB es excesivo (debería ser &lt;20 KB). Aunque el tiempo de respuesta del servidor es bueno (0.76s), el logo grande penaliza el LCP (Largest Contentful Paint) en móviles con datos móviles, que es un factor de ranking directo en Google desde 2021 (Core Web Vitals).</p>
+        <div class="pi-fix">
+          <div class="pi-fix-label">Cómo corregirlo</div>
+          <p>Comprime el logo en <strong>squoosh.app</strong> (gratuito): exporta como WebP a calidad 80 y máximo 200×200px. El resultado debería ser &lt;15 KB. Luego actualiza las referencias en index.html y productos.html.</p>
+          <pre>&lt;link rel="icon" type="image/png" href="assets/logo.png"&gt;
+&lt;!-- Cambiar a: --&gt;
+&lt;link rel="icon" type="image/webp" href="assets/logo.webp"&gt;</pre>
+        </div>
+      </div>
+
+      <div class="priority-item p-warning">
+        <div class="pi-header">
+          <span class="pi-badge">Advertencia</span>
+          <span class="pi-title">Title principal 63 caracteres — riesgo de truncado en Google</span>
+        </div>
+        <p class="pi-why">Google muestra ~60 caracteres en el título antes de truncar con "...". El título actual tiene 63 chars: "Milena's Shoes | Zapatos Deportivos en Cali — Kits de Regalo Colombia". Esto hace que en las SERPs se corte y se pierda "Colombia" — la keyword de geolocalización más importante.</p>
+        <div class="pi-fix">
+          <div class="pi-fix-label">Título recomendado (57 chars)</div>
+          <pre>&lt;title&gt;Milena's Shoes | Zapatos Deportivos Cali Colombia&lt;/title&gt;</pre>
+        </div>
+      </div>
+
+      <div class="priority-item p-warning">
+        <div class="pi-header">
+          <span class="pi-badge">Advertencia</span>
+          <span class="pi-title">Sitemap desactualizado — solo 2 URLs, fecha: 2 mayo 2026</span>
+        </div>
+        <p class="pi-why">El sitemap.xml existe (bien), pero solo tiene 2 URLs y la fecha de última modificación es del 2 de mayo, lo que puede hacer que Google no rastreé actualizaciones recientes del catálogo (mayo-junio). El sitemap debería actualizarse con cada deploy.</p>
+        <div class="pi-fix">
+          <div class="pi-fix-label">Sitemap recomendado</div>
+          <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://milenashoes.online/&lt;/loc&gt;
+    &lt;lastmod&gt;2026-06-29&lt;/lastmod&gt;
+    &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+    &lt;priority&gt;1.0&lt;/priority&gt;
+  &lt;/url&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://milenashoes.online/productos.html&lt;/loc&gt;
+    &lt;lastmod&gt;2026-06-29&lt;/lastmod&gt;
+    &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+    &lt;priority&gt;0.9&lt;/priority&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATEGORÍAS -->
+  <div class="section" id="categorias">
+    <div class="section-title">Desglose por categoría</div>
+    <div class="cat-grid">
+
+      <div class="cat-item">
+        <div class="cat-header">
+          <div>
+            <span class="cat-name">Meta Tags</span>
+            <span class="cat-weight">(peso 20%)</span>
+          </div>
+          <span class="cat-pct score-g">90/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:90%"></div></div>
+        <div class="findings">
+          <div class="finding"><span class="ico">✅</span><span>Title existe y contiene keywords principales ("Zapatos Deportivos", "Cali", "Colombia")</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Meta description persuasiva con precio y propuesta de valor</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Meta viewport configurado correctamente</span></div>
+          <div class="finding"><span class="ico">✅</span><span>meta robots: index, follow — correcto</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Canonical apuntando a la URL correcta</span></div>
+          <div class="finding"><span class="ico">✅</span><span>hreflang="es-CO" y html lang="es-CO" configurados</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>Title tiene 63 chars — riesgo de truncado en Google (ideal: 50-60)</span></div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-header">
+          <div>
+            <span class="cat-name">Estructura de Headings</span>
+            <span class="cat-weight">(peso 15%)</span>
+          </div>
+          <span class="cat-pct score-g">85/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:85%"></div></div>
+        <div class="findings">
+          <div class="finding"><span class="ico">✅</span><span>Exactamente un H1: "Zapatos Deportivos en Cali — Milena's Shoes"</span></div>
+          <div class="finding"><span class="ico">✅</span><span>H1 contiene la keyword principal + localización geográfica</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Jerarquía H1 → H2 → H3 correcta, sin saltos</span></div>
+          <div class="finding"><span class="ico">✅</span><span>H2s descriptivos: "Zapatos Deportivos Mujer", "Zapatos Deportivos Hombre", etc.</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>El H1 está visualmente oculto (sr-only) — el texto grande visible usa aria-hidden. Funciona para SEO pero es inusual; Google puede interpretar el div aria-hidden como contenido secundario.</span></div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-header">
+          <div>
+            <span class="cat-name">Imágenes</span>
+            <span class="cat-weight">(peso 10%)</span>
+          </div>
+          <span class="cat-pct score-y">55/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:55%"></div></div>
+        <div class="findings">
+          <div class="finding"><span class="ico">✅</span><span>loading="lazy" en imágenes below-the-fold</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Imágenes del carrusel tienen alt descriptivo (nombre de marca)</span></div>
+          <div class="finding"><span class="ico">❌</span><span>Banner hero (Banner2.jpg) sin alt — imagen más importante de la página</span></div>
+          <div class="finding"><span class="ico">❌</span><span>Múltiples imágenes de galería con alt genérico o incompleto</span></div>
+          <div class="finding"><span class="ico">❌</span><span>logo.png pesa 366 KB — impacta Core Web Vitals (LCP)</span></div>
+          <div class="finding"><span class="ico">❌</span><span>Todas las imágenes en JPEG — no se usan formatos modernos (WebP, AVIF)</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>galeria-1.jpeg aparece dos veces en la galería</span></div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-header">
+          <div>
+            <span class="cat-name">Enlaces</span>
+            <span class="cat-weight">(peso 10%)</span>
+          </div>
+          <span class="cat-pct score-g">82/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:82%"></div></div>
+        <div class="findings">
+          <div class="finding"><span class="ico">✅</span><span>Enlace externo a WhatsApp con rel="noopener"</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Enlace a Instagram con rel="nofollow noopener" — correcto para redes sociales</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Enlace a Google Maps con rel="noopener"</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Sin enlaces rotos detectados (200 OK en todas las páginas principales)</span></div>
+          <div class="finding"><span class="ico">✅</span><span>www.milenashoes.online redirige correctamente (301) a milenashoes.online</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>Pocos enlaces internos (4) — dificulta que Google entienda la arquitectura del sitio</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>Los CTAs de WhatsApp podrían tener anchor text más descriptivo para SEO</span></div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-header">
+          <div>
+            <span class="cat-name">Open Graph &amp; Social</span>
+            <span class="cat-weight">(peso 10%)</span>
+          </div>
+          <span class="cat-pct score-g">92/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:92%"></div></div>
+        <div class="findings">
+          <div class="finding"><span class="ico">✅</span><span>og:title, og:description, og:image, og:url, og:type — todos presentes</span></div>
+          <div class="finding"><span class="ico">✅</span><span>og:locale="es_CO" y og:site_name configurados</span></div>
+          <div class="finding"><span class="ico">✅</span><span>og-cover.jpg existe y carga correctamente (200 OK, 42 KB)</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Twitter card completa: card, title, description, image</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>og:image no especifica dimensiones explícitas (recomendado: 1200×630px mínimo)</span></div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-header">
+          <div>
+            <span class="cat-name">Schema / Datos Estructurados</span>
+            <span class="cat-weight">(peso 10%)</span>
+          </div>
+          <span class="cat-pct score-g">88/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:88%"></div></div>
+        <div class="findings">
+          <div class="finding"><span class="ico">✅</span><span>Schema tipo "Store" (LocalBusiness) — correcto para tienda física/online</span></div>
+          <div class="finding"><span class="ico">✅</span><span>AggregateRating con ratingValue 5.0 y 6 reviews</span></div>
+          <div class="finding"><span class="ico">✅</span><span>6 reviews individuales con texto, autor y rating</span></div>
+          <div class="finding"><span class="ico">✅</span><span>address con ciudad, región y país</span></div>
+          <div class="finding"><span class="ico">✅</span><span>telephone, url, image, openingHoursSpecification presentes</span></div>
+          <div class="finding"><span class="ico">✅</span><span>productos.html tiene schema ItemList con 157 productos</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>sameAs solo incluye Instagram — agregar Google Business URL</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>reviewCount "6" — bajo para generar estrellas en SERP (Google requiere varios)</span></div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-header">
+          <div>
+            <span class="cat-name">Técnico</span>
+            <span class="cat-weight">(peso 15%)</span>
+          </div>
+          <span class="cat-pct score-g">85/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:85%"></div></div>
+        <div class="findings">
+          <div class="finding"><span class="ico">✅</span><span>HTTPS activo y forzado correctamente</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Tiempo de respuesta: 0.76s — excelente (GitHub Pages + CDN Fastly)</span></div>
+          <div class="finding"><span class="ico">✅</span><span>robots.txt presente y correcto — permite indexación total, referencia sitemap</span></div>
+          <div class="finding"><span class="ico">✅</span><span>sitemap.xml presente con las 2 páginas principales</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Redirección www → no-www configurada (301 Permanent)</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Cache-Control configurado (max-age=600)</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>HTML de index.html pesa 72 KB — algo pesado para una sola página, considerar minificar</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>Sitemap con fecha 2 mayo 2026 — desactualizado (actualizar con cada deploy)</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>Favicon solo en .png — añadir favicon.ico para compatibilidad legacy</span></div>
+        </div>
+      </div>
+
+      <div class="cat-item">
+        <div class="cat-header">
+          <div>
+            <span class="cat-name">Contenido</span>
+            <span class="cat-weight">(peso 10%)</span>
+          </div>
+          <span class="cat-pct score-y">72/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:72%"></div></div>
+        <div class="findings">
+          <div class="finding"><span class="ico">✅</span><span>Contenido textual suficiente: hero, sobre nosotros, testimonios, secciones con texto descriptivo</span></div>
+          <div class="finding"><span class="ico">✅</span><span>Keywords locales integradas naturalmente: "Cali", "Colombia", "Jamundí"</span></div>
+          <div class="finding"><span class="ico">✅</span><span>6 testimonios con texto de clientes reales — excelente para SEO local</span></div>
+          <div class="finding"><span class="ico">❌</span><span>twitter:description de productos.html dice "59 modelos" — dato falso y desactualizado</span></div>
+          <div class="finding"><span class="ico">❌</span><span>Meta description de productos.html dice "169 modelos" — inconsistente con "157 productos" en Schema</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>Sin blog ni contenido educativo — limita el posicionamiento por keywords long-tail</span></div>
+          <div class="finding"><span class="ico">⚠️</span><span>Precio en index.html ("$100K-$160K") no coincide con hero ("desde $130.000 COP")</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DETALLE TÉCNICO -->
+  <div class="section" id="detalle">
+    <div class="section-title">Detalle técnico completo</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Elemento</th>
+            <th>Estado</th>
+            <th>Valor encontrado</th>
+            <th>Observación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>HTTPS</td><td class="status-ok">✅ OK</td><td>Sí — forzado</td><td>Correcto</td></tr>
+          <tr><td>Tiempo de respuesta</td><td class="status-ok">✅ OK</td><td>0.76s</td><td>Excelente (bajo 2s)</td></tr>
+          <tr><td>Servidor</td><td class="status-ok">✅ OK</td><td>GitHub Pages + Fastly CDN</td><td>CDN global activo</td></tr>
+          <tr><td>HTML peso</td><td class="status-warn">⚠️</td><td>72 KB</td><td>Considerar minificar</td></tr>
+          <tr><td>robots.txt</td><td class="status-ok">✅ OK</td><td>Existe</td><td>Allow: /, Sitemap referenciado</td></tr>
+          <tr><td>sitemap.xml</td><td class="status-warn">⚠️</td><td>Existe — 2 URLs</td><td>Fecha: 2 mayo 2026 (desactualizado)</td></tr>
+          <tr><td>Canonical</td><td class="status-ok">✅ OK</td><td>https://milenashoes.online/</td><td>Correcto</td></tr>
+          <tr><td>www redirect</td><td class="status-ok">✅ OK</td><td>301 → no-www</td><td>Correcto</td></tr>
+          <tr><td>html lang</td><td class="status-ok">✅ OK</td><td>es-CO</td><td>Colombia correcto</td></tr>
+          <tr><td>hreflang</td><td class="status-ok">✅ OK</td><td>es-CO</td><td>Correcto</td></tr>
+          <tr><td>&lt;title&gt; index</td><td class="status-warn">⚠️</td><td>63 caracteres</td><td>Ideal 50-60 chars</td></tr>
+          <tr><td>&lt;title&gt; productos</td><td class="status-warn">⚠️</td><td>Sin "Cali" ni "Colombia"</td><td>Falta geolocalización</td></tr>
+          <tr><td>Meta description</td><td class="status-ok">✅ OK</td><td>152 chars, persuasiva</td><td>Bien</td></tr>
+          <tr><td>H1 único</td><td class="status-ok">✅ OK</td><td>"Zapatos Deportivos en Cali"</td><td>Con keyword local</td></tr>
+          <tr><td>Jerarquía H1-H6</td><td class="status-ok">✅ OK</td><td>Correcta</td><td>Sin saltos</td></tr>
+          <tr><td>Open Graph</td><td class="status-ok">✅ OK</td><td>Completo (7 tags)</td><td>Imagen existe (42 KB)</td></tr>
+          <tr><td>Twitter Card</td><td class="status-ok">✅ OK</td><td>summary_large_image</td><td>Completo</td></tr>
+          <tr><td>Schema type</td><td class="status-ok">✅ OK</td><td>Store + AggregateRating</td><td>Bien</td></tr>
+          <tr><td>Schema reviews</td><td class="status-warn">⚠️</td><td>6 reviews</td><td>Poco para estrellitas en Google</td></tr>
+          <tr><td>Google Analytics</td><td class="status-ok">✅ OK</td><td>G-Y4XM6RVM2W</td><td>Activo</td></tr>
+          <tr><td>Search Console</td><td class="status-ok">✅ OK</td><td>Verificado</td><td>Meta tag presente</td></tr>
+          <tr><td>Favicon</td><td class="status-warn">⚠️</td><td>logo.png (366 KB)</td><td>Demasiado pesado — sin .ico legacy</td></tr>
+          <tr><td>Imágenes con ALT</td><td class="status-err">❌ Error</td><td>~60% sin ALT descriptivo</td><td>Banner y galería sin ALT</td></tr>
+          <tr><td>Formato imágenes</td><td class="status-warn">⚠️</td><td>Solo JPEG</td><td>Sin WebP ni AVIF</td></tr>
+          <tr><td>Loading lazy</td><td class="status-ok">✅ OK</td><td>Presente en imágenes</td><td>Bien implementado</td></tr>
+          <tr><td>twitter:description productos</td><td class="status-err">❌ Error</td><td>"59 modelos"</td><td>Dato falso — son 157+</td></tr>
+          <tr><td>Precios consistentes</td><td class="status-warn">⚠️</td><td>Inconsistentes</td><td>$100K vs $130K en distintas secciones</td></tr>
+          <tr><td>enlaces internos</td><td class="status-warn">⚠️</td><td>4 links</td><td>Poco — agregar más navegación interna</td></tr>
+          <tr><td>Links rotos</td><td class="status-ok">✅ OK</td><td>0 detectados</td><td>Bien</td></tr>
+          <tr><td>rel=noopener externos</td><td class="status-ok">✅ OK</td><td>Todos correctos</td><td>Bien</td></tr>
+          <tr><td>Scroll behavior</td><td class="status-ok">✅ OK</td><td>smooth</td><td>Bien</td></tr>
+          <tr><td>Responsive / mobile</td><td class="status-ok">✅ OK</td><td>Media queries configuradas</td><td>Bien</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="rpt-footer">
+  Auditoría SEO generada el 29 de junio de 2026 · milenashoes.online · Herramienta: Claude Code + análisis manual
+</div>
+
+</body>
+</html>

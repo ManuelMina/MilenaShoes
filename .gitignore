@@ -1,0 +1,10 @@
+node_modules/
+package.json
+package-lock.json
+temp_catalog.js
+temp_products.csv
+catalogo-src.html
+catalogo.pdf
+*.tmp
+.DS_Store
+Thumbs.db

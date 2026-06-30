@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría de Negocio Digital — Milena's Shoes</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #07090f;
+    --bg2: #0f1219;
+    --bg3: #161b27;
+    --bg4: #1e2535;
+    --gold: #C9A84C;
+    --gold-l: #E8C97A;
+    --green: #22c55e;
+    --yellow: #eab308;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --pink: #ec4899;
+    --text: #e8eaf0;
+    --muted: #8892a4;
+    --border: rgba(201,168,76,0.15);
+    --border2: rgba(255,255,255,0.07);
+  }
+  body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; font-size: 14px; }
+  a { color: var(--gold); text-decoration: none; }
+  /* NAV */
+  .topnav { position: sticky; top: 0; z-index: 100; background: rgba(7,9,15,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border2); padding: 12px 32px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .topnav-brand { font-weight: 700; font-size: 15px; color: var(--gold); margin-right: 8px; }
+  .topnav a { font-size: 11px; color: var(--muted); letter-spacing: 0.5px; transition: color 0.2s; }
+  .topnav a:hover { color: var(--text); }
+  /* HERO */
+  .hero { background: linear-gradient(135deg, #07090f 0%, #0e1520 60%, #07090f 100%); padding: 64px 32px; text-align: center; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .hero::before { content: 'NEGOCIO'; position: absolute; font-size: 20vw; font-weight: 900; color: rgba(201,168,76,0.02); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; letter-spacing: 15px; white-space: nowrap; }
+  .hero-badge { display: inline-block; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 6px 16px; margin-bottom: 24px; }
+  .hero-name { font-size: 2.2rem; font-weight: 900; color: var(--text); margin-bottom: 4px; letter-spacing: 2px; }
+  .hero-sub { color: var(--muted); font-size: 13px; margin-bottom: 40px; }
+  .score-ring { width: 180px; height: 180px; margin: 0 auto 32px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .score-ring svg { position: absolute; inset: 0; transform: rotate(-90deg); }
+  .score-ring circle { fill: none; stroke-width: 10; }
+  .score-ring .track { stroke: rgba(255,255,255,0.05); }
+  .score-ring .fill-y { stroke: var(--yellow); stroke-linecap: round; stroke-dasharray: 502; }
+  .score-center { text-align: center; position: relative; z-index: 1; }
+  .score-num { font-size: 3.5rem; font-weight: 900; color: var(--yellow); line-height: 1; }
+  .score-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+  .score-level { font-size: 13px; font-weight: 600; color: var(--yellow); margin-top: 20px; }
+  /* CONTAINER */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+  .section { margin-top: 56px; }
+  .section-title { font-size: 11px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  /* RESUMEN EJECUTIVO */
+  .resumen-block { background: var(--bg2); border: 1px solid var(--border2); border-left: 3px solid var(--gold); padding: 28px 32px; }
+  .resumen-block p { font-size: 14px; color: var(--muted); line-height: 1.9; margin-bottom: 14px; }
+  .resumen-block p:last-child { margin-bottom: 0; }
+  .resumen-block strong { color: var(--text); }
+  /* CARDS GRID */
+  .cards-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .cards-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .card { background: var(--bg2); border: 1px solid var(--border2); padding: 24px 20px; }
+  .card-num { font-size: 2.2rem; font-weight: 900; line-height: 1; }
+  .card-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+  .c-gold .card-num { color: var(--gold); }
+  .c-red .card-num { color: var(--red); }
+  .c-yellow .card-num { color: var(--yellow); }
+  .c-green .card-num { color: var(--green); }
+  .c-blue .card-num { color: var(--blue); }
+  /* AREA SCORES */
+  .areas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .area-card { background: var(--bg2); border: 1px solid var(--border2); padding: 20px 22px; }
+  .area-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .area-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .area-score { font-size: 18px; font-weight: 900; }
+  .score-g { color: var(--green); } .bar-g { background: var(--green); }
+  .score-y { color: var(--yellow); } .bar-y { background: var(--yellow); }
+  .score-r { color: var(--red); } .bar-r { background: var(--red); }
+  .bar-track { height: 5px; background: rgba(255,255,255,0.05); border-radius: 3px; margin-bottom: 12px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .area-notes { font-size: 11px; color: var(--muted); line-height: 1.6; }
+  /* INCOHERENCIAS */
+  .incoh-list { display: flex; flex-direction: column; gap: 14px; }
+  .incoh-item { background: var(--bg2); border: 1px solid var(--border2); border-left: 3px solid; padding: 18px 22px; }
+  .incoh-item.alta { border-left-color: var(--red); }
+  .incoh-item.media { border-left-color: var(--yellow); }
+  .incoh-item.baja { border-left-color: var(--blue); }
+  .incoh-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .incoh-badge { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 2px 8px; }
+  .alta .incoh-badge { background: rgba(239,68,68,0.15); color: var(--red); }
+  .media .incoh-badge { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .baja .incoh-badge { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .incoh-title { font-size: 13px; font-weight: 700; color: var(--text); }
+  .incoh-desc { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .incoh-fix { background: var(--bg3); padding: 10px 14px; font-size: 12px; color: #94a3b8; }
+  /* JOURNEY */
+  .journey-wrap { overflow-x: auto; }
+  .journey { display: flex; gap: 0; min-width: 900px; }
+  .journey-phase { flex: 1; background: var(--bg2); border: 1px solid var(--border2); padding: 20px 16px; text-align: center; position: relative; }
+  .journey-phase::after { content: '→'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--muted); z-index: 2; }
+  .journey-phase:last-child::after { display: none; }
+  .jp-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .jp-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .jp-status { font-size: 10px; font-weight: 700; padding: 2px 8px; margin-bottom: 10px; display: inline-block; }
+  .jp-ok { background: rgba(34,197,94,0.15); color: var(--green); }
+  .jp-warn { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .jp-missing { background: rgba(239,68,68,0.15); color: var(--red); }
+  .jp-notes { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  /* PLAN DE ACCIÓN */
+  .plan-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .plan-table th { background: var(--bg3); color: var(--gold); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  .plan-table td { padding: 12px 14px; border-bottom: 1px solid var(--border2); color: var(--muted); vertical-align: top; }
+  .plan-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .tag { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; display: inline-block; }
+  .tag-alta { background: rgba(239,68,68,0.15); color: var(--red); }
+  .tag-media { background: rgba(234,179,8,0.15); color: var(--yellow); }
+  .tag-baja { background: rgba(59,130,246,0.15); color: var(--blue); }
+  .tag-bajo { background: rgba(34,197,94,0.15); color: var(--green); }
+  .tag-medio { background: rgba(234,179,8,0.12); color: var(--yellow); }
+  .tag-alto { background: rgba(239,68,68,0.12); color: var(--red); }
+  /* QUICK WINS */
+  .qw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .qw-card { background: var(--bg2); border: 1px solid var(--border2); border-top: 2px solid var(--gold); padding: 24px 20px; }
+  .qw-num { font-family: monospace; font-size: 2rem; font-weight: 900; color: rgba(201,168,76,0.25); margin-bottom: 12px; }
+  .qw-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+  .qw-desc { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+  .qw-result { font-size: 11px; color: var(--green); font-weight: 600; }
+  .qw-time { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  /* COMPETENCIA */
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .comp-table th { background: var(--bg3); color: var(--gold); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  .comp-table td { padding: 11px 14px; border-bottom: 1px solid var(--border2); color: var(--muted); vertical-align: top; }
+  .comp-table .milena { color: var(--gold); font-weight: 600; }
+  .comp-win { color: var(--green); } .comp-lose { color: var(--red); } .comp-tie { color: var(--yellow); }
+  /* ADS */
+  .ads-block { background: var(--bg2); border: 1px solid var(--border2); border-left: 3px solid var(--red); padding: 24px 28px; }
+  .ads-title { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 10px; }
+  .ads-body { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  /* GOOGLE BUSINESS */
+  .gb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .gb-stat { background: var(--bg2); border: 1px solid var(--border2); padding: 20px; }
+  .gb-stat-n { font-size: 2rem; font-weight: 900; color: var(--gold); }
+  .gb-stat-l { font-size: 11px; color: var(--muted); margin-top: 4px; letter-spacing: 1px; text-transform: uppercase; }
+  /* COPY */
+  .copy-example { background: var(--bg3); border: 1px solid var(--border2); padding: 14px 18px; margin-top: 10px; }
+  .copy-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+  .copy-antes { color: var(--red); }
+  .copy-despues { color: var(--green); }
+  .copy-text { font-size: 12px; color: var(--muted); font-style: italic; }
+  /* FOOTER */
+  .rpt-footer { text-align: center; padding: 32px; border-top: 1px solid var(--border2); color: #2d3748; font-size: 11px; margin-top: 56px; }
+  @media(max-width:800px) {
+    .cards-4 { grid-template-columns: 1fr 1fr; }
+    .cards-3 { grid-template-columns: 1fr 1fr; }
+    .areas-grid { grid-template-columns: 1fr; }
+    .qw-grid { grid-template-columns: 1fr; }
+    .gb-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 16px 60px; }
+    .hero { padding: 48px 16px; }
+    .topnav { padding: 10px 16px; gap: 14px; }
+  }
+  @media print {
+    .topnav { position: static; }
+    .bar-fill { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <span class="topnav-brand">Auditoría Negocio</span>
+  <a href="#resumen">Resumen</a>
+  <a href="#areas">Áreas</a>
+  <a href="#incoherencias">Incoherencias</a>
+  <a href="#journey">Customer Journey</a>
+  <a href="#competencia">Competencia</a>
+  <a href="#plan">Plan de acción</a>
+  <a href="#quickwins">Quick Wins</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Auditoría de Negocio Digital</div>
+  <div class="hero-name">MILENA'S SHOES</div>
+  <div class="hero-sub">milenashoes.online &nbsp;·&nbsp; @milenashoes26 &nbsp;·&nbsp; Cali, Colombia &nbsp;·&nbsp; 29 jun 2026</div>
+  <div class="score-ring">
+    <svg viewBox="0 0 180 180">
+      <circle class="track" cx="90" cy="90" r="80"/>
+      <circle class="fill-y" cx="90" cy="90" r="80" stroke-linecap="round" style="stroke-dasharray:502; stroke-dashoffset: calc(502 - 502 * 64 / 100)"/>
+    </svg>
+    <div class="score-center">
+      <div class="score-num">64</div>
+      <div class="score-label">/ 100</div>
+    </div>
+  </div>
+  <div class="score-level">⚡ Negocio funcional con grandes oportunidades sin explotar</div>
+</div>
+
+<div class="container">
+
+  <!-- RESUMEN EJECUTIVO -->
+  <div class="section" id="resumen">
+    <div class="section-title">Resumen ejecutivo</div>
+    <div class="resumen-block">
+      <p><strong>¿Dónde está Milena's Shoes hoy?</strong> Es un negocio digital joven pero con una base sólida: web profesional, catálogo de 157 productos, Google Business verificado y presencia en Instagram. La operación está 100% en WhatsApp, lo que da agilidad pero limita el crecimiento escalable. Los clientes que llegan compran (hay testimonios reales), pero el negocio no tiene sistema para captarlos, fidelizarlos ni hacer que vuelvan.</p>
+      <p><strong>El problema principal:</strong> Milena's Shoes vive del descubrimiento orgánico (Google, Instagram, boca a boca) sin ningún mecanismo para convertir visitantes en base de datos propia. Cuando alguien llega a la web, puede comprar por WhatsApp o irse — y si se va, nunca más hay forma de contactarlo. No hay email, no hay newsletter, no hay retargeting. Cada venta es de adquisición fría, lo más caro del marketing. Además, los competidores directos como Bodegas Zapatillas Cali ofrecen el mismo tipo de producto desde <strong>$90.000 COP</strong> — $40.000 menos que el precio mínimo de Milena's — sin una diferenciación de marca clara que justifique el precio premium.</p>
+      <p><strong>La oportunidad:</strong> El diferenciador real de Milena's Shoes no son los zapatos — son los <strong>kits de regalo</strong> (zapatos + rosa + chocolatina + tarjeta). Ningún competidor identificado ofrece esto. Si Milena's se posiciona agresivamente como "la tienda de regalos de zapatos" y no solo como "tienda de zapatos", puede escapar de la guerra de precios con los bodegas. Combinado con un sistema básico de captación (WhatsApp Business API, link en bio de Instagram a oferta específica, más reseñas en Google), se puede duplicar las conversiones sin aumentar el presupuesto publicitario.</p>
+    </div>
+  </div>
+
+  <!-- MÉTRICAS -->
+  <div class="section">
+    <div class="section-title">Métricas clave del negocio</div>
+    <div class="cards-4">
+      <div class="card c-gold">
+        <div class="card-num">157</div>
+        <div class="card-label">Productos en catálogo</div>
+      </div>
+      <div class="card c-green">
+        <div class="card-num">+50</div>
+        <div class="card-label">Clientes felices</div>
+      </div>
+      <div class="card c-red">
+        <div class="card-num">6</div>
+        <div class="card-label">Reseñas en Google</div>
+      </div>
+      <div class="card c-yellow">
+        <div class="card-num">0</div>
+        <div class="card-label">Emails capturados</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÁREAS -->
+  <div class="section" id="areas">
+    <div class="section-title">Puntuación por área</div>
+    <div class="areas-grid">
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">🌐 Web &amp; UX</span>
+          <span class="area-score score-g">82/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:82%"></div></div>
+        <div class="area-notes">Web muy profesional para una tienda en este segmento. Diseño premium, mobile responsive, rápida (0.76s). CTAs de WhatsApp claros y en múltiples puntos. La sección de kits es un activo diferenciador. Puntos negativos: sin formulario de captación, precios inconsistentes entre secciones.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">🔍 SEO</span>
+          <span class="area-score score-g">82/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:82%"></div></div>
+        <div class="area-notes">Base SEO sólida: meta tags, schema, sitemap, robots.txt. Debilidades en imágenes (sin ALT), inconsistencias en conteos de productos, title ligeramente largo. Ver informe SEO completo para detalles.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">📸 Redes Sociales (Instagram)</span>
+          <span class="area-score score-y">55/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:55%"></div></div>
+        <div class="area-notes">Solo se usa Instagram. Presencia activa pero sin datos de seguidores para comparar (perfil no accesible en auditoría automática). El principal competidor Pasos Shoes tiene 107K seguidores — esto muestra el potencial del canal. Sin TikTok, sin Facebook, sin YouTube. El link en bio debería apuntar a una oferta concreta, no a la home genérica.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">📣 Anuncios (Meta Ads)</span>
+          <span class="area-score score-r">20/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-r" style="width:20%"></div></div>
+        <div class="area-notes">Sin anuncios detectados en Meta Ads Library. El crecimiento actual depende 100% de alcance orgánico. Para un negocio en la fase actual, la publicidad pagada (incluso $50-100K COP/mes) podría triplicar el alcance de forma inmediata. Esta es la mayor oportunidad sin explotar.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">✍️ Copy &amp; Comunicación</span>
+          <span class="area-score score-y">72/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:72%"></div></div>
+        <div class="area-notes">El tono caleño es un activo (naturales, directos, con personalidad). "Pisa fuerte. Luce diferente." es un buen slogan. Sin embargo, hay inconsistencias de precio entre secciones y el kit de regalo no tiene una página de ventas dedicada con toda la argumentación de valor. Los CTAs son buenos pero genéricos.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">💰 Oferta &amp; Precios</span>
+          <span class="area-score score-y">68/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:68%"></div></div>
+        <div class="area-notes">Rango de precios $130K-$185K COP cuando el competidor directo (Bodegas Zapatillas Cali) empieza en $90K. El diferenciador son los kits de regalo — pero sin una landing específica que justifique el precio premium. El "Kit Día de Madres" no está vigente (pasó en mayo 2026) y sigue en la web sin actualizar.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">🗺️ Customer Journey (pre+post)</span>
+          <span class="area-score score-r">42/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-r" style="width:42%"></div></div>
+        <div class="area-notes">El embudo pre-venta existe y funciona (descubrimiento → WhatsApp → compra). El post-venta prácticamente no existe: no hay email de seguimiento, no se piden reseñas sistemáticamente, no hay upsell ni cross-sell, no hay programa de referidos. El 80% de los ingresos vendrá siempre de clientes nuevos en vez de clientes que repiten.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">📍 Google Business</span>
+          <span class="area-score score-y">65/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:65%"></div></div>
+        <div class="area-notes">Ficha verificada en Google Maps ✅. Rating 5 estrellas. PROBLEMA: solo 6 reseñas — insuficiente para aparecer en resultados locales de Google con destaque. Competidores con más reseñas ganarán visibilidad. Urge pedir reseñas a los 50+ clientes satisfechos.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">📝 Contenido</span>
+          <span class="area-score score-y">60/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:60%"></div></div>
+        <div class="area-notes">Buen contenido en la landing (historia, kits, testimonios). Sin embargo, no hay blog, no hay contenido educativo ("cómo elegir talla", "guía de tenis 2026"), no hay Reels educativos. El contenido es 100% de venta directa, lo que limita el alcance orgánico en Instagram y Google.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">⭐ Reputación</span>
+          <span class="area-score score-y">65/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:65%"></div></div>
+        <div class="area-notes">5 estrellas en todas las reseñas es excelente. Los testimonios en la web son auténticos y con lenguaje caleño real. Problemas: solo 6 reseñas en Google (se necesitan mínimo 25-30 para ganar visibilidad local), y no se sabe si responde a las reseñas.</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">🎨 Coherencia de Marca</span>
+          <span class="area-score score-g">78/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-g" style="width:78%"></div></div>
+        <div class="area-notes">Diseño consistente (negro, dorado, tipografía premium). El concepto "premium" de la web no choca con el producto. Incoherencia menor: se menciona "réplicas exactas" en los stats de la web pero los testimonios refuerzan calidad genuina — hay que decidir si el mensaje es "calidad" o "réplicas buenas".</div>
+      </div>
+
+      <div class="area-card">
+        <div class="area-header">
+          <span class="area-name">🏆 Competencia</span>
+          <span class="area-score score-y">55/100</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill bar-y" style="width:55%"></div></div>
+        <div class="area-notes">Mercado muy competido. Bodegas con precios desde $90K, Pasos Shoes con 107K seguidores, Calzatodo y Bata con presencia nacional. Milena's tiene el diferenciador correcto (kits de regalo) pero no lo comunica con suficiente fuerza para justificar el precio premium.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INCOHERENCIAS -->
+  <div class="section" id="incoherencias">
+    <div class="section-title">Incoherencias y errores detectados</div>
+    <div class="incoh-list">
+
+      <div class="incoh-item alta">
+        <div class="incoh-header">
+          <span class="incoh-badge">Alta</span>
+          <span class="incoh-title">Kit "Día de Madres" vigente en la web — el evento pasó en mayo</span>
+        </div>
+        <p class="incoh-desc">La sección de kits menciona explícitamente el "Día de las Madres" y el banner festivo probablemente sigue siendo el de mayo. Un cliente que llega hoy en junio ve una promoción caducada, lo que genera desconfianza y sensación de abandono del sitio.</p>
+        <div class="incoh-fix">→ Actualizar la sección de kits a un mensaje genérico de regalo (cumpleaños, aniversario, etc.) y cambiar el banner festivo. El próximo evento grande es el Día del Padre (21 jun, ya pasó también) — apuntar a Amor y Amistad (septiembre).</div>
+      </div>
+
+      <div class="incoh-item alta">
+        <div class="incoh-header">
+          <span class="incoh-badge">Alta</span>
+          <span class="incoh-title">Precios contradictorios en la misma web</span>
+        </div>
+        <p class="incoh-desc">El hero dice "desde <strong>$130.000 COP</strong>". La sección de contacto dice "<strong>$100K–$160K</strong>". La meta description dice "Desde <strong>$100.000 COP</strong>". Tres precios distintos en el mismo sitio. Esto confunde al cliente y puede hacerle pensar que hay engaño en el precio.</p>
+        <div class="incoh-fix">→ Definir UN precio mínimo oficial y usarlo en todas partes. Si el mínimo real es $130.000, corregir la sección de contacto y la meta description.</div>
+      </div>
+
+      <div class="incoh-item alta">
+        <div class="incoh-header">
+          <span class="incoh-badge">Alta</span>
+          <span class="incoh-title">Se menciona "Efectivo contra entrega" como medio de pago — pero la política dice que no hay contraentrega</span>
+        </div>
+        <p class="incoh-desc">La sección de medios de pago muestra una tarjeta "Efectivo — Contra entrega". Pero el CLAUDE.md y la política del negocio dicen expresamente: "sin contraentrega". Esto puede generar expectativas falsas en clientes y convertirse en un problema de servicio.</p>
+        <div class="incoh-fix">→ Eliminar la tarjeta de "Efectivo contra entrega" de la sección de pagos, o cambiarla a "Efectivo en punto" si aplica, o simplemente quitarla.</div>
+      </div>
+
+      <div class="incoh-item media">
+        <div class="incoh-header">
+          <span class="incoh-badge">Media</span>
+          <span class="incoh-title">"Réplicas exactas 1.1" en los stats vs mensajes de calidad en testimonios</span>
+        </div>
+        <p class="incoh-desc">En la sección "Sobre Nosotros" hay un stat que dice "Réplicas exactas — 1.1". Los testimonios dicen "tenía miedo que fueran réplicas malas pero están muy bien hechos". El mensaje envía señales mixtas: ¿son réplicas o son originales? Hay que elegir el posicionamiento.</p>
+        <div class="incoh-fix">→ Cambiar el stat a algo que refuerce calidad: "Calidad certificada", "Materiales premium", o directamente eliminar la referencia a "réplicas" del stat público.</div>
+      </div>
+
+      <div class="incoh-item media">
+        <div class="incoh-header">
+          <span class="incoh-badge">Media</span>
+          <span class="incoh-title">Sin sistema de captura de leads — cada venta parte de cero</span>
+        </div>
+        <p class="incoh-desc">No hay formulario, no hay pop-up de oferta, no hay descuento a cambio de WhatsApp o email. Los 50+ clientes satisfechos son contactos perdidos si no guardan el número de Milena's Shoes. Sin base de datos propia, no hay forma de lanzar ofertas o novedades a clientes anteriores.</p>
+        <div class="incoh-fix">→ Implementar un CTA de "Únete a nuestra lista de novedades" que lleve al WhatsApp o recoja email. Incluso un simple formulario de Google Forms integrado ya cambia el panorama.</div>
+      </div>
+
+      <div class="incoh-item media">
+        <div class="incoh-header">
+          <span class="incoh-badge">Media</span>
+          <span class="incoh-title">PSE, Visa y Mastercard en los medios de pago sin plataforma de pagos online</span>
+        </div>
+        <p class="incoh-desc">La web muestra PSE, Visa y Mastercard como opciones. Si no hay una pasarela de pagos configurada (Wompi, PayU, MercadoPago), esto es promesa falsa. Se aclara que es "vía link de pago" con una nota pequeña, pero la visualización principal puede generar expectativas erróneas.</p>
+        <div class="incoh-fix">→ Aclarar más visible que el pago con tarjeta es manual vía link enviado por WhatsApp, o eliminar esas tarjetas si no se usan regularmente.</div>
+      </div>
+
+      <div class="incoh-item baja">
+        <div class="incoh-header">
+          <span class="incoh-badge">Baja</span>
+          <span class="incoh-title">176 modelos en el texto del carrusel vs 157 en la base de datos</span>
+        </div>
+        <p class="incoh-desc">El subtítulo del carrusel dice "176 modelos en stock" pero el CATALOG tiene 157 productos. La meta description del catálogo dice "169 modelos". Números inconsistentes que ningún cliente verifica, pero que pueden afectar la confianza si se nota.</p>
+        <div class="incoh-fix">→ Unificar el número de productos en todas las menciones: hero, catálogo, meta description y schema.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CUSTOMER JOURNEY -->
+  <div class="section" id="journey">
+    <div class="section-title">Mapa del Customer Journey completo</div>
+    <div class="journey-wrap">
+      <div class="journey">
+        <div class="journey-phase">
+          <div class="jp-icon">🔍</div>
+          <div class="jp-title">Descubrimiento</div>
+          <div class="jp-status jp-ok">Funciona</div>
+          <div class="jp-notes">Google orgánico, Instagram, boca a boca entre amigos caleños. El SEO básico funciona.</div>
+        </div>
+        <div class="journey-phase">
+          <div class="jp-icon">👀</div>
+          <div class="jp-title">Primera visita</div>
+          <div class="jp-status jp-ok">Buena</div>
+          <div class="jp-notes">Web profesional, carga rápida. La primera impresión es premium. Se entiende qué vende en 5 segundos.</div>
+        </div>
+        <div class="journey-phase">
+          <div class="jp-icon">🛍️</div>
+          <div class="jp-title">Interés</div>
+          <div class="jp-status jp-ok">Bueno</div>
+          <div class="jp-notes">Carrusel, catálogo con filtros, kits visuales. El cliente puede explorar fácilmente.</div>
+        </div>
+        <div class="journey-phase">
+          <div class="jp-icon">💬</div>
+          <div class="jp-title">Contacto WA</div>
+          <div class="jp-status jp-ok">Fuerte</div>
+          <div class="jp-notes">Múltiples CTAs de WhatsApp. El proceso de contactar es simple y rápido.</div>
+        </div>
+        <div class="journey-phase">
+          <div class="jp-icon">💳</div>
+          <div class="jp-title">Compra</div>
+          <div class="jp-status jp-warn">Mejorable</div>
+          <div class="jp-notes">Pago anticipado requerido. Sin pasarela. Genera fricción en clientes nuevos sin confianza previa.</div>
+        </div>
+        <div class="journey-phase">
+          <div class="jp-icon">📦</div>
+          <div class="jp-title">Post-venta</div>
+          <div class="jp-status jp-missing">No existe</div>
+          <div class="jp-notes">Sin seguimiento, sin email, sin encuesta de satisfacción, sin petición de reseña sistematizada.</div>
+        </div>
+        <div class="journey-phase">
+          <div class="jp-icon">🔄</div>
+          <div class="jp-title">Retención</div>
+          <div class="jp-status jp-missing">No existe</div>
+          <div class="jp-notes">Sin newsletter, sin comunidad, sin programa de referidos. El cliente satisfecho no tiene incentivo para volver o recomendar.</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px; padding:16px 20px; background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); font-size:12px; color:#f87171;">
+      ⚠️ <strong>El embudo se rompe después de la compra.</strong> Los clientes satisfechos son la fuente de crecimiento más económica. Sin post-venta, Milena's Shoes pierde referidos naturales y recompras. Con solo pedir una reseña en Google a cada cliente, en 3 meses se puede pasar de 6 a 50+ reseñas.
+    </div>
+  </div>
+
+  <!-- ADS -->
+  <div class="section">
+    <div class="section-title">Análisis de Anuncios (Meta Ads)</div>
+    <div class="ads-block">
+      <div class="ads-title">❌ Sin anuncios activos en Meta Ads Library</div>
+      <div class="ads-body">
+        No se detectaron anuncios activos en Facebook/Instagram Ads. El crecimiento es 100% orgánico.<br><br>
+        <strong>¿Debería invertir en publicidad?</strong> Sí, especialmente para:<br>
+        • <strong>Retargeting</strong>: personas que visitaron la web pero no contactaron (requiere pixel de Meta instalado)<br>
+        • <strong>Anuncios de kits de regalo</strong> en fechas especiales (Amor y Amistad septiembre, Navidad, Día de la Madre)<br>
+        • <strong>Alcance local en Cali y Jamundí</strong> — segmentación por ciudad desde $30.000 COP/día<br><br>
+        Un presupuesto de <strong>$150.000-$300.000 COP/mes</strong> bien optimizado puede generar 5-10x el retorno en ventas de zapatos.<br><br>
+        <strong>Primer anuncio recomendado:</strong> Video de 15 segundos mostrando un kit de regalo siendo armado + precio $178.000 COP + "envío gratis en Cali" → link a WhatsApp directo.
+      </div>
+    </div>
+  </div>
+
+  <!-- COPY -->
+  <div class="section">
+    <div class="section-title">Análisis del Copy</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+
+      <div class="copy-example">
+        <div class="copy-label copy-antes">❌ Antes — CTA genérico</div>
+        <p class="copy-text">"Ver Colecciones" — cualquier tienda usa esto</p>
+      </div>
+      <div class="copy-example">
+        <div class="copy-label copy-despues">✅ Después — CTA específico con beneficio</div>
+        <p class="copy-text">"Ver los 157 modelos disponibles" o "Ver zapatos para mujer" / "Ver zapatos para hombre"</p>
+      </div>
+
+      <div class="copy-example">
+        <div class="copy-label copy-antes">❌ Antes — sobre nosotros genérico</div>
+        <p class="copy-text">"En Milena's Shoes creemos que el calzado correcto transforma cómo te sientes." — cualquier tienda de zapatos diría esto</p>
+      </div>
+      <div class="copy-example">
+        <div class="copy-label copy-despues">✅ Después — específico y diferenciador</div>
+        <p class="copy-text">"En Milena's Shoes traemos las referencias más buscadas directamente desde la fuente — para que en Cali uses lo mismo que se usa en Medellín y Bogotá, a un precio justo."</p>
+      </div>
+
+      <div class="copy-example">
+        <div class="copy-label copy-antes">❌ Antes — sección de kits sin urgencia ni objeción resuelta</div>
+        <p class="copy-text">Solo se describe el kit, sin resolver la objeción "¿y si no le gusta la talla?"</p>
+      </div>
+      <div class="copy-example">
+        <div class="copy-label copy-despues">✅ Después — responde objeciones</div>
+        <p class="copy-text">"¿Y si no le queda? Hacemos cambio de talla por una sola vez. Tú te luciste, nosotros lo resolvemos."</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GOOGLE BUSINESS -->
+  <div class="section">
+    <div class="section-title">Google Business Profile</div>
+    <div class="gb-grid">
+      <div class="gb-stat">
+        <div class="gb-stat-n" style="color:var(--green)">✅</div>
+        <div class="gb-stat-l">Ficha verificada</div>
+      </div>
+      <div class="gb-stat">
+        <div class="gb-stat-n">5.0 ⭐</div>
+        <div class="gb-stat-l">Calificación promedio</div>
+      </div>
+      <div class="gb-stat">
+        <div class="gb-stat-n" style="color:var(--red)">6</div>
+        <div class="gb-stat-l">Reseñas totales (muy pocas)</div>
+      </div>
+      <div class="gb-stat">
+        <div class="gb-stat-n" style="color:var(--yellow)">?</div>
+        <div class="gb-stat-l">No se pudo verificar si responde reseñas</div>
+      </div>
+    </div>
+    <div style="margin-top:16px; padding:16px 20px; background:var(--bg2); border:1px solid var(--border2); font-size:12px; color:var(--muted);">
+      <strong style="color:var(--text)">Acción urgente:</strong> Con 50+ clientes satisfechos y solo 6 reseñas en Google, hay un gap enorme. Enviar mensaje de WhatsApp a cada cliente después de la entrega: "¡Hola! Espero que te llegaron geniales. Si tienes un minuto, ¿me regalas una reseña en Google? Me ayuda muchísimo 🙏 [link]". Con 20+ reseñas, Google Business empieza a mostrar la ficha en búsquedas locales de forma prominente.
+    </div>
+  </div>
+
+  <!-- COMPETENCIA -->
+  <div class="section" id="competencia">
+    <div class="section-title">Análisis de competencia</div>
+    <div class="table-wrap" style="overflow-x:auto">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>Milena's Shoes</th>
+            <th>Bodegas Zapatillas Cali</th>
+            <th>Pasos Shoes (IG)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Precio mínimo</td>
+            <td class="milena">$130.000 COP</td>
+            <td class="comp-win">$90.000 COP ✅ más barato</td>
+            <td>N/D</td>
+          </tr>
+          <tr>
+            <td>Web propia</td>
+            <td class="milena comp-win">✅ Profesional</td>
+            <td>✅ Existe</td>
+            <td class="comp-lose">❌ Solo Instagram</td>
+          </tr>
+          <tr>
+            <td>Catálogo digital</td>
+            <td class="milena comp-win">✅ 157 productos con filtros</td>
+            <td>✅ Sí</td>
+            <td>Solo Stories/posts</td>
+          </tr>
+          <tr>
+            <td>Seguidores Instagram</td>
+            <td class="milena comp-lose">❌ Datos no disponibles (inicio)</td>
+            <td>N/D</td>
+            <td class="comp-win">107.000 seguidores ✅</td>
+          </tr>
+          <tr>
+            <td>Kits de regalo</td>
+            <td class="milena comp-win">✅ ÚNICO diferenciador claro</td>
+            <td class="comp-lose">❌ No</td>
+            <td class="comp-lose">❌ No</td>
+          </tr>
+          <tr>
+            <td>Envío nacional</td>
+            <td class="milena comp-lose">Solo Cali + Jamundí (limitado)</td>
+            <td class="comp-win">✅ Nacional</td>
+            <td class="comp-win">✅ Nacional</td>
+          </tr>
+          <tr>
+            <td>Google Business</td>
+            <td class="milena comp-win">✅ 5⭐ (6 reseñas)</td>
+            <td>N/D</td>
+            <td class="comp-lose">❌ No detectado</td>
+          </tr>
+          <tr>
+            <td>Publicidad pagada</td>
+            <td class="milena comp-lose">❌ No</td>
+            <td>Probable</td>
+            <td>Probable</td>
+          </tr>
+          <tr>
+            <td>Sistema post-venta</td>
+            <td class="milena comp-lose">❌ No</td>
+            <td>N/D</td>
+            <td>N/D</td>
+          </tr>
+          <tr>
+            <td>Diseño web / marca</td>
+            <td class="milena comp-win">✅ Premium — el mejor</td>
+            <td>Funcional</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px; padding:14px 18px; background:var(--bg2); border:1px solid var(--border2); font-size:12px; color:var(--muted);">
+      <strong style="color:var(--text)">Oportunidad de diferenciación:</strong> Milena's Shoes es el único negocio en el nicho con web premium + kits de regalo + Google Business verificado. Si además añade un sistema de reseñas activo y publicidad de kits en fechas especiales, puede capturar el segmento "regalo especial" que los competidores ignoran completamente.
+    </div>
+  </div>
+
+  <!-- PLAN DE ACCIÓN -->
+  <div class="section" id="plan">
+    <div class="section-title">Plan de acción priorizado</div>
+    <div style="overflow-x:auto">
+      <table class="plan-table">
+        <thead>
+          <tr>
+            <th>Prioridad</th>
+            <th>Acción</th>
+            <th>Impacto esperado</th>
+            <th>Esfuerzo</th>
+            <th>Área</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-alta">Alta</span></td>
+            <td>Corregir precio inconsistente ($130K en todas partes)</td>
+            <td>Confianza del cliente</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>Web</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-alta">Alta</span></td>
+            <td>Eliminar "Efectivo contra entrega" de medios de pago</td>
+            <td>Evitar fraudes/malentendidos</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>Web</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-alta">Alta</span></td>
+            <td>Actualizar sección de kits (quitar "Día de Madres")</td>
+            <td>Relevancia del contenido</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>Web</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-alta">Alta</span></td>
+            <td>Pedir reseña a cada cliente post-compra (mensaje plantilla WA)</td>
+            <td>+20 reseñas = mejor posicionamiento Google local</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>Google Business</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-alta">Alta</span></td>
+            <td>Añadir ALT descriptivos a todas las imágenes (ver informe SEO)</td>
+            <td>SEO de imágenes, accesibilidad</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>SEO</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-media">Media</span></td>
+            <td>Cambiar stat "Réplicas exactas 1.1" por mensaje de calidad</td>
+            <td>Coherencia de marca</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>Branding</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-media">Media</span></td>
+            <td>Crear landing específica para Kits de Regalo (Amor y Amistad)</td>
+            <td>Conversión, diferenciación</td>
+            <td><span class="tag tag-medio">Medio</span></td>
+            <td>Web / Oferta</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-media">Media</span></td>
+            <td>Activar primer anuncio en Meta Ads (video kit de regalo)</td>
+            <td>Alcance x3-5 inmediato</td>
+            <td><span class="tag tag-medio">Medio</span></td>
+            <td>Ads</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-media">Media</span></td>
+            <td>Implementar enlace de reseña Google en perfil WhatsApp Business</td>
+            <td>Reseñas automáticas sin esfuerzo extra</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>Reputación</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-media">Media</span></td>
+            <td>Unificar número de productos en toda la web (157)</td>
+            <td>Consistencia, confianza</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>Contenido</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-baja">Baja</span></td>
+            <td>Abrir TikTok con videos de unboxing de kits</td>
+            <td>Alcance orgánico masivo</td>
+            <td><span class="tag tag-medio">Medio</span></td>
+            <td>Redes Sociales</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-baja">Baja</span></td>
+            <td>Sistema básico de post-venta: mensaje WA + link reseña 2 días post-entrega</td>
+            <td>Reseñas, recurrencia</td>
+            <td><span class="tag tag-bajo">Bajo</span></td>
+            <td>Customer Journey</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-baja">Baja</span></td>
+            <td>Evaluar expansión de envíos a nivel nacional (Medellín, Bogotá)</td>
+            <td>Mercado x5 potencial</td>
+            <td><span class="tag tag-alto">Alto</span></td>
+            <td>Oferta</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- QUICK WINS -->
+  <div class="section" id="quickwins">
+    <div class="section-title">Quick Wins — Lo que puedes hacer esta semana</div>
+    <div class="qw-grid">
+
+      <div class="qw-card">
+        <div class="qw-num">01</div>
+        <div class="qw-title">Mensaje de WhatsApp post-compra para reseñas</div>
+        <div class="qw-desc">Crea una plantilla de mensaje en WhatsApp Business: "¡Hola [nombre]! Espero que tus zapatos llegaron perfectos 👟 Si tienes un minutico, ¿me regalas una reseñita en Google? Me ayuda un montón: [link]". Envía a todos los clientes anteriores.</div>
+        <div class="qw-result">📈 En 2-3 semanas: 20+ reseñas → mayor visibilidad en Google Maps</div>
+        <div class="qw-time">⏱️ 30 minutos de configuración</div>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-num">02</div>
+        <div class="qw-title">Corregir precios, "contra entrega" y datos inconsistentes</div>
+        <div class="qw-desc">3 cambios rápidos en la web: (1) Cambiar "$100K-$160K" en contacto a "$130.000-$185.000 COP", (2) Eliminar tarjeta "Efectivo contra entrega", (3) Actualizar todos los conteos de productos a 157. Son edits de 5 minutos en el HTML.</div>
+        <div class="qw-result">📈 Confianza del cliente, menos preguntas sobre precios por WA</div>
+        <div class="qw-time">⏱️ 20 minutos</div>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-num">03</div>
+        <div class="qw-title">Actualizar sección de kits para Amor y Amistad</div>
+        <div class="qw-desc">Cambiar el banner festivo y el texto de kits de "Día de las Madres" a "Amor y Amistad" (septiembre) o a un mensaje genérico de regalo. Fotografiar un kit nuevo si hay. Esta sección es el mayor diferenciador del negocio y debe estar siempre vigente.</div>
+        <div class="qw-result">📈 Kits como diferenciador permanente, no estacional</div>
+        <div class="qw-time">⏱️ 1-2 horas (incluye foto si aplica)</div>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-num">04</div>
+        <div class="qw-title">Añadir ALT a las imágenes del catálogo</div>
+        <div class="qw-desc">Siguiendo las instrucciones del informe SEO: añadir alt="[Marca] [Modelo] [género] [talla] Cali Colombia" a cada imagen del catálogo. Es trabajo mecánico pero tiene impacto directo en las búsquedas de Google Imágenes, que es un canal enorme para zapatos.</div>
+        <div class="qw-result">📈 Tráfico desde Google Imágenes en 4-6 semanas</div>
+        <div class="qw-time">⏱️ 2-3 horas (puede hacerse por bloques)</div>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-num">05</div>
+        <div class="qw-title">Primer Reel de TikTok/Instagram: unboxing de kit</div>
+        <div class="qw-desc">Filmar con el celular el proceso completo de armar un kit de regalo: zapatos → rosa → chocolatina → tarjeta → empacar con papel de regalo. Música trending. Caption: "El regalo perfecto existe 🎁 $178.000 COP con envío en Cali". Es el tipo de contenido que se viraliza en Colombia.</div>
+        <div class="qw-result">📈 Alcance orgánico potencial: miles de views sin inversión</div>
+        <div class="qw-time">⏱️ 30 minutos de grabación + 20 de edición</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<div class="rpt-footer">
+  Auditoría de Negocio Digital generada el 29 de junio de 2026 · Milena's Shoes — milenashoes.online · Herramienta: Claude Code
+</div>
+
+</body>
+</html>
