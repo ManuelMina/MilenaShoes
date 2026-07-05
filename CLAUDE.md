@@ -29,22 +29,24 @@ MILENASHOES/
 │   ├── auditoria-seo-milenashoes.html
 │   └── auditoria-negocio-milenashoes.html
 └── assets/
-    ├── logo.png                    # Logo (mantener en PNG para favicon)
+    ├── logo.webp                   # Logo (favicon + nav)
     ├── og-cover.webp               # Imagen Open Graph
     ├── banner-festivo.webp         # Banner sección festiva
     ├── Banner/
-    │   ├── BANNER-1.webp           # Banner hero principal
+    │   ├── BANNER-PC.webp          # Banner hero — escritorio/tablet (picture > source por defecto)
+    │   ├── BANNER-CEL.webp         # Banner hero — móvil (picture > source max-width:700px)
     │   ├── PROMO-1.webp … PROMO-4.webp  # Banners promocionales (medias gratis)
-    │   ├── Banner1.webp, Banner2.webp   # Banners anteriores
-    ├── 1.webp … 161.webp          # Fotos de productos (convertidas a WebP)
+    ├── 1.webp … 185.webp          # Fotos de productos (WebP, numeración = ID del Excel)
     ├── galeria-1.webp … galeria-5.webp  # Fotos de galería
     └── LISTA ZAPATILLAS.xlsx       # BASE DE DATOS MAESTRA del inventario
+
+Nota: "Sin uso/" en la raíz del proyecto guarda banners descartados (versiones viejas del hero) pendientes de revisión manual.
 ```
 
 ## Estructura de páginas (v3 jun-2026)
 
 ### index.html — Secciones en orden:
-1. `#inicio` — Banner hero (BANNER-1.webp) — link a productos.html
+1. `#inicio` — Banner hero responsive (`<picture>`: BANNER-CEL.webp en móvil ≤700px, BANNER-PC.webp en el resto) — link a productos.html
 2. `#novedades` — Carrusel de productos populares (15 modelos)
 3. `#promociones` — Grid 2×2 de banners PROMO-1 a PROMO-4 (link a WA)
 4. `#colecciones` — Cards mujer / hombre → link a productos.html?gen=M/H
