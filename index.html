@@ -7,7 +7,7 @@
   <title>Milena's Shoes | Zapatos Deportivos Cali Colombia</title>
 
   <!-- SEO -->
-  <meta name="description" content="Tienda online de zapatos deportivos para hombre y mujer en Cali, Colombia. 157 modelos Nike, Adidas, Jordan y más. Desde $130.000 COP. Envíos a todo Colombia.">
+  <meta name="description" content="Tienda online de zapatos deportivos para hombre y mujer en Cali, Colombia. 358 modelos Nike, Adidas, Jordan y más. Desde $130.000 COP. Envíos a todo Colombia.">
   <meta name="keywords" content="zapatos deportivos Cali, zapatos mujer Colombia, zapatos hombre Cali, comprar zapatos online Colombia, Nike Adidas Jordan Cali, tienda zapatos Cali, Milena's Shoes">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Milena's Shoes">
@@ -18,15 +18,17 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://milenashoes.online">
   <meta property="og:title" content="Milena's Shoes | Zapatos Deportivos — Todo Colombia">
-  <meta property="og:description" content="157 modelos de zapatos deportivos para hombre y mujer desde $130.000 COP. Envíos a todo Colombia. Pide por WhatsApp.">
+  <meta property="og:description" content="358 modelos de zapatos deportivos para hombre y mujer desde $130.000 COP. Envíos a todo Colombia. Pide por WhatsApp.">
   <meta property="og:image" content="https://milenashoes.online/assets/og-cover.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="es_CO">
   <meta property="og:site_name" content="Milena's Shoes">
 
   <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Milena's Shoes | Zapatos Deportivos Cali Colombia">
-  <meta name="twitter:description" content="157 modelos Nike, Adidas, Jordan y más desde $130.000 COP. Envíos a todo Colombia.">
+  <meta name="twitter:description" content="358 modelos Nike, Adidas, Jordan y más desde $130.000 COP. Envíos a todo Colombia.">
   <meta name="twitter:image" content="https://milenashoes.online/assets/og-cover.webp">
 
   <!-- Favicon -->
@@ -42,7 +44,7 @@
     "@context": "https://schema.org",
     "@type": "Store",
     "name": "Milena's Shoes",
-    "description": "Tienda online de zapatos deportivos para hombre y mujer en Cali, Colombia. 157 modelos Nike, Adidas, Jordan y más. Envíos a todo Colombia.",
+    "description": "Tienda online de zapatos deportivos para hombre y mujer en Cali, Colombia. 358 modelos Nike, Adidas, Jordan y más. Envíos a todo Colombia.",
     "url": "https://milenashoes.online",
     "telephone": "+573227155957",
     "image": "https://milenashoes.online/assets/og-cover.webp",
@@ -418,7 +420,7 @@
   <div class="s-center">
     <p class="s-tag rv">Disponibles ahora</p>
     <h2 class="s-h2 rv d1">Zapatos Deportivos más <em>populares</em></h2>
-    <p class="s-body rv d2" style="max-width:480px;margin:0 auto">157 modelos en stock. Haz click en cualquier zapato para pedir por WhatsApp.</p>
+    <p class="s-body rv d2" id="novedades-count" style="max-width:480px;margin:0 auto">Recién llegados. Haz click en cualquier zapato para pedir por WhatsApp.</p>
   </div>
   <div class="carousel-wrap">
     <div class="carousel-track" id="carouselTrack"></div>
@@ -892,7 +894,8 @@
   // ── CARRUSEL ──
   (function() {
     var WA = '573227155957';
-    var carProds = [
+    var NEW_ARRIVALS_FROM = 186; // IDs >= este numero se consideran "recien llegados"
+    var FALLBACK = [
       {id:1,  g:"H", m:"NIKE",        r:"AF1 SAIL RIPSTOP",       t:"EU 40-44", p:145000},
       {id:27, g:"U", m:"VANS",        r:"VANS HYLANE",            t:"EU 36-44", p:145000},
       {id:23, g:"H", m:"JORDAN",      r:"JORDAN RETRO 1 LOW",     t:"EU 40-44", p:145000},
@@ -935,7 +938,36 @@
       });
       return card;
     }
-    carProds.concat(carProds).forEach(function(p) { track.appendChild(makeCarCard(p)); });
+    function shuffle(arr) {
+      for (var i = arr.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+      }
+      return arr;
+    }
+    function pickNewArrivals(list, perSide) {
+      var news = list.filter(function(p) { return p.id >= NEW_ARRIVALS_FROM; });
+      var hombres = shuffle(news.filter(function(p) { return p.g === 'H'; }));
+      var mujeres = shuffle(news.filter(function(p) { return p.g === 'M'; }));
+      var picked = [];
+      for (var i = 0; i < perSide; i++) {
+        if (hombres[i]) picked.push(hombres[i]);
+        if (mujeres[i]) picked.push(mujeres[i]);
+      }
+      return picked;
+    }
+    function paint(list) {
+      var countEl = document.getElementById('novedades-count');
+      if (countEl) countEl.textContent = list.length + ' modelos en stock. Haz click en cualquier zapato para pedir por WhatsApp.';
+      var items = pickNewArrivals(list, 8);
+      if (items.length === 0) items = FALLBACK;
+      items.concat(items).forEach(function(p) { track.appendChild(makeCarCard(p)); });
+    }
+    fetch('catalogo.json').then(function(r) { return r.json(); }).then(function(data) {
+      paint(data);
+    }).catch(function() {
+      FALLBACK.concat(FALLBACK).forEach(function(p) { track.appendChild(makeCarCard(p)); });
+    });
   })();
 
   // ── PROMO SLIDER ──
