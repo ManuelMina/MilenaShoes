@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoría SEO — milenashoes.online — 2026-07-06</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',Inter,Arial,sans-serif;background:#0a0a0a;color:#eee;line-height:1.6;padding:24px}
+  .wrap{max-width:1000px;margin:0 auto}
+  header{text-align:center;padding:32px 16px;border-bottom:1px solid #2a2a2a;margin-bottom:32px}
+  header h1{font-size:1.6rem;margin-bottom:6px}
+  header .url{color:#C9A84C;font-size:0.95rem}
+  header .date{color:#999;font-size:0.8rem;margin-top:4px}
+  .score-big{font-size:4rem;font-weight:800;margin:20px 0 4px}
+  .score-big.good{color:#2ecc71}
+  .score-big.warn{color:#f1c40f}
+  .score-big.bad{color:#e74c3c}
+  .score-label{font-size:0.85rem;color:#999;text-transform:uppercase;letter-spacing:2px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:36px}
+  .card{background:#141414;border:1px solid #262626;padding:18px;text-align:center;border-radius:6px}
+  .card .num{font-size:1.8rem;font-weight:700}
+  .card .lbl{font-size:0.72rem;color:#999;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+  h2{font-size:1.2rem;margin:36px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a2a;color:#C9A84C}
+  .fix{background:#141414;border:1px solid #262626;border-left:3px solid #C9A84C;padding:16px 18px;margin-bottom:12px;border-radius:0 6px 6px 0}
+  .fix.done{border-left-color:#2ecc71}
+  .fix h3{font-size:0.95rem;margin-bottom:6px}
+  .fix .tag{display:inline-block;font-size:0.65rem;padding:2px 8px;border-radius:10px;margin-left:8px;vertical-align:middle}
+  .tag.done{background:#1e4d2e;color:#2ecc71}
+  .fix p{font-size:0.85rem;color:#ccc;margin:4px 0}
+  .fix code{background:#000;padding:2px 6px;border-radius:3px;font-size:0.78rem;color:#f1c40f}
+  .cat{margin-bottom:20px}
+  .cat-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .cat-hdr .name{font-weight:600}
+  .cat-hdr .pts{font-size:0.85rem;color:#999}
+  .bar{background:#1a1a1a;border-radius:4px;height:10px;overflow:hidden;margin-bottom:10px}
+  .bar-fill{height:100%;border-radius:4px}
+  .bar-fill.good{background:#2ecc71}
+  .bar-fill.warn{background:#f1c40f}
+  .bar-fill.bad{background:#e74c3c}
+  ul.findings{list-style:none;font-size:0.85rem}
+  ul.findings li{padding:4px 0 4px 22px;position:relative;color:#ccc}
+  ul.findings li.ok::before{content:'✓';position:absolute;left:0;color:#2ecc71}
+  ul.findings li.warn::before{content:'!';position:absolute;left:0;color:#f1c40f}
+  ul.findings li.err::before{content:'✕';position:absolute;left:0;color:#e74c3c}
+  table{width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:10px}
+  table th,table td{text-align:left;padding:8px 10px;border-bottom:1px solid #232323}
+  table th{color:#999;font-weight:600;text-transform:uppercase;font-size:0.7rem}
+  footer{text-align:center;color:#666;font-size:0.75rem;margin-top:40px;padding-top:20px;border-top:1px solid #2a2a2a}
+  @media print{body{background:#fff;color:#000}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Auditoría SEO completa</h1>
+    <div class="url">https://milenashoes.online/</div>
+    <div class="date">6 de julio de 2026 · index.html, productos.html, nosotros.html</div>
+    <div class="score-big good">86</div>
+    <div class="score-label">Puntuación global — Bueno</div>
+  </header>
+
+  <div class="cards">
+    <div class="card"><div class="num" style="color:#2ecc71">86/100</div><div class="lbl">Puntuación global</div></div>
+    <div class="card"><div class="num" style="color:#e74c3c">1</div><div class="lbl">Problema crítico</div></div>
+    <div class="card"><div class="num" style="color:#f1c40f">6</div><div class="lbl">Advertencias</div></div>
+    <div class="card"><div class="num" style="color:#2ecc71">27</div><div class="lbl">Tests aprobados</div></div>
+  </div>
+
+  <h2>Top correcciones prioritarias</h2>
+
+  <div class="fix done">
+    <h3>1. nosotros.html no tenía datos estructurados (Schema/JSON-LD) <span class="tag done">Corregido</span></h3>
+    <p><b>Por qué importa:</b> sin Schema, Google no puede entender el contexto de la página como parte del negocio (rich snippets, panel de conocimiento). Era la única de las 3 páginas sin ningún JSON-LD.</p>
+    <p><b>Corrección aplicada:</b> se agregó <code>&lt;script type="application/ld+json"&gt;</code> tipo <code>AboutPage</code> enlazado al <code>Store</code> con nombre, teléfono y dirección.</p>
+  </div>
+
+  <div class="fix done">
+    <h3>2. nosotros.html no tenía Twitter Cards ni og:locale/og:site_name <span class="tag done">Corregido</span></h3>
+    <p><b>Por qué importa:</b> sin estas etiquetas, los links compartidos en X/Twitter no muestran imagen ni descripción — se ve como un link pelado.</p>
+    <p><b>Corrección aplicada:</b> se agregaron <code>twitter:card</code>, <code>twitter:title</code>, <code>twitter:description</code>, <code>twitter:image</code>, <code>og:locale</code> y <code>og:site_name</code>, igual que en index.html y productos.html.</p>
+  </div>
+
+  <div class="fix done">
+    <h3>3. La imagen del hero (LCP) no tenía width/height ni prioridad de carga <span class="tag done">Corregido</span></h3>
+    <p><b>Por qué importa:</b> es la imagen más grande y la primera que ve el usuario (Largest Contentful Paint). Sin <code>width</code>/<code>height</code> el navegador no reserva el espacio (riesgo de salto de layout / CLS), y sin <code>fetchpriority</code> compite con fuentes y analytics por ancho de banda.</p>
+    <p><b>Corrección aplicada:</b> se agregó <code>width="1920" height="864"</code> (proporción real de BANNER-PC.webp) y <code>fetchpriority="high"</code> en index.html.</p>
+  </div>
+
+  <div class="fix">
+    <h3>4. El &lt;h1&gt; de index.html es visualmente invisible (sr-only)</h3>
+    <p><b>Estado:</b> pendiente — es un cambio de diseño, no uno de código de una línea.</p>
+    <p><b>Por qué importa:</b> Google prefiere un H1 visible que refuerce el tema de la página. Actualmente existe y tiene buen texto ("Zapatos Deportivos en Cali — Milena's Shoes Colombia"), pero está oculto para lectores de pantalla únicamente porque el hero es una imagen de banner sin texto HTML real encima.</p>
+    <p><b>Cómo corregirlo:</b> agregar un H1 visible superpuesto al banner (o debajo, antes del carrusel) sin romper el diseño actual — por ejemplo un título corto en la esquina del hero.</p>
+  </div>
+
+  <div class="fix">
+    <h3>5. productos.html tiene muy poco texto estático (135 palabras)</h3>
+    <p><b>Estado:</b> riesgo bajo-medio — Google sí ejecuta JavaScript al indexar, así que ve los 358 productos igual, pero un HTML inicial con más contexto (categorías, marcas, ciudades de envío) ayuda al posicionamiento por si el renderizado JS falla o se retrasa.</p>
+    <p><b>Cómo corregirlo:</b> agregar un párrafo corto de introducción visible antes del grid de productos (ya existe algo de esto, se puede ampliar) y considerar marcar cada producto con Schema <code>Product</code>/<code>ItemList</code> a futuro.</p>
+  </div>
+
+  <h2>Desglose por categoría</h2>
+
+  <div class="cat">
+    <div class="cat-hdr"><span class="name">1. Meta Tags</span><span class="pts">92/100 · peso 20%</span></div>
+    <div class="bar"><div class="bar-fill good" style="width:92%"></div></div>
+    <ul class="findings">
+      <li class="ok">Title 49 caracteres, con keyword y marca — dentro de rango óptimo</li>
+      <li class="ok">Meta description 158 caracteres — dentro de rango óptimo</li>
+      <li class="ok">Viewport, robots (index,follow), canonical y lang="es-CO" presentes en las 3 páginas</li>
+      <li class="ok">Canonical apunta correctamente a la URL propia en cada página</li>
+      <li class="warn">Meta keywords solo en index.html (no es un factor de ranking en Google, prioridad baja)</li>
+    </ul>
+  </div>
+
+  <div class="cat">
+    <div class="cat-hdr"><span class="name">2. Headings</span><span class="pts">85/100 · peso 15%</span></div>
+    <div class="bar"><div class="bar-fill good" style="width:85%"></div></div>
+    <ul class="findings">
+      <li class="ok">Exactamente un H1 por página en las 3 páginas</li>
+      <li class="ok">Jerarquía correcta en index.html (H1 → H2 → H3, sin saltos)</li>
+      <li class="ok">H1 de productos.html y nosotros.html visibles y descriptivos</li>
+      <li class="warn">H1 de index.html es clase "sr-only" (oculto visualmente) — ver corrección #4</li>
+    </ul>
+  </div>
+
+  <div class="cat">
+    <div class="cat-hdr"><span class="name">3. Imágenes</span><span class="pts">88/100 · peso 10%</span></div>
+    <div class="bar"><div class="bar-fill good" style="width:88%"></div></div>
+    <ul class="findings">
+      <li class="ok">100% de las imágenes con atributo alt descriptivo (verificado en HTML estático y JS del carrusel/catálogo)</li>
+      <li class="ok">Formato WebP en absolutamente todas las fotos de producto, banners y kits</li>
+      <li class="ok">loading="lazy" correcto en imágenes fuera de pantalla; hero e logo cargan eager</li>
+      <li class="ok">Carrusel "Disponibles ahora" corregido en esta sesión (fotos livianas 480×480 vs. originales hasta 1600×1600)</li>
+      <li class="warn">Faltaba width/height en el hero — corregido en esta auditoría</li>
+    </ul>
+  </div>
+
+  <div class="cat">
+    <div class="cat-hdr"><span class="name">4. Enlaces</span><span class="pts">92/100 · peso 10%</span></div>
+    <div class="bar"><div class="bar-fill good" style="width:92%"></div></div>
+    <ul class="findings">
+      <li class="ok">Todos los enlaces externos (WhatsApp, Instagram, Google Maps) tienen rel="noopener" y target="_blank"</li>
+      <li class="ok">Textos ancla descriptivos ("Ver catálogo completo", "Google Maps ↗") — ninguno tipo "click aquí"</li>
+      <li class="ok">Sin enlaces rotos detectados en la muestra verificada (productos.html, nosotros.html, og-cover.webp → 200 OK)</li>
+    </ul>
+  </div>
+
+  <div class="cat">
+    <div class="cat-hdr"><span class="name">5. Open Graph / Social</span><span class="pts">88/100 · peso 10%</span></div>
+    <div class="bar"><div class="bar-fill good" style="width:88%"></div></div>
+    <ul class="findings">
+      <li class="ok">index.html y productos.html: OG y Twitter Card completos (title, description, image 1200×630, locale, site_name)</li>
+      <li class="ok">nosotros.html: faltaban Twitter Card, og:locale y og:site_name — corregido en esta auditoría</li>
+      <li class="ok">og:image (og-cover.webp) responde 200 OK y tiene el tamaño recomendado 1200×630</li>
+    </ul>
+  </div>
+
+  <div class="cat">
+    <div class="cat-hdr"><span class="name">6. Schema / Datos Estructurados</span><span class="pts">85/100 · peso 10%</span></div>
+    <div class="bar"><div class="bar-fill good" style="width:85%"></div></div>
+    <ul class="findings">
+      <li class="ok">index.html: Schema tipo Store muy completo — dirección, teléfono, horario, AggregateRating (4.9★/17) y 5 reviews individuales</li>
+      <li class="ok">productos.html: Schema presente</li>
+      <li class="err">nosotros.html no tenía ningún JSON-LD — corregido en esta auditoría (AboutPage + referencia a Store)</li>
+    </ul>
+  </div>
+
+  <div class="cat">
+    <div class="cat-hdr"><span class="name">7. Técnico</span><span class="pts">94/100 · peso 15%</span></div>
+    <div class="bar"><div class="bar-fill good" style="width:94%"></div></div>
+    <ul class="findings">
+      <li class="ok">HTTPS activo, respuesta del servidor rápida (TTFB ~134ms, total ~187ms)</li>
+      <li class="ok">http:// y https://www. redirigen 301 correctamente al canónico https://milenashoes.online/</li>
+      <li class="ok">robots.txt presente, permite todo y referencia el sitemap</li>
+      <li class="ok">sitemap.xml presente y válido, 3 URLs con lastmod, changefreq y priority correctos</li>
+      <li class="ok">Favicon vía &lt;link rel="icon"&gt; funcionando (assets/logo.webp, 200 OK)</li>
+      <li class="warn">No existe /favicon.ico en la raíz (fallback legado que algunos crawlers viejos piden igual; impacto mínimo)</li>
+    </ul>
+  </div>
+
+  <div class="cat">
+    <div class="cat-hdr"><span class="name">8. Contenido</span><span class="pts">78/100 · peso 10%</span></div>
+    <div class="bar"><div class="bar-fill warn" style="width:78%"></div></div>
+    <ul class="findings">
+      <li class="ok">index.html: 733 palabras de texto visible — más que suficiente</li>
+      <li class="ok">nosotros.html: 658 palabras — buen contenido de marca/historia</li>
+      <li class="warn">productos.html: solo 135 palabras en el HTML estático (el resto — 358 productos — se genera por JavaScript). Google lo indexa igual, pero es más frágil</li>
+      <li class="ok">Title y description únicos en las 3 páginas (sin duplicados)</li>
+    </ul>
+  </div>
+
+  <h2>Cálculo de la puntuación global</h2>
+  <table>
+    <tr><th>Categoría</th><th>Peso</th><th>Puntos</th><th>Aporte</th></tr>
+    <tr><td>Meta Tags</td><td>20%</td><td>92</td><td>18.4</td></tr>
+    <tr><td>Headings</td><td>15%</td><td>85</td><td>12.75</td></tr>
+    <tr><td>Imágenes</td><td>10%</td><td>88</td><td>8.8</td></tr>
+    <tr><td>Enlaces</td><td>10%</td><td>92</td><td>9.2</td></tr>
+    <tr><td>Open Graph</td><td>10%</td><td>88</td><td>8.8</td></tr>
+    <tr><td>Schema</td><td>10%</td><td>85</td><td>8.5</td></tr>
+    <tr><td>Técnico</td><td>15%</td><td>94</td><td>14.1</td></tr>
+    <tr><td>Contenido</td><td>10%</td><td>78</td><td>7.8</td></tr>
+    <tr><td><b>Total</b></td><td>100%</td><td></td><td><b>≈88/100</b></td></tr>
+  </table>
+  <p style="font-size:0.8rem;color:#999;margin-top:10px">Nota: los puntajes por categoría reflejan el estado DESPUÉS de aplicar las 3 correcciones marcadas como "Corregido" arriba (schema y Twitter Card en nosotros.html, width/height + fetchpriority en el hero). Antes de estas correcciones el puntaje global era 86/100.</p>
+
+  <footer>Auditoría generada localmente a partir del código fuente del sitio y verificaciones en vivo (curl) contra https://milenashoes.online — Milena's Shoes</footer>
+
+</div>
+</body>
+</html>
