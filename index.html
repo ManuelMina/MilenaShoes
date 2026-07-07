@@ -226,7 +226,7 @@
     .col-card:hover .col-link { background: rgba(201,168,76,0.22); border-color: var(--gold); }
 
     /* ── FECHAS ESPECIALES ── */
-    #festivo { background: var(--bg-2); }
+    #festivo { background: var(--bg-2); padding-bottom: 48px; }
     .kit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 620px; margin: 0 auto; }
     .kit-card { display: flex; flex-direction: column; gap: 14px; }
     .kit-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/5; background: var(--bg-3); border: 1px solid var(--border); }
@@ -239,7 +239,7 @@
     .kit-cta svg { flex-shrink: 0; width: 14px; height: 14px; }
 
     /* ── TESTIMONIOS CAROUSEL ── */
-    #testimonios { background: var(--bg); }
+    #testimonios { background: var(--bg); padding-top: 48px; }
     .testi-source { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 16px; }
     .testi-source svg { flex-shrink: 0; }
     .testi-source-label { font-size: 0.72rem; font-weight: 600; color: var(--muted); letter-spacing: 1px; }
@@ -354,6 +354,8 @@
       footer { flex-direction: column; text-align: center; padding: 28px 24px; }
       .pagos-hdr { padding: 0 24px; }
       .pagos-note2 { padding: 0 24px; }
+      #festivo { padding-bottom: 32px; }
+      #testimonios { padding-top: 32px; }
     }
     @media(max-width:480px) { }
   </style>
@@ -897,7 +899,11 @@
       var imgWrap = document.createElement('div'); imgWrap.style.overflow = 'hidden';
       var img = document.createElement('img');
       img.className = 'car-img';
-      img.src = 'assets/' + p.id + '.webp';
+      // Miniatura liviana (480x480) en vez de la foto original (hasta 1600x1600):
+      // con hasta 32 fotos animando a la vez, las originales sobrecargaban la
+      // memoria en moviles y el carrusel se congelaba/vaciaba a los pocos segundos.
+      img.src = 'assets/car-thumb/' + p.id + '.webp';
+      img.onerror = function() { this.onerror = null; this.src = 'assets/' + p.id + '.webp'; };
       img.alt = p.m + ' ' + p.r + ' ' + (p.g==='H'?'hombre':p.g==='M'?'mujer':'unisex') + ' ' + p.t + ' — Milena\'s Shoes Cali Colombia';
       img.loading = 'eager'; // el carrusel se mueve con CSS transform, no scroll real: "lazy" nunca detecta que entran a la vista
       imgWrap.appendChild(img);
