@@ -229,14 +229,29 @@
     #festivo { background: var(--bg-2); padding-bottom: 48px; }
     .kit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 620px; margin: 0 auto; }
     .kit-card { display: flex; flex-direction: column; gap: 14px; }
-    .kit-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/5; background: var(--bg-3); border: 1px solid var(--border); }
+    .kit-img-wrap { position: relative; overflow: hidden; aspect-ratio: 4/5; background: var(--bg-3); border: 1px solid var(--border); cursor: zoom-in; }
     .kit-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
     .kit-card:hover .kit-img-wrap img { transform: scale(1.05); }
-    .kit-overlay { position: absolute; left: 0; right: 0; bottom: 0; padding: 32px 14px 14px; background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0)); }
+    .kit-overlay { position: absolute; left: 0; right: 0; bottom: 0; padding: 32px 14px 14px; background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0)); pointer-events: none; }
     .kit-overlay-title { font-family: 'Playfair Display', serif; font-size: clamp(0.95rem,3vw,1.2rem); font-weight: 700; color: #fff; letter-spacing: 0.5px; }
     .kit-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: #fff; padding: 11px 16px; font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s; width: 100%; justify-content: center; }
     .kit-cta:hover { background: #1ebe5a; box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
     .kit-cta svg { flex-shrink: 0; width: 14px; height: 14px; }
+
+    /* ── LIGHTBOX (zoom de imagen) ── */
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); display: none; align-items: center; justify-content: center; z-index: 1100; padding: 24px; cursor: zoom-out; overflow-y: auto; }
+    .lightbox.is-open { display: flex; }
+    .lightbox-content { cursor: default; display: flex; flex-direction: column; align-items: center; gap: 18px; max-width: 480px; width: 100%; margin: auto; }
+    .lightbox-content img { max-width: 100%; max-height: 62vh; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+    .lightbox-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: #fff; text-align: center; }
+    .lightbox-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .lightbox-switch { display: inline-flex; align-items: center; gap: 8px; justify-content: center; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #fff; padding: 12px 18px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; font-family: inherit; }
+    .lightbox-switch:hover { border-color: var(--gold); color: var(--gold); }
+    .lightbox-wa { display: inline-flex; align-items: center; gap: 8px; justify-content: center; background: var(--green); color: #fff; padding: 12px 18px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; transition: all 0.3s; }
+    .lightbox-wa:hover { background: #1ebe5a; box-shadow: 0 8px 24px rgba(37,211,102,0.3); }
+    .lightbox-wa svg { flex-shrink: 0; width: 14px; height: 14px; }
+    .lightbox-close { position: absolute; top: 18px; right: 24px; width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.3); background: rgba(0,0,0,0.4); color: #fff; font-size: 1.4rem; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .lightbox-close:hover { border-color: var(--gold); color: var(--gold); }
 
     /* ── TESTIMONIOS CAROUSEL ── */
     #testimonios { background: var(--bg); padding-top: 48px; }
@@ -490,13 +505,13 @@
     <div class="s-center">
       <p class="s-tag rv">Regalo perfecto</p>
       <h2 class="s-h2 rv d1">El kit ideal <em>para él y para ella</em></h2>
-      <p class="s-body rv d2" style="max-width:520px;margin:0 auto">Un kit de regalo completo: zapatos + rosa + chocolatina + tarjeta personalizada. Perfecto para Cumpleaños, Aniversario, Amor y Amistad o Navidad — entrega en Cali y a todo Colombia.</p>
+      <p class="s-body rv d2" style="max-width:520px;margin:0 auto">Un kit de regalo completo: Zapatillas + Termo con medidor de temperatura + chocolates Ferrero Rocher + 3 pares de medias.<br><br>Perfecto para 🎂 Cumpleaños, 💍 Aniversario, 💖 Amor y Amistad o 🎄 Navidad — entrega en Cali y a todo Colombia.</p>
     </div>
     <div class="kit-grid">
 
       <div class="kit-card rv d1">
-        <div class="kit-img-wrap">
-          <img src="assets/Regalos/Reg-Hombre.jpeg" alt="Kit de regalo Milena's Shoes para hombre: zapatos, rosa, chocolatina y tarjeta personalizada" loading="lazy">
+        <div class="kit-img-wrap" data-kit="hombre">
+          <img src="assets/Regalos/Reg-Hombre.webp" alt="Kit de regalo Milena's Shoes para hombre: zapatillas, termo, chocolates Ferrero Rocher y medias" loading="lazy">
           <div class="kit-overlay"><span class="kit-overlay-title">Kit Hombre</span></div>
         </div>
         <a class="kit-cta" href="https://wa.me/573227155957?text=Hola%20Milena's%20Shoes!%20Quiero%20el%20kit%20de%20regalo%20para%20hombre%20%F0%9F%8E%81.%20%C2%BFQu%C3%A9%20modelos%20tienen%20disponibles%3F" target="_blank" rel="noopener">
@@ -506,8 +521,8 @@
       </div>
 
       <div class="kit-card rv d2">
-        <div class="kit-img-wrap">
-          <img src="assets/Regalos/Reg-Mujer.jpeg" alt="Kit de regalo Milena's Shoes para mujer: zapatos, rosa, chocolatina y tarjeta personalizada" loading="lazy">
+        <div class="kit-img-wrap" data-kit="mujer">
+          <img src="assets/Regalos/Reg-Mujer.webp" alt="Kit de regalo Milena's Shoes para mujer: zapatillas, termo, chocolates Ferrero Rocher y medias" loading="lazy">
           <div class="kit-overlay"><span class="kit-overlay-title">Kit Mujer</span></div>
         </div>
         <a class="kit-cta" href="https://wa.me/573227155957?text=Hola%20Milena's%20Shoes!%20Quiero%20el%20kit%20de%20regalo%20para%20mujer%20%F0%9F%8E%81.%20%C2%BFQu%C3%A9%20modelos%20tienen%20disponibles%3F" target="_blank" rel="noopener">
@@ -516,6 +531,21 @@
         </a>
       </div>
 
+    </div>
+  </div>
+
+  <div class="lightbox" id="kitLightbox">
+    <div class="lightbox-close" id="kitLightboxClose">&times;</div>
+    <div class="lightbox-content">
+      <img id="kitLightboxImg" src="" alt="">
+      <div class="lightbox-title" id="kitLightboxTitle"></div>
+      <div class="lightbox-actions">
+        <button type="button" class="lightbox-switch" id="kitLightboxSwitch"></button>
+        <a class="lightbox-wa" id="kitLightboxWa" href="#" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Pedir kit
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -946,6 +976,52 @@
     }).catch(function() {
       FALLBACK.concat(FALLBACK).forEach(function(p) { track.appendChild(makeCarCard(p)); });
     });
+  })();
+
+  // ── KIT REGALO: lightbox con zoom + cambio de kit ──
+  (function() {
+    var KITS = {
+      hombre: {
+        title: 'Kit Hombre',
+        img: 'assets/Regalos/Reg-Hombre.webp',
+        wa: "https://wa.me/573227155957?text=Hola%20Milena's%20Shoes!%20Quiero%20el%20kit%20de%20regalo%20para%20hombre%20%F0%9F%8E%81.%20%C2%BFQu%C3%A9%20modelos%20tienen%20disponibles%3F",
+        switchLabel: 'Ver Kit Mujer'
+      },
+      mujer: {
+        title: 'Kit Mujer',
+        img: 'assets/Regalos/Reg-Mujer.webp',
+        wa: "https://wa.me/573227155957?text=Hola%20Milena's%20Shoes!%20Quiero%20el%20kit%20de%20regalo%20para%20mujer%20%F0%9F%8E%81.%20%C2%BFQu%C3%A9%20modelos%20tienen%20disponibles%3F",
+        switchLabel: 'Ver Kit Hombre'
+      }
+    };
+    var lightbox = document.getElementById('kitLightbox');
+    var lbImg = document.getElementById('kitLightboxImg');
+    var lbTitle = document.getElementById('kitLightboxTitle');
+    var lbSwitch = document.getElementById('kitLightboxSwitch');
+    var lbWa = document.getElementById('kitLightboxWa');
+    var lbClose = document.getElementById('kitLightboxClose');
+    if (!lightbox) return;
+
+    function openKit(id) {
+      var kit = KITS[id];
+      if (!kit) return;
+      lbImg.src = kit.img;
+      lbImg.alt = kit.title;
+      lbTitle.textContent = kit.title;
+      lbSwitch.textContent = kit.switchLabel;
+      lbSwitch.dataset.target = id === 'hombre' ? 'mujer' : 'hombre';
+      lbWa.href = kit.wa;
+      lightbox.classList.add('is-open');
+    }
+    function closeLightbox() { lightbox.classList.remove('is-open'); }
+
+    document.querySelectorAll('.kit-img-wrap').forEach(function(el) {
+      el.addEventListener('click', function() { openKit(el.dataset.kit); });
+    });
+    lbSwitch.addEventListener('click', function() { openKit(lbSwitch.dataset.target); });
+    lbClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', function(e) { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
   })();
 
   // ── PROMO SLIDER ──

@@ -111,7 +111,8 @@ El catálogo está **hardcodeado** en el array `CATALOG` dentro del `<script>` d
 
 ## Kit de regalo (permanente)
 - **Precio:** $178.000 COP
-- **Incluye:** Zapatos + Rosa + Chocolatina + Tarjeta personalizada + Papel de regalo
+- **Incluye:** Zapatillas + Termo con medidor de temperatura + Chocolates Ferrero Rocher + 3 pares de medias
+- **Presentación:** Kit Hombre y Kit Mujer (index.html sección `#festivo`, fotos en `assets/Regalos/Reg-Hombre.webp` y `Reg-Mujer.webp`)
 - **Domicilio gratis** en Cali y Jamundí
 - **Ocasiones:** Cumpleaños, Aniversario, Amor y Amistad, Navidad — siempre disponible
 
